@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+
+    ireceptor-database:
+        image: ireceptorj/repository-mongodb:dev
+
+    ireceptor-api:
+        depends_on:
+            - ireceptor-database
+        image: ireceptorj/service-php-mongodb:latest
+        environment:
+            DB_HOST: ireceptor-database
+            DB_DATABASE: test
+        ports:
+            - 80:80
