@@ -19,8 +19,6 @@ services:
         depends_on:
             - ireceptor-database
         image: ireceptorj/dataloading-mongo:latest
-        volumes:
-            - .:/root
         environment:
             DB_HOST: ireceptor-database
             DB_DATABASE: test
