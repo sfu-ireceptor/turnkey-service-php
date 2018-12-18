@@ -22,3 +22,5 @@ services:
         environment:
             DB_HOST: ireceptor-database
             DB_DATABASE: test
+        volumes:
+            - .:/scratch
