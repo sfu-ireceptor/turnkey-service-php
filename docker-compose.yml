@@ -18,9 +18,9 @@ services:
     ireceptor-dataloading:
         depends_on:
             - ireceptor-database
-        image: ireceptorj/dataloading-mongo:latest
+        image: ireceptorj/dataloading-mongo:dev
         environment:
             DB_HOST: ireceptor-database
             DB_DATABASE: test
         volumes:
-            - .:/scratch
+            - ${FILE_FOLDER:-/tmp}:/scratch:ro
