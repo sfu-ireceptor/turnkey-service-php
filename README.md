@@ -15,10 +15,11 @@ cd turnkey-service-php
 ```
 
 #### Check it's working
-Query the web application with a POST request at `/v2/samples` to get the list of samples:
+Query the web application with a POST request at `/v2/samples` to get the list of samples: go in your browser to <http://localhost/v2/samples"> (replace "localhost" if necessary) or use:
 ```
 curl -X POST -H "Content-Type: application/x-www-form-urlencoded" "http://localhost/v2/samples"
 ```
+
 
 An empty array is returned because the database is empty.
 ```
