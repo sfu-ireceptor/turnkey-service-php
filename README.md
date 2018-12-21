@@ -29,10 +29,22 @@ An empty array is returned because the database is empty.
 
 ## Loading data
 
-#### General procedure
+#### Procedure
 1. load the "sample metadata" associated with a study that has generated sequence data.
-2. load the available sequence annotations (from imgt, mixcr, etc).
+2. load the sequence annotations (from imgt, mixcr, etc).
 
+#### Example: loading the test data
+
+1. Load the samples:
+```
+./load_samples.sh data/samples.csv 
+
+```
+
+Check it worked:
+```
+curl -X POST -H "Content-Type: application/x-www-form-urlencoded" "http://localhost/v2/samples"
+```
 
 ## Reference
 - <http://ireceptor.org>
