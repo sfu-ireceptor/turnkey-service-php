@@ -6,7 +6,7 @@ A quick and easy way to build your own AIRR-seq repository.
 - a database with scripts to load data into it
 - a web application exposing that database through the [iReceptor API](https://github.com/sfu-ireceptor/api)
 
-## Installation (15 min)
+## Installation (10 min)
 Get the code and launch the installation:
 ```
 git clone https://github.com/sfu-ireceptor/turnkey-service-php.git
