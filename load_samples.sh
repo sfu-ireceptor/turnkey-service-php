@@ -1,7 +1,8 @@
 #!/bin/sh
 
-export FILE_FOLDER=`dirname "$1"`
-export FILE_NAME=`basename "$1"`
+export FILE_PATH=`realpath "$1"`
+export FILE_FOLDER=`dirname "$FILE_PATH"`
+export FILE_NAME=`basename "$FILE_PATH"`
 
 sudo -E docker-compose run  \
 			-e FILE_NAME="$FILE_NAME" \
