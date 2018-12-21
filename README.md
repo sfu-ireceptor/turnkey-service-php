@@ -22,7 +22,7 @@ curl -X POST -H "Content-Type: application/x-www-form-urlencoded" "http://localh
 ```
 
 
-An empty array is returned because the database is currently empty.
+An empty array is returned because the database is currently empty:
 ```
 []
 ```
