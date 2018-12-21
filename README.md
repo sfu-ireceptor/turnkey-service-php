@@ -49,5 +49,4 @@ curl -X POST -H "Content-Type: application/x-www-form-urlencoded" "http://localh
 
 ## Reference
 - <http://ireceptor.org>
-- [Credits](docs/credits.md)
 - Contact us at <support@ireceptor.org>
