@@ -1,9 +1,18 @@
 #!/bin/sh
 
-export FILE_PATH=`realpath "$1"`
-export FILE_FOLDER=`dirname "$FILE_PATH"`
-export FILE_NAME=`basename "$FILE_PATH"`
+FILE_ABSOLUTE_PATH=`realpath "$1"`
+FILE_FOLDER=`dirname "$FILE_ABSOLUTE_PATH"`
+FILE_NAME=`basename "$FILE_ABSOLUTE_PATH"`
 
+# make available to docker-compose.yml
+export FILE_FOLDER
+
+# Notes:
+# sudo -E: make current environment variables available to the command run as root
+# docker-compose -e: these variables will be available inside the container (but not accessible in docker-compose.yml)
+# $DB_HOST and $DB_DATABASE are defined in docker-compose.yml and will be substituted only when the python command is executed, INSIDE the container
+# "ireceptor-dataloading" is the service name defined in docker-compose.yml 
+# sh -c '...' is the command executed inside the container
 sudo -E docker-compose run  \
 			-e FILE_NAME="$FILE_NAME" \
 			-e FILE_FOLDER="$FILE_FOLDER" \
