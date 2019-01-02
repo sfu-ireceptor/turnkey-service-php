@@ -15,8 +15,10 @@ cd turnkey-service-php
 ```
 
 #### Check it's working
-See the list of samples in your database at the `/v2/samples` entry point of the iReceptor API:  go to <http://localhost/v2/samples"> in your browser (if necessary, replace "localhost" with your server URL).
-You can also use the command line:
+
+Go to <http://localhost/v2/samples> in your browser (if necessary, replace "localhost" with your server URL).
+
+This returns the list of samples in your database by querying the `/v2/samples` entry point of the iReceptor API. You can also use the command line:
 ```
 curl -X POST -H "Content-Type: application/x-www-form-urlencoded" "http://localhost/v2/samples"
 ```
@@ -30,19 +32,19 @@ An empty array is returned because the database is currently empty:
 
 ## Loading data
 
-#### Procedure
+#### General procedure
 1. load the "sample metadata" associated with a study that has generated sequence data.
 2. load the sequence annotations (from imgt, mixcr, etc).
 
 #### Example: loading the test data
 
-1. Load the samples:
+1. Load the "samples metadata" <data/samples.csv>:
 ```
 ./load_samples.sh data/samples.csv 
 
 ```
 
-Check it worked: go to <http://localhost/v2/samples"> or execute:
+To check it worked, go to <http://localhost/v2/samples> or execute:
 ```
 curl -X POST -H "Content-Type: application/x-www-form-urlencoded" "http://localhost/v2/samples"
 ```
