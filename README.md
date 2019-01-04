@@ -1,8 +1,6 @@
 # iReceptor Service Turnkey (PHP)
 
-A quick and easy way to build your own AIRR-seq repository.
-
-## What is it?
+A quick and easy way to build your own AIRR-seq repository. It contains:
 - a database with scripts to load data into it
 - a web application exposing that database through the [iReceptor API](https://github.com/sfu-ireceptor/api)
 
