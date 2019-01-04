@@ -11,7 +11,7 @@ Get the code and launch the installation:
 ```
 git clone https://github.com/sfu-ireceptor/turnkey-service-php.git
 cd turnkey-service-php
-./install.sh
+./install_turnkey.sh
 ```
 
 #### Check it's working
