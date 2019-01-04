@@ -9,4 +9,5 @@ sudo chmod +x /usr/local/bin/docker-compose
 sudo docker-compose --version
 
 # download images from Docker Hub, build and start containers
-./start.sh
+SCRIPT_DIR=`dirname "$0"`
+${SCRIPT_DIR}/start.sh
