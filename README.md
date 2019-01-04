@@ -11,7 +11,7 @@ Get the code and launch the installation:
 ```
 git clone https://github.com/sfu-ireceptor/turnkey-service-php.git
 cd turnkey-service-php
-./install_turnkey.sh
+scripts/install_turnkey.sh
 ```
 
 #### Check it's working
@@ -40,7 +40,7 @@ An empty array is returned because the database is currently empty:
 
 1. Load the "samples metadata" [data/samples.csv](data/samples.csv):
 ```
-./load_samples.sh data/samples.csv 
+scripts/load_samples.sh data/samples.csv 
 ```
 
 To check it worked, go to <http://localhost/v2/samples> or execute:
