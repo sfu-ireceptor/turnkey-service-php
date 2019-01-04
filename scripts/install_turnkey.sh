@@ -17,8 +17,17 @@ echo "Done"
 echo
 
 
-# download images from Docker Hub, build and start containers
-echo "Downloading (pulling) Docker images from Docker Hub.."
-${SCRIPT_DIR}/start_turnkey.sh
+# download Docker images from Docker Hub
+echo "Downloading Docker images from Docker Hub.."
+sudo docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service pull
 echo "Done"
 echo
+
+# build Docker containers from downloaded Docker images
+echo "Downloading Docker images from Docker Hub.."
+sudo docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service build
+echo "Done"
+echo
+
+# start Docker containers
+${SCRIPT_DIR}/start_turnkey.sh
