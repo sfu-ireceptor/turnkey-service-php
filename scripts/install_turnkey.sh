@@ -10,4 +10,4 @@ sudo docker-compose --version
 
 # download images from Docker Hub, build and start containers
 SCRIPT_DIR=`dirname "$0"`
-${SCRIPT_DIR}/start.sh
+${SCRIPT_DIR}/start_turnkey.sh
