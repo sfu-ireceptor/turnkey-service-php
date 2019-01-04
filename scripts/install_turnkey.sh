@@ -24,4 +24,11 @@ echo "Done"
 echo
 
 # start Docker containers
+echo "Starting Docker containers.."
 ${SCRIPT_DIR}/start_turnkey.sh
+echo "Done"
+echo
+
+# confirm successful installation
+echo "Congratulations, your iReceptor Service Turnkey is up and running."
+echo "For more information, go to https://github.com/sfu-ireceptor/turnkey-service-php"
