@@ -47,7 +47,7 @@ curl -X POST -H "Content-Type: application/x-www-form-urlencoded" "http://localh
 ```
 
 ## Other documentation
-- [Turnkey admin scripts](docs/admin_scripts.md)
+- [Turnkey admin scripts](doc/admin_scripts.md)
 
 
 ## Reference
