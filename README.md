@@ -46,6 +46,8 @@ To check it worked, go to <http://localhost/v2/samples> or execute:
 curl -X POST -H "Content-Type: application/x-www-form-urlencoded" "http://localhost/v2/samples"
 ```
 
+## Other documentation
+- [Turnkey admin scripts](docs/admin_scripts.md)
 
 
 ## Reference
