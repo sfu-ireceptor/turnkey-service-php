@@ -37,7 +37,7 @@ An empty array is returned because the database is currently empty:
 
 1. Load the "samples metadata" [test_data/samples.csv](test_data/samples.csv):
 ```
-scripts/load_samples.sh test_data/samples.csv 
+scripts/load_metadata.sh test_data/samples.csv 
 ```
 
 To check it worked, go to <http://localhost/v2/samples> or execute:
