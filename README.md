@@ -36,9 +36,9 @@ An empty array is returned because the database is currently empty:
 
 #### Example: loading the test data
 
-1. Load the "samples metadata" [data/samples.csv](data/samples.csv):
+1. Load the "samples metadata" [test_data/samples.csv](test_data/samples.csv):
 ```
-scripts/load_samples.sh data/samples.csv 
+scripts/load_samples.sh test_data/samples.csv 
 ```
 
 To check it worked, go to <http://localhost/v2/samples> or execute:
