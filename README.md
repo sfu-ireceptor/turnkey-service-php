@@ -57,12 +57,12 @@ scripts/stop_turnkey.sh
 
 2. Move the data folder
 ```
-mv data </path/to/another/folder>
+mv data /path/to/another/folder
 ```
 
 2. Create a symbolic link to it
 ```
-ln -s </path/to/another/folder> data
+ln -s /path/to/another/folder data
 ```
 
 3. Start the turnkey
