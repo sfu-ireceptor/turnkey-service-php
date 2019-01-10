@@ -27,6 +27,24 @@ An empty array is returned because the database is currently empty:
 []
 ```
 
+## Loading data
+
+#### General procedure
+1. load the "sample metadata" associated with a study that has generated sequence data.
+2. load the sequence annotations (from imgt, mixcr, etc).
+
+#### Example: loading the test data
+
+1. Load the "samples metadata" [test_data/samples.csv](test_data/samples.csv):
+```
+scripts/load_samples.sh test_data/samples.csv 
+```
+
+To check it worked, go to <http://localhost/v2/samples> or execute:
+```
+curl -X POST -H "Content-Type: application/x-www-form-urlencoded" "http://localhost/v2/samples"
+```
+
 ## Customization
 
 #### Moving the database folder
@@ -50,24 +68,6 @@ ln -s </path/to/another/folder> data
 3. Start the turnkey
 ```
 scripts/start_turnkey.sh
-```
-
-## Loading data
-
-#### General procedure
-1. load the "sample metadata" associated with a study that has generated sequence data.
-2. load the sequence annotations (from imgt, mixcr, etc).
-
-#### Example: loading the test data
-
-1. Load the "samples metadata" [test_data/samples.csv](test_data/samples.csv):
-```
-scripts/load_samples.sh test_data/samples.csv 
-```
-
-To check it worked, go to <http://localhost/v2/samples> or execute:
-```
-curl -X POST -H "Content-Type: application/x-www-form-urlencoded" "http://localhost/v2/samples"
 ```
 
 ## Other documentation
