@@ -4,7 +4,7 @@ SCRIPT_DIR=`dirname "$0"`
 
 REARRANGEMENT_TYPE="$1"
 
-FILE_ABSOLUTE_PATH=`realpath "$1"`
+FILE_ABSOLUTE_PATH=`realpath "$2"`
 FILE_FOLDER=`dirname "$FILE_ABSOLUTE_PATH"`
 FILE_NAME=`basename "$FILE_ABSOLUTE_PATH"`
 
