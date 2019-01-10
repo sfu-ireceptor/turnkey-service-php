@@ -27,6 +27,30 @@ An empty array is returned because the database is currently empty:
 []
 ```
 
+## Customization
+
+#### Moving the database folder
+The database data is in the `data` folder. To move it somewhere else:
+
+1. Stop the turnkey
+```
+scripts/stop_turnkey.sh
+```
+
+2. Move the data folder
+```
+mv data </path/to/another/folder>
+```
+
+2. Create a symbolic link to it
+```
+ln -s </path/to/another/folder> data
+```
+
+3. Start the turnkey
+```
+scripts/start_turnkey.sh
+```
 
 ## Loading data
 
