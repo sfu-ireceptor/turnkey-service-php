@@ -30,20 +30,31 @@ An empty array is returned because the database is currently empty:
 ## Loading data
 
 #### General procedure
-1. load the "sample metadata" associated with a study that has generated sequence data.
+1. load the metadata associated with a study that has generated sequence data.
 2. load the sequence annotations (from imgt, mixcr, etc).
 
 #### Example: loading the test data
 
-1. Load the "samples metadata" [test_data/samples.csv](test_data/samples.csv):
+1. Load the metadata file [test_data/metadata_mixcr.csv](test_data/metadata_mixcr.csv):
 ```
-scripts/load_metadata.sh test_data/samples.csv 
+scripts/load_metadata.sh test_data/metadata_mixcr.csv
 ```
 
 To check it worked, go to <http://localhost/v2/samples> or execute:
 ```
 curl -X POST -H "Content-Type: application/x-www-form-urlencoded" "http://localhost/v2/samples"
 ```
+
+2. Load the associated sequence annotations file [test_data/rearrangements_mixcr.txt](test_data/rearrangements_mixcr.txt):
+```
+scripts/load_rearrangements.sh mixcr test_data/rearrangements_mixcr.txt
+```
+
+To check it worked, go to <http://localhost/v2/sequences_summary> or execute:
+```
+curl -X POST -H "Content-Type: application/x-www-form-urlencoded" "http://localhost/v2/sequences_summary"
+```
+
 
 ## Customization
 
