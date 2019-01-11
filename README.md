@@ -55,6 +55,10 @@ To check it worked, go to <http://localhost/v2/sequences_summary> or execute:
 curl -X POST -H "Content-Type: application/x-www-form-urlencoded" "http://localhost/v2/sequences_summary"
 ```
 
+Note: to load IMGT or AIRR annotations, replace the `mixcr` parameter by `imgt` or `airr`. Example:
+```
+scripts/load_rearrangements.sh imgt <IMGT file>
+```
 
 ## Customization
 
@@ -71,7 +75,7 @@ scripts/stop_turnkey.sh
 mv data <another folder>
 ```
 
-2. Create a symbolic link to that new data folder
+2. Create a symbolic link to the new location
 ```
 ln -s <another folder>/data data
 ```
