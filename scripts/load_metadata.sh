@@ -2,6 +2,12 @@
 
 SCRIPT_DIR=`dirname "$0"`
 
+if [ $# -ne 1 ];
+then
+    echo "usage: $0 [metadata file ...]"
+    exit 1
+fi
+
 FILE_ABSOLUTE_PATH=`realpath "$1"`
 FILE_FOLDER=`dirname "$FILE_ABSOLUTE_PATH"`
 FILE_NAME=`basename "$FILE_ABSOLUTE_PATH"`
