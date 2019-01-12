@@ -13,8 +13,8 @@ export FILE_FOLDER
 
 # create log file
 LOG_FOLDER=${SCRIPT_DIR}/../logs
-TIME1=$(date "+%Y-%m-%d_%H-%M-%S")
-LOG_FILE=${LOG_FOLDER}/$TIME1_${FILE_NAME}.log
+TIME1=`date +%Y-%m-%d_%H-%M-%S`
+LOG_FILE=${LOG_FOLDER}/${TIME1}_${FILE_NAME}.log
 
 # Notes:
 # sudo -E: make current environment variables available to the command run as root
