@@ -17,8 +17,8 @@ FILE_NAME=`basename "$FILE_ABSOLUTE_PATH"`
 
 # create log file
 LOG_FOLDER=${SCRIPT_DIR}/../logs
-TIME1=$(date "+%Y%m%d-%H%M%S")
-LOG_FILE=${LOG_FOLDER}/$TIME1-${FILE_NAME}-log.txt
+TIME1=$(date "+%Y-%m-%d_%H-%M-%S_")
+LOG_FILE=${LOG_FOLDER}/$TIME1-${FILE_NAME}.log
 
 # make available to docker-compose.yml
 export FILE_FOLDER
@@ -39,4 +39,5 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 			 		--host=$DB_HOST \
 			 		--database=$DB_DATABASE \
 			 		--sample \
-			 		-f /scratch/$FILE_NAME'
+			 		-f /scratch/$FILE_NAME' \
+ 	2>&1 | tee $LOG_FILE
