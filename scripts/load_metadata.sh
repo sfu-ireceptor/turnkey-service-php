@@ -2,9 +2,12 @@
 
 SCRIPT_DIR=`dirname "$0"`
 
-if [ $# -ne 1 ];
+# check number of arguments
+NB_ARGS=1
+if [ $# -ne $NB_ARGS ];
 then
-    echo "usage: $0 [metadata file ...]"
+    echo "$0: wrong number of arguments ($# instead of $NB_ARGS)"
+    echo "usage: $0 metadata_file.csv"
     exit 1
 fi
 

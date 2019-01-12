@@ -2,6 +2,15 @@
 
 SCRIPT_DIR=`dirname "$0"`
 
+# check number of arguments
+NB_ARGS=2
+if [ $# -lt $NB_ARGS ];
+then
+    echo "$0: wrong number of arguments ($# instead of at least $NB_ARGS)"
+    echo "usage: $0 (airr|imgt|mixcr) <rearrangement_file> [<another_rearrangement_file> ...]"
+    exit 1
+fi
+
 REARRANGEMENT_TYPE="$1"
 shift
 
