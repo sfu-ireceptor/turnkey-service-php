@@ -7,13 +7,18 @@ NB_ARGS=1
 if [ $# -ne $NB_ARGS ];
 then
     echo "$0: wrong number of arguments ($# instead of $NB_ARGS)"
-    echo "usage: $0 metadata_file.csv"
+    echo "usage: $0 <metadata_file.csv>"
     exit 1
 fi
 
 FILE_ABSOLUTE_PATH=`realpath "$1"`
 FILE_FOLDER=`dirname "$FILE_ABSOLUTE_PATH"`
 FILE_NAME=`basename "$FILE_ABSOLUTE_PATH"`
+
+# create log file
+LOG_FOLDER=${SCRIPT_DIR}/../logs
+TIME1=$(date "+%Y%m%d-%H%M%S")
+LOG_FILE=${LOG_FOLDER}/$TIME1-${FILE_NAME}-log.txt
 
 # make available to docker-compose.yml
 export FILE_FOLDER
