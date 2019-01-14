@@ -32,6 +32,7 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 					--mapfile=/app/config/AIRR-iReceptorMapping.txt \
 			 		--host=$DB_HOST \
 			 		--database=$DB_DATABASE \
+			 		--repertoire_collection samples \
 			 		--rearrangement_collection sequences \
 			 		--$REARRANGEMENT_TYPE \
 			 		-f /scratch/$FILE_NAME' \
