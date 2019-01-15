@@ -26,7 +26,7 @@ scripts/start_turnkey.sh
 scripts/stop_turnkey.sh
 ```
 
-## See the running Docker containers
+## List the Docker containers
 You can use docker-compose:
 ```
 sudo docker-compose --file scripts/docker-compose.yml --project-name turnkey-service ps
@@ -44,7 +44,7 @@ or directly Docker:
 ```
 sudo docker ps
 ```
-which will return the list of Docker containers currently running:
+which will return the list of Docker containers **currently running**:
 ```
 CONTAINER ID        IMAGE                                   COMMAND                  CREATED             STATUS              PORTS                NAMES
 9641ed06f008        ireceptorj/service-php-mongodb:latest   "docker-php-entrypoi…"   3 hours ago         Up 3 hours          0.0.0.0:80->80/tcp   turnkey-service_ireceptor-api_1
@@ -53,17 +53,17 @@ CONTAINER ID        IMAGE                                   COMMAND             
 
 ## Entering the Docker containers
 
-### Log into the database container
+### Log into the database container as root
 ```
 sudo docker-compose --file scripts/docker-compose.yml --project-name turnkey-service exec ireceptor-database bash
 ```
 
-### Log into the web application container
+### Log into the web application container as root
 ```
 sudo docker-compose --file scripts/docker-compose.yml --project-name turnkey-service exec ireceptor-api bash
 ```
 
-### Launch the dataloading container and log into it
+### Launch the dataloading container and log into it as root
 ```
 sudo docker-compose --file scripts/docker-compose.yml --project-name turnkey-service run ireceptor-dataloading bash
 ```
