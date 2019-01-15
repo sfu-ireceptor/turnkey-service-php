@@ -16,7 +16,8 @@ FILE_FOLDER=`dirname "$FILE_ABSOLUTE_PATH"`
 FILE_NAME=`basename "$FILE_ABSOLUTE_PATH"`
 
 # create log file
-LOG_FOLDER=${SCRIPT_DIR}/../logs
+LOG_FOLDER=${SCRIPT_DIR}/../log
+mkdir -p $LOG_FOLDER
 TIME1=`date +%Y-%m-%d_%H-%M-%S`
 LOG_FILE=${LOG_FOLDER}/${TIME1}_${FILE_NAME}.log
 
