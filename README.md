@@ -66,38 +66,13 @@ Note: to load IMGT or AIRR annotations, replace the `mixcr` parameter by `imgt` 
 scripts/load_rearrangements.sh imgt <IMGT file>
 ```
 
-## Customization
-
-#### Moving the database folder
-The database data is in the `.mongodb_data` folder. To move it somewhere else:
-
-1. Stop the turnkey
-```
-scripts/stop_turnkey.sh
-```
-
-2. Rename and move the data folder
-```
-mv .mongodb_data ireceptor_turneky_mongodb_data
-mv ireceptor_turneky_mongodb_data <another folder>
-```
-
-2. Create a symbolic link to the new location
-```
-ln -s <another folder>/ireceptor_turneky_mongodb_data .mongodb_data
-```
-
-3. Start the turnkey
-```
-scripts/start_turnkey.sh
-```
-
 ## More information
 - [How it works](doc/how_it_works.md)
-- [Turnkey admin scripts](doc/admin_scripts.md)
 - [Troubleshooting](doc/troubleshooting.md)
+- [Moving the database folder](doc/moving_the_database_folder.md)
+- [Upgrading the turnkey to the latest version](doc/upgrading.md)
 
-
-## Reference
 - <http://ireceptor.org>
+
+## Contact us
 - Contact us at <support@ireceptor.org>
