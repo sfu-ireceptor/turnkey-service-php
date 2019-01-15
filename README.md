@@ -75,4 +75,4 @@ scripts/load_rearrangements.sh imgt <IMGT file>
 - <http://ireceptor.org>
 
 ## Contact us
-- Contact us at <support@ireceptor.org>
+:envelope: <support@ireceptor.org>
