@@ -4,7 +4,7 @@ The upgrade will update the web application, the dataloading scripts, and the di
 
 Warning: we recommend contacting us at <support@ireceptor.org> to confirm that the upgrade is safe for your data.
 
-To run the upgrade, just launch this script:
+To upgrade, run this script:
 
 ```
 scripts/upgrade_turnkey.sh
