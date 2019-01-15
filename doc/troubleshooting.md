@@ -68,7 +68,7 @@ Look into the `logs` folder:
 ```
 ls -l logs
 ```
-which will return something like:
+which contains log files for each file which has been imported into the database.
 ```
 total 28
 -rw-rw-r-- 1 ubuntu ubuntu 486 Jan 12 02:00 2019-01-12_02-00-53_metadata_mixcr.csv.log
