@@ -53,11 +53,6 @@ CONTAINER ID        IMAGE                                   COMMAND             
 
 ## Logs
 
-## View the logs for the different Docker containers
-```
-scripts/show_logs.sh
-```
-
 ### View the database log (MongoDB log)
 ```
 sudo docker-compose --file scripts/docker-compose.yml --project-name turnkey-service logs ireceptor-database
