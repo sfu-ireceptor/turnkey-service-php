@@ -14,11 +14,11 @@ db.samples.find()
 db.sequences.find()
 ```
 
-For more, see the [MongoDB documentation](https://docs.mongodb.com/manual/tutorial/query-documents/)
+For more, see the [MongoDB documentation](https://docs.mongodb.com/manual/tutorial/query-documents/).
 
 
 ## Starting and stopping the Turnkey
-This will start and stop the Docker containers.
+This will start and stop the Docker containers:
 ```
 scripts/start_turnkey.sh
 ```
@@ -31,7 +31,7 @@ You can use docker-compose:
 ```
 sudo docker-compose --file scripts/docker-compose.yml --project-name turnkey-service ps
 ```
-which will return the list of services (those services are defined in scripts/docker-compose.yml):
+which will return the state of the services defined in docker-compose.yml:
 ```
                  Name                                Command               State          Ports       
 ------------------------------------------------------------------------------------------------------
