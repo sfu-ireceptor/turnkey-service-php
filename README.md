@@ -68,7 +68,7 @@ scripts/load_rearrangements.sh imgt <IMGT file>
 
 ## More information
 - [How it works](doc/how_it_works.md)
-- [Troubleshooting](doc/troubleshooting.md)
+- [Troubleshooting](doc/troubleshooting.md) :hammer:
 - [Moving the database folder](doc/moving_the_database_folder.md)
 - [Upgrading the turnkey to the latest version](doc/upgrading.md)
 
