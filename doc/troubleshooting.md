@@ -51,6 +51,23 @@ CONTAINER ID        IMAGE                                   COMMAND             
 0265683d92cd        ireceptorj/repository-mongodb:dev       "docker-entrypoint.s…"   3 hours ago         Up 3 hours          27017/tcp            turnkey-service_ireceptor-database_1
 ```
 
+## Entering the Docker containers
+
+### Log into the database container
+```
+sudo docker-compose --file scripts/docker-compose.yml --project-name turnkey-service exec ireceptor-database bash
+```
+
+### Log into the web application container
+```
+sudo docker-compose --file scripts/docker-compose.yml --project-name turnkey-service exec ireceptor-api bash
+```
+
+### Launch the dataloading container and log into it
+```
+sudo docker-compose --file scripts/docker-compose.yml --project-name turnkey-service run ireceptor-dataloading bash
+```
+
 ## Logs
 
 ### View the database log (MongoDB log)
