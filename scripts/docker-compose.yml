@@ -5,7 +5,7 @@ services:
     ireceptor-database:
         image: ireceptorj/repository-mongodb:dev
         volumes:
-            - ../data:/data/db
+            - ../.mongodb_data:/data/db
 
     ireceptor-api:
         depends_on:
