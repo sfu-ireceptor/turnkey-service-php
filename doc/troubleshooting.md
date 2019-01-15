@@ -31,7 +31,7 @@ You can use docker-compose:
 ```
 sudo docker-compose --file scripts/docker-compose.yml --project-name turnkey-service ps
 ```
-which will return:
+which will return the list of services (those services are defined in scripts/docker-compose.yml):
 ```
                  Name                                Command               State          Ports       
 ------------------------------------------------------------------------------------------------------
@@ -40,7 +40,7 @@ turnkey-service_ireceptor-database_1      docker-entrypoint.sh mongod      Up   
 turnkey-service_ireceptor-dataloading_1   python3                          Exit 0     
 ```
 
-or directly Docker:
+or directly Docker which will return the list of Docker containers currently running:
 ```
 sudo docker ps
 ```
@@ -50,8 +50,6 @@ CONTAINER ID        IMAGE                                   COMMAND             
 9641ed06f008        ireceptorj/service-php-mongodb:latest   "docker-php-entrypoi…"   3 hours ago         Up 3 hours          0.0.0.0:80->80/tcp   turnkey-service_ireceptor-api_1
 0265683d92cd        ireceptorj/repository-mongodb:dev       "docker-entrypoint.s…"   3 hours ago         Up 3 hours          27017/tcp            turnkey-service_ireceptor-database_1
 ```
-
-sudo docker-compose --file scripts/docker-compose.yml --project-name turnkey-service logs ireceptor-database
 
 ## Logs
 
