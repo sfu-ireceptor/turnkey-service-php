@@ -40,11 +40,11 @@ turnkey-service_ireceptor-database_1      docker-entrypoint.sh mongod      Up   
 turnkey-service_ireceptor-dataloading_1   python3                          Exit 0     
 ```
 
-or directly Docker which will return the list of Docker containers currently running:
+or directly Docker:
 ```
 sudo docker ps
 ```
-which will return:
+which will return the list of Docker containers currently running:
 ```
 CONTAINER ID        IMAGE                                   COMMAND                  CREATED             STATUS              PORTS                NAMES
 9641ed06f008        ireceptorj/service-php-mongodb:latest   "docker-php-entrypoi…"   3 hours ago         Up 3 hours          0.0.0.0:80->80/tcp   turnkey-service_ireceptor-api_1
