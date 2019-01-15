@@ -14,6 +14,8 @@ services:
         environment:
             DB_HOST: ireceptor-database
             DB_DATABASE: test
+            DB_SAMPLES_COLLECTION: samples
+            DB_SEQUENCES_COLLECTION: sequences
         ports:
             - 80:80
 
