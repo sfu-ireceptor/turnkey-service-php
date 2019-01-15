@@ -85,9 +85,10 @@ ln -s <another folder>/data data
 scripts/start_turnkey.sh
 ```
 
-## Other documentation
+## More information
 - [How it works](doc/how_it_works.md)
 - [Turnkey admin scripts](doc/admin_scripts.md)
+- [Troubleshooting](doc/troubleshooting.md)
 
 
 ## Reference
