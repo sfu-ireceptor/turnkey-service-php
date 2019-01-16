@@ -7,6 +7,8 @@ A quick and easy way to build your own AIRR-seq repository.
 - a web application exposing that database through the [iReceptor API](https://github.com/sfu-ireceptor/api)
 - some scripts to load your data into the database
 
+![iReceptor Service Turnkey Architecture](doc/architecture.png)
+
 ## How does it work?
 It uses Docker containers to make the installation and future upgrades simple. For more information, see [How it works](doc/how_it_works.md).
 
