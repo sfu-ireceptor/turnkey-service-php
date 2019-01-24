@@ -73,6 +73,7 @@ scripts/load_rearrangements.sh imgt <IMGT file>
 - [Troubleshooting](doc/troubleshooting.md) :hammer:
 - [Moving the database folder](doc/moving_the_database_folder.md)
 - [Upgrading the turnkey to the latest version](doc/upgrading.md)
+- [Resetting your turnkey](doc/resetting.md)
 
 - <http://ireceptor.org>
 
