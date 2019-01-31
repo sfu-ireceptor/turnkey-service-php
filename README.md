@@ -78,7 +78,5 @@ You can now [reset your turnkey](doc/resetting.md) and load your own data.
 - [Upgrading the turnkey to the latest version](doc/upgrading.md)
 - [Resetting your turnkey](doc/resetting.md)
 
-- <http://ireceptor.org>
-
 ## Contact us
 :envelope: <support@ireceptor.org>
