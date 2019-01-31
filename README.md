@@ -10,7 +10,7 @@ A quick and easy way to build your own AIRR-seq repository.
 ![iReceptor Service Turnkey Architecture](doc/architecture.png)
 
 ## How does it work?
-It uses Docker containers to make the installation and future upgrades simple. For more information, see [How it works](doc/how_it_works.md).
+Docker containers are used to make the installation and future upgrades clean and simple. For more information, see [How it works](doc/how_it_works.md).
 
 ## Installation (10 min)
 Get the code and launch the installation:
