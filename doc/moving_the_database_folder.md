@@ -1,4 +1,4 @@
-# Moving the database folder
+# Moving the database folder to another location
 The database data is in the `.mongodb_data` folder. To move it somewhere else (for example on an external disk):
 
 1. Stop the turnkey
