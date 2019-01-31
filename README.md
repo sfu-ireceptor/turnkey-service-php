@@ -68,6 +68,9 @@ Note: to load IMGT or AIRR annotations, replace the `mixcr` parameter by `imgt` 
 scripts/load_rearrangements.sh imgt <IMGT file>
 ```
 
+You can now [reset your turnkey](doc/resetting.md) and load your own data.
+
+
 ## More information
 - [How it works](doc/how_it_works.md)
 - [Troubleshooting](doc/troubleshooting.md) :hammer:
