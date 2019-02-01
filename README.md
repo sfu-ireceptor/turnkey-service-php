@@ -24,15 +24,11 @@ scripts/install_turnkey.sh
 
 Go to <http://localhost/v2/samples> in your browser (if necessary, replace "localhost" with your server URL).
 
-This returns the list of samples in your database by querying the web application at `/v2/samples`, which is an entry point of the [iReceptor API](https://github.com/sfu-ireceptor/api). You can also use the command line:
+This returns the list of samples in your database by querying the web application at `/v2/samples`, which is an entry point of the [iReceptor API](https://github.com/sfu-ireceptor/api). An empty array `[]` is returned because the database is currently empty.
+
+You can also use the command line:
 ```
 curl -X POST -H "Content-Type: application/x-www-form-urlencoded" "http://localhost/v2/samples"
-```
-
-
-An empty array is returned because the database is currently empty:
-```
-[]
 ```
 
 ## Loading data
