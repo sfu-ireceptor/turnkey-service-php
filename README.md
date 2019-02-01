@@ -76,7 +76,7 @@ You can now [reset your turnkey](doc/resetting.md) and load your own data.
 - [Troubleshooting](doc/troubleshooting.md) :hammer:
 - [Moving the database folder to another location](doc/moving_the_database_folder.md)
 - [Updating the turnkey](doc/updating.md)
-- [Resetting the turnkey](doc/resetting.md)
+- [Resetting the turnkey database](doc/resetting.md)
 
 ## Contact us
 :envelope: <support@ireceptor.org>

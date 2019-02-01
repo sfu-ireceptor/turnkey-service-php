@@ -1,4 +1,4 @@
-# Resetting the turnkey
+# Resetting the turnkey database
 
 :warning: This will erase the turnkey database.
 
