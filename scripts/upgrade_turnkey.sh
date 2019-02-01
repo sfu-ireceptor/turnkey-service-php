@@ -8,22 +8,17 @@ ${SCRIPT_DIR}/stop_turnkey.sh
 echo "Done"
 echo
 
-
 # update local git repository
-echo "Upgrading source code.."
+echo "Updating source code.."
 git pull
 echo "Done"
 echo
 
-
 # download latest Docker images from Docker Hub
 echo "Downloading Docker images from Docker Hub.."
 sudo docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service pull
-# sudo docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service pull ireceptor-api
-# sudo docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service pull ireceptor-dataloading
 echo "Done"
 echo
-
 
 # start Docker containers
 echo "Starting Docker containers.."
