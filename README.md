@@ -75,7 +75,7 @@ You can now [reset your turnkey](doc/resetting.md) and load your own data.
 - [How it works](doc/how_it_works.md)
 - [Troubleshooting](doc/troubleshooting.md) :hammer:
 - [Moving the database folder to another location](doc/moving_the_database_folder.md)
-- [Upgrading the turnkey to the latest version](doc/upgrading.md)
+- [Updating the turnkey](doc/updating.md)
 - [Resetting your turnkey](doc/resetting.md)
 
 ## Contact us

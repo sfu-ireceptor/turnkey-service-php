@@ -27,5 +27,5 @@ echo "Done"
 echo
 
 # confirm successful installation
-echo "Congratulations, your iReceptor Service Turnkey has been upgraded successfully."
+echo "Congratulations, your iReceptor Service Turnkey has been updated successfully."
 echo "For more information, go to https://github.com/sfu-ireceptor/turnkey-service-php"
