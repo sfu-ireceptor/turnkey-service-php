@@ -37,7 +37,7 @@ curl -X POST -H "Content-Type: application/x-www-form-urlencoded" "http://localh
 1. load the metadata associated with a study that has generated sequence data.
 2. load the sequence annotations (from imgt, mixcr, etc).
 
-#### Example: loading the test data
+#### Quick example: loading the test data
 
 1. Load the metadata file [test_data/metadata_mixcr.csv](test_data/metadata_mixcr.csv):
 ```
