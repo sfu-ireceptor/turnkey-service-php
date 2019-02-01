@@ -1,6 +1,6 @@
-# Resetting your turnkey
+# Resetting the turnkey
 
-:warning: This will erase your database.
+:warning: This will erase the turnkey database.
 
 ```
 # stop turnkey
