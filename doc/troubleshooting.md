@@ -51,7 +51,7 @@ CONTAINER ID        IMAGE                                   COMMAND             
 0265683d92cd        ireceptorj/repository-mongodb:dev       "docker-entrypoint.s…"   3 hours ago         Up 3 hours          27017/tcp            turnkey-service_ireceptor-database_1
 ```
 
-## Entering the Docker containers
+## Logging into the Docker containers
 
 ### Log into the database container as root
 ```
