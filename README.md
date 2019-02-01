@@ -20,7 +20,7 @@ cd turnkey-service-php
 scripts/install_turnkey.sh
 ```
 
-#### Check it's working
+## Check it's working
 
 Go to <http://localhost/v2/samples> in your browser (if necessary, replace "localhost" with your server URL).
 
