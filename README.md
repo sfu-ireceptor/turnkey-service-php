@@ -12,8 +12,8 @@ A quick and easy way to build your own AIRR-seq repository.
 ## How does it work?
 Docker containers are used to make the installation and future updates clean and simple. For more information, see [How it works](doc/how_it_works.md).
 
-## Installation (10 min)
-Get the code and launch the installation:
+## Installation
+Get the code and launch the installation, which will take from 10 to 30 min (depending on the speed of the downloads).
 ```
 git clone https://github.com/sfu-ireceptor/turnkey-service-php.git
 cd turnkey-service-php
