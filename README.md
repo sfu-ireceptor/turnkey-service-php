@@ -70,6 +70,7 @@ Congratulations :relaxed: You can now [reset the turnkey database](doc/resetting
 ## More information
 - [How it works](doc/how_it_works.md)
 - [Troubleshooting](doc/troubleshooting.md) :hammer:
+- [Backing up and restoring the database](doc/database_backup.md)
 - [Moving the database to another folder](doc/moving_the_database_folder.md)
 - [Updating the turnkey](doc/updating.md)
 - [Resetting the turnkey database](doc/resetting.md)
