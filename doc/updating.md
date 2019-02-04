@@ -6,5 +6,5 @@ Warning: we recommend contacting us at <support@ireceptor.org> before running th
 
 To run the update, execute this this script:
 ```
-scripts/updade_turnkey.sh
+scripts/update_turnkey.sh
 ```
