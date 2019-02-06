@@ -6,6 +6,8 @@ services:
         image: ireceptorj/repository-mongodb:dev
         volumes:
             - ../.mongodb_data:/data/db
+        environment:
+            MONGO_INITDB_DATABASE: ireceptor
 
     ireceptor-api:
         depends_on:
@@ -13,7 +15,7 @@ services:
         image: ireceptorj/service-php-mongodb:latest
         environment:
             DB_HOST: ireceptor-database
-            DB_DATABASE: test
+            DB_DATABASE: ireceptor
             DB_SAMPLES_COLLECTION: samples
             DB_SEQUENCES_COLLECTION: sequences
         ports:
@@ -25,6 +27,6 @@ services:
         image: ireceptorj/dataloading-mongo:dev
         environment:
             DB_HOST: ireceptor-database
-            DB_DATABASE: test
+            DB_DATABASE: ireceptor
         volumes:
             - ${FILE_FOLDER:-/tmp}:/scratch:ro
