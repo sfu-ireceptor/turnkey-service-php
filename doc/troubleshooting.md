@@ -8,10 +8,10 @@ scripts/mongo.sh
 You can then execute standard MongoDB commands:
 ```
 // show sampless
-db.samples.find()
+db.sample.find()
 
 // show sequence annotations
-db.sequences.find()
+db.sequence.find()
 ```
 
 For more, see the [MongoDB documentation](https://docs.mongodb.com/manual/tutorial/query-documents/).

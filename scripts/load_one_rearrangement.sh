@@ -31,10 +31,10 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 			ireceptor-dataloading \
 				sh -c 'python /app/scripts/dataloader.py -v \
 					--mapfile=/app/config/AIRR-iReceptorMapping.txt \
-			 		--host=$DB_HOST \
-			 		--database=$DB_DATABASE \
-			 		--repertoire_collection samples \
-			 		--rearrangement_collection sequences \
-			 		--$REARRANGEMENT_TYPE \
-			 		-f /scratch/$FILE_NAME' \
+					--host=$DB_HOST \
+					--database=$DB_DATABASE \
+					--repertoire_collection sample \
+					--rearrangement_collection sequence \
+					--$REARRANGEMENT_TYPE \
+					-f /scratch/$FILE_NAME' \
  	2>&1 | tee $LOG_FILE
