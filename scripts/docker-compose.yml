@@ -3,7 +3,7 @@ version: '3'
 services:
 
     ireceptor-database:
-        image: ireceptorj/repository-mongodb:dev
+        image: ireceptor/repository-mongodb:turnkey
         volumes:
             - ../.mongodb_data:/data/db
         environment:
@@ -12,7 +12,7 @@ services:
     ireceptor-api:
         depends_on:
             - ireceptor-database
-        image: ireceptorj/service-php-mongodb:latest
+        image: ireceptor/service-php-mongodb:turnkey
         environment:
             DB_HOST: ireceptor-database
             DB_DATABASE: ireceptor
@@ -24,7 +24,7 @@ services:
     ireceptor-dataloading:
         depends_on:
             - ireceptor-database
-        image: ireceptorj/dataloading-mongo:dev
+        image: ireceptor/dataloading-mongo:turnkey
         environment:
             DB_HOST: ireceptor-database
             DB_DATABASE: ireceptor
