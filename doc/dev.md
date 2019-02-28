@@ -10,7 +10,7 @@ cp scripts/.env-dev .env
 scripts/start_turnkey.sh 
 ```
 
-## How it works:
+## How it works
 
 
 The .env file overrides the default Docker image tags defined in scripts/docker-compose.yml:
