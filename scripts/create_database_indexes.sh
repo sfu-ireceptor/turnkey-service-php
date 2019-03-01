@@ -4,8 +4,8 @@ SCRIPT_DIR=`dirname "$0"`
 
 # create indexes
 sudo docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service exec ireceptor-database \
-		sh -c 'cd /app && mongo --quiet /app/scripts/create_indexes.js'
+		sh -c 'cd /app && mongo --quiet $MONGO_INITDB_DATABASE /app/scripts/create_indexes.js'
 
 # create query plans
 sudo docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service exec ireceptor-database \
-		sh -c 'cd /app && mongo --quiet /app/scripts/create_query_plans.js'
+		sh -c 'cd /app && mongo --quiet $MONGO_INITDB_DATABASE /app/scripts/create_query_plans.js'
