@@ -30,3 +30,9 @@ services:
             DB_DATABASE: ireceptor
         volumes:
             - ${FILE_FOLDER:-/tmp}:/scratch:ro
+
+    ireceptor-performance-testing:
+        image: ireceptor/dataloading-mongo:${PERFORMANCE_TESTING_TAG:-turnkey-refactor-mongo}
+        environment:
+            DB_HOST: ireceptor-database
+            DB_DATABASE: ireceptor
