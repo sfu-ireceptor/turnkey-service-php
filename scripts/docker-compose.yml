@@ -33,6 +33,4 @@ services:
 
     ireceptor-performance-testing:
         image: ireceptor/dataloading-mongo:${PERFORMANCE_TESTING_TAG:-turnkey-refactor-mongo}
-        environment:
-            DB_HOST: ireceptor-database
-            DB_DATABASE: ireceptor
+        entrypoint: "mongo --quiet --host ireceptor-database ireceptor"
