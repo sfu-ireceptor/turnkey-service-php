@@ -4,16 +4,25 @@ SCRIPT_DIR=`dirname "$0"`
 
 # install Docker
 echo "Installing Docker.."
-sudo ${SCRIPT_DIR}/install_docker.sh > /dev/null 2>&1
-echo "Done"
+if [ -x "$(command -v docker)" ]; then
+	echo "Already installed."
+  else
+	sudo ${SCRIPT_DIR}/install_docker.sh > /dev/null 2>&1
+	echo "Done"
+fi
 echo
+
 
 
 # install Docker Compose
 echo "Installing Docker Compose.."
-sudo curl -L https://github.com/docker/compose/releases/download/1.23.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose > /dev/null 2>&1
-sudo chmod +x /usr/local/bin/docker-compose
-echo "Done"
+if [ -x "$(command -v docker-compose)" ]; then
+	echo "Already installed."
+  else
+	sudo curl -L https://github.com/docker/compose/releases/download/1.23.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose > /dev/null 2>&1
+	sudo chmod +x /usr/local/bin/docker-compose
+	echo "Done"
+fi
 echo
 
 
@@ -22,6 +31,15 @@ echo "Downloading Docker images from Docker Hub.."
 sudo docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service pull
 echo "Done"
 echo
+
+
+# # Optimize host system for MongoDB
+# echo 'MongoDB optimization: setting "transparent_hugepage" to "never"..'
+# echo never | sudo tee /sys/kernel/mm/transparent_hugepage/enabled
+# echo never | sudo tee /sys/kernel/mm/transparent_hugepage/defrag
+# echo "Done"
+# echo
+
 
 # start Docker containers
 echo "Starting Docker containers.."
