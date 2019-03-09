@@ -4,13 +4,13 @@ SCRIPT_DIR=`dirname "$0"`
 
 METADATA_FILE="$1"
 API_FILE="$2"
-SAMPLE_ID="$3"
+STUDY_ID="$3"
 ANNOTATION_DIR="$4"
 
 # make available to docker-compose.yml
 export METADATA_FILE
 export API_FILE
-export SAMPLE_ID
+export STUDY_ID
 export ANNOTATION_DIR
 
 # create log file
@@ -28,13 +28,14 @@ LOG_FILE=${LOG_FOLDER}/${TIME1}_${FILE_NAME}.log
 sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run -v /data:/data --rm \
 			-e METADATA_FILE="$METADATA_FILE" \
 			-e API_FILE="$API_FILE" \
-			-e SAMPLE_ID="$SAMPLE_ID" \
+			-e STUDY_ID="$STUDY_ID" \
 			-e ANNOTATION_DIR="$ANNOTATION_DIR" \
 			ireceptor-dataloading \
-				sh -c 'pip install requests; pip install xlrd; python /app/verify/sanitychecking.py \
+				sh -c 'python /app/verify/sanitychecking.py \
                                         $METADATA_FILE \
                                         $API_FILE \
-                                        $SAMPLE_ID \
+                                        $STUDY_ID \
                                         $ANNOTATION_DIR \
                                         L' \
  	2>&1 | tee $LOG_FILE
+
