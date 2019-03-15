@@ -2,7 +2,7 @@
 
 The iReceptor Turnkey is designed as a quick and easy mechanism for a researcher or research group to install and manage an AIRR-seq data repository. In addition, through the integration of the iReceptor Web Service with the repository, it makes it possible for you to also integrate your repository into the AIRR Data Commons. 
 
-For more information on the iReceptor Turnkey, please refer to the [iReceptor Repository page](http://www.ireceptor.org/repositories#turnkey) on the main [iReceptor web site](http://www.ireceptor.org/).
+For more information on the iReceptor Turnkey, please refer to the [iReceptor Turnkey Repository page](http://www.ireceptor.org/repositories#turnkey) on the main [iReceptor web site](http://www.ireceptor.org/).
 
 The remainder of this document provides you with directions on how to install and run the iReceptor Turnkey Repository.
 
