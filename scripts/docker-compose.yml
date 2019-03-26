@@ -29,8 +29,13 @@ services:
             DB_HOST: ireceptor-database
             DB_DATABASE: ireceptor
         volumes:
-            - ${FILE_FOLDER:-/tmp}:/scratch:ro
+            - ${FILE_FOLDER:-/tmp}:/scratch
 
     ireceptor-performance-testing:
         image: ireceptor/dataloading-mongo:${PERFORMANCE_TESTING_TAG:-turnkey-refactor-mongo}
-        entrypoint: "mongo --quiet --host ireceptor-database ireceptor"
+        environment:
+            DB_HOST: ireceptor-database
+            DB_DATABASE: ireceptor
+            DB_SAMPLES_COLLECTION: sample
+            DB_SEQUENCES_COLLECTION: sequence
+
