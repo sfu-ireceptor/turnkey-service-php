@@ -15,6 +15,10 @@ else
     exit
 fi
 
+# create log folder
+LOG_FOLDER=${SCRIPT_DIR}/../log
+mkdir -p $LOG_FOLDER
+
 # The host we are running on
 host_name=$(hostname)
 
@@ -27,14 +31,16 @@ echo "Test performed at: $current_time"
 sudo docker-compose --file ${SCRIPT_DIR}/docker-compose.yml \
         --project-name turnkey-service run ireceptor-performance-testing \
         sh -c 'mongo $DB_DATABASE --host $DB_HOST /app/benchmark/index_dump.js' \
-        > index-$host_name-$current_time.txt
+        2>&1 > $LOG_FOLDER/index-$host_name-$current_time.txt
+echo "Index log file = " $LOG_FOLDER/index-$host_name-$current_time.txt
 
 # Dump the query plan cache. This is important to know as if the performance
 # is not as good as expected this can help diagnose the problem.
 sudo docker-compose --file ${SCRIPT_DIR}/docker-compose.yml \
         --project-name turnkey-service run ireceptor-performance-testing \
         sh -c 'mongo $DB_DATABASE --host $DB_HOST /app/benchmark/cache_dump.js' \
-        > cache-$host_name-$current_time.txt
+        2>&1 > $LOG_FOLDER/cache-$host_name-$current_time.txt
+echo "Query Plan Cache log file = " $LOG_FOLDER/cache-$host_name-$current_time.txt
 
 # Perform the benchmark test the number of times requested.
 for i in `seq 1 $count`;
@@ -45,10 +51,12 @@ do
     sudo docker-compose --file ${SCRIPT_DIR}/docker-compose.yml \
         --project-name turnkey-service run ireceptor-performance-testing \
         sh -c 'mongo $DB_DATABASE --host $DB_HOST /app/benchmark/test_performance_explain.js' \
-        > run$i-$host_name-$current_time.txt
+        2>&1 > $LOG_FOLDER/run$i-$host_name-$current_time.txt
+    echo "Performance test log file = " $LOG_FOLDER/run$i-$host_name-$current_time.txt
 done
 
 # Print out the time when the test run finished.
 end_time=$(date "+%Y.%m.%d-%H.%M.%S")
-echo "Test finished at: $end_time"
+echo "Test finished at: $end_time" 
+echo "Log files created in $LOG_FOLDER"
 
