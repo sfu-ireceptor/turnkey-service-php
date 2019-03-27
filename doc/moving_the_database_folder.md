@@ -9,13 +9,13 @@ scripts/stop_turnkey.sh
 
 2. Rename and move the data folder
 ```
-mv .mongodb_data ireceptor_turneky_mongodb_data
-mv ireceptor_turneky_mongodb_data <another folder>
+sudo mv .mongodb_data ireceptor_turnkey_mongodb_data
+sudo mv ireceptor_turnkey_mongodb_data <another folder>
 ```
 
 2. Create a symbolic link to the new location
 ```
-ln -s <another folder>/ireceptor_turneky_mongodb_data .mongodb_data
+ln -s <another folder>/ireceptor_turnkey_mongodb_data .mongodb_data
 ```
 
 3. Start the turnkey
