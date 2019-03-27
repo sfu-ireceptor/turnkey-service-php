@@ -32,7 +32,7 @@ services:
             - ${FILE_FOLDER:-/tmp}:/scratch
 
     ireceptor-performance-testing:
-        image: ireceptor/dataloading-mongo:${PERFORMANCE_TESTING_TAG:-turnkey}
+        image: ireceptor/dataloading-mongo:${PERFORMANCE_TESTING_TAG:-turnkey-mongo}
         environment:
             DB_HOST: ireceptor-database
             DB_DATABASE: ireceptor
