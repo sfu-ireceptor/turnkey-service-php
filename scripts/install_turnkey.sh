@@ -12,8 +12,6 @@ if [ -x "$(command -v docker)" ]; then
 fi
 echo
 
-
-
 # install Docker Compose
 echo "Installing Docker Compose.."
 if [ -x "$(command -v docker-compose)" ]; then
@@ -25,21 +23,18 @@ if [ -x "$(command -v docker-compose)" ]; then
 fi
 echo
 
-
 # download Docker images from Docker Hub
 echo "Downloading Docker images from Docker Hub.."
 sudo docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service pull
 echo "Done"
 echo
 
-
-# # Optimize host system for MongoDB
-# echo 'MongoDB optimization: setting "transparent_hugepage" to "never"..'
-# echo never | sudo tee /sys/kernel/mm/transparent_hugepage/enabled
-# echo never | sudo tee /sys/kernel/mm/transparent_hugepage/defrag
-# echo "Done"
-# echo
-
+# optimize host for MongoDB
+echo 'Setting "transparent_hugepage" to "never" (recommended by MongoDB)..'
+echo never | sudo tee /sys/kernel/mm/transparent_hugepage/enabled
+echo never | sudo tee /sys/kernel/mm/transparent_hugepage/defrag
+echo "Done"
+echo
 
 # start Docker containers
 echo "Starting Docker containers.."
