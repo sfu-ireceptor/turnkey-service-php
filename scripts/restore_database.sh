@@ -5,7 +5,7 @@ SCRIPT_DIR=`dirname "$0"`
 sudo docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service exec -T ireceptor-database \
 	sh -c 'mongo --quiet /app/scripts/drop_indexes.js && \
 			echo && \
-			echo "Restoring database..." && \ 
+			echo "Restoring database..." && \
 			mongorestore --noIndexRestore --archive && \
 			echo "Done" && \
 			echo && \
