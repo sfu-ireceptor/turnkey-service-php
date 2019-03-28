@@ -29,13 +29,6 @@ sudo docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnk
 echo "Done"
 echo
 
-# optimize host for MongoDB
-echo 'Setting "transparent_hugepage" to "never" (recommended by MongoDB)..'
-echo never | sudo tee /sys/kernel/mm/transparent_hugepage/enabled
-echo never | sudo tee /sys/kernel/mm/transparent_hugepage/defrag
-echo "Done"
-echo
-
 # start Docker containers
 echo "Starting Docker containers.."
 ${SCRIPT_DIR}/start_turnkey.sh
