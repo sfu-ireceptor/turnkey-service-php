@@ -18,9 +18,9 @@ Nothing is installed directly on your machine, except for Docker. The database a
 # Docker Hub images
 The Docker containers are created from Docker images downloaded from [Docker Hub](https://hub.docker.com/) during the installation of the iReceptor turnkey. Here are the Docker Hub links for each Docker container:
 
-- Docker image for ireceptor-dataloading: https://hub.docker.com/r/ireceptorj/dataloading-mongo
-- Docker image for ireceptor-database: https://hub.docker.com/r/ireceptorj/repository-mongodb
-- Docker image for ireceptor-api: https://hub.docker.com/r/ireceptorj/service-php-mongodb
+- Docker image for ireceptor-dataloading: https://hub.docker.com/r/ireceptor/dataloading-mongo
+- Docker image for ireceptor-database: https://hub.docker.com/r/ireceptor/repository-mongodb
+- Docker image for ireceptor-api: https://hub.docker.com/r/ireceptor/service-php-mongodb
 
 # GitHub repositories
 Each Docker image on Docker Hub is generated from a GitHub repository. Here are the GitHub repositories for each Docker image:
