@@ -2,10 +2,19 @@
 
 SCRIPT_DIR=`dirname "$0"`
 
-METADATA_FILE="$1"
-API_FILE="$2"
-STUDY_ID="$3"
-ANNOTATION_DIR="$4"
+# Get the command line arguements
+if [ $# -eq 4 ]
+then
+    METADATA_FILE="$1"
+    API_FILE="$2"
+    STUDY_ID="$3"
+    ANNOTATION_DIR="$4"
+else
+    echo "usage: $0 metadata_file api_file study_id annotation_dir"
+    exit
+fi
+
+
 
 # make available to docker-compose.yml
 export METADATA_FILE
