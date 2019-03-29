@@ -70,6 +70,28 @@ scripts/load_rearrangements.sh imgt <IMGT file>
 
 Congratulations :relaxed: You can now [reset the turnkey database](doc/resetting.md) and load your own data.
 
+## Loading large data sets
+
+The above scripts can be used to load large data sets. In particular, the load_rearrangements.sh script can be used to load many rearrangement files in a row. We recommend following a well structured data curation process to help ensure data provenance around your data management. Please refer to the iReceptor Curation process and the iReceptor Curation GitHub repository for more information on recommended data curation approaches.
+
+Assuming all data for a study can be found in a single directory, it is possible to utilize the two commands described above to load the entire study data. Assuming your data is in a folder called STUDY_DATA, the study metadata is stored in a metadata file called METADATA.csv, and all of your rearrangement files are MiXCR .txt files, you can do the following:
+
+1. To load your Repertiore Metadata use the load_metadata.sh scrip as above:
+
+```
+scripts/load_metadata.sh STUDY_FOLDER/METADATA.csv
+```
+
+1. To load your rearrangement data, use the load_rearrangements.sh as given below:
+
+```
+scripts/load_rearrangements.sh mixcr STUDY_FOLDER/*.txt
+```
+It is important to note that depending on the size of the data in your rearrangement files, loading the rearrangements can take a very long time. As a result, it is good practice to use the Unix "nohup" command to control the rearrantement loading. The Unix nohup command allows you to run a long running command in the background, redirects the output of that command to a file, and allows you to log out and come back to check on the progress of your command later. You would use the nohup command as follows:
+```
+nohup scripts/load_rearrangements.sh mixcr STUDY_FOLDER/*.txt > rearrangement.log &
+```
+Also note that both the load_metadata.sh and the load_rearrangement.sh command produce log files for every file that they process. If you want to view the log files simply refere to the files in the log directory. Log files are named using date and the file that was processed.
 
 ## More information
 - [How it works](doc/how_it_works.md)
