@@ -82,7 +82,7 @@ Assuming all data for a study can be found in a single directory, it is possible
 scripts/load_metadata.sh STUDY_FOLDER/METADATA.csv
 ```
 
-1. To load your rearrangement data, use the load_rearrangements.sh as given below:
+2. To load your rearrangement data, use the load_rearrangements.sh as given below:
 
 ```
 scripts/load_rearrangements.sh mixcr STUDY_FOLDER/*.txt
