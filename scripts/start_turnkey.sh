@@ -8,9 +8,3 @@ echo
 # They need to be recreated at startup.
 ${SCRIPT_DIR}/create_database_queryplans.sh
 echo
-
-# MongoDB optimization
-echo 'Setting "transparent_hugepage" to "never" (recommended by MongoDB)..'
-echo never | sudo tee /sys/kernel/mm/transparent_hugepage/enabled > /dev/null
-echo never | sudo tee /sys/kernel/mm/transparent_hugepage/defrag > /dev/null
-echo "Done"
