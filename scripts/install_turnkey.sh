@@ -23,6 +23,14 @@ if [ -x "$(command -v docker-compose)" ]; then
 fi
 echo
 
+# MongoDB optimization
+# https://docs.mongodb.com/manual/tutorial/transparent-huge-pages/
+echo 'Installing system service to disable Transparent Huge Pages (recommended by MongoDB)..'
+sudo cp ${SCRIPT_DIR}/disable-transparent-hugepages /etc/init.d/disable-transparent-hugepages
+sudo update-rc.d disable-transparent-hugepages defaults
+echo "Done"
+echo
+
 # download Docker images from Docker Hub
 echo "Downloading Docker images from Docker Hub.."
 sudo docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service pull
