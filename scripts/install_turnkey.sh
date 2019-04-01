@@ -28,6 +28,7 @@ echo
 echo 'Installing system service to disable Transparent Huge Pages (recommended by MongoDB)..'
 sudo cp ${SCRIPT_DIR}/disable-transparent-hugepages /etc/init.d/disable-transparent-hugepages
 sudo update-rc.d disable-transparent-hugepages defaults
+sudo service disable-transparent-hugepages start
 echo "Done"
 echo
 
