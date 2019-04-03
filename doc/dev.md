@@ -18,7 +18,8 @@ The .env file overrides the default Docker image tags defined in scripts/docker-
 ```
 DATABASE_TAG=dev
 API_TAG=latest
-DATALOADING_TAG=latest
+DATALOADING_TAG=turnkey-dataloading-latest
+PERFORMANCE_TESTING_TAG=turnkey-performance-latest
 ```
 
 The turnkey will then use the development Docker Hub images, which are built from the developement branches of the GitHub repositories.
