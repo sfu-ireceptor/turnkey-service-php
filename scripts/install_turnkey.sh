@@ -39,7 +39,7 @@ echo "Done"
 echo
 
 # install and enable system service
-cp ${SCRIPT_DIR}/ireceptor_turnkey.service /etc/systemd/system/ireceptor_turnkey.service
+sudo cp ${SCRIPT_DIR}/ireceptor_turnkey.service /etc/systemd/system/ireceptor_turnkey.service
 sudo systemctl enable /etc/systemd/system/ireceptor_turnkey.service
 
 # start turnkey
