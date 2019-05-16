@@ -38,9 +38,13 @@ sudo docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnk
 echo "Done"
 echo
 
-# start Docker containers
-echo "Starting Docker containers.."
-${SCRIPT_DIR}/start_turnkey.sh
+# install and enable system service
+cp ${SCRIPT_DIR}/ireceptor_turnkey.service /etc/systemd/system/ireceptor_turnkey.service
+sudo systemctl enable /etc/systemd/system/ireceptor_turnkey.service
+
+# start turnkey
+echo "Starting iReceptor Service Turnkey.."
+sudo systemctl start ireceptor_turnkey.service
 echo "Done"
 echo
 
