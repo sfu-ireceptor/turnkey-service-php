@@ -1,0 +1,13 @@
+[Unit]
+Description=iReceptor Turnkey
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=always
+Environment=IRECEPTOR_TURNKEY_FOLDER=/home/ubuntu/turnkey-service-php
+ExecStart=${IRECEPTOR_TURNKEY_FOLDER}/start_turnkey.sh
+ExecStop=${IRECEPTOR_TURNKEY_FOLDER}/stop_turnkey.sh
+
+[Install]
+WantedBy=multi-user.target
