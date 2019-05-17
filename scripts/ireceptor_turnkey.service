@@ -5,9 +5,9 @@ Requires=docker.service
 
 [Service]
 Restart=always
-Environment=IRECEPTOR_TURNKEY_FOLDER=/home/ubuntu/turnkey-service-php
-ExecStart=${IRECEPTOR_TURNKEY_FOLDER}/scripts/start_turnkey.sh
-ExecStop=${IRECEPTOR_TURNKEY_FOLDER}/scripts/stop_turnkey.sh
+#Environment=IRECEPTOR_TURNKEY_FOLDER=/home/ubuntu/turnkey-service-php
+ExecStart=/home/ubuntu/turnkey-service-php/scripts/start_turnkey.sh
+ExecStop=/home/ubuntu/turnkey-service-php/scripts/stop_turnkey.sh
 
 [Install]
 WantedBy=multi-user.target
