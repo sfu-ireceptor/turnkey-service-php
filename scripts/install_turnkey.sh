@@ -41,8 +41,8 @@ echo
 
 # launch on boot
 STARTUP_FILE='/etc/rc.local'
-sudo echo '#!/bin/bash' > $STARTUP_FILE
-sudo echo ${SCRIPT_DIR_FULL}/start_turnkey.sh >> $STARTUP_FILE
+echo '#!/bin/bash' | sudo tee $STARTUP_FILE > /dev/null
+echo "${SCRIPT_DIR_FULL}/start_turnkey.sh" | sudo tee -a $STARTUP_FILE > /dev/null
 sudo chmod +x $STARTUP_FILE
 
 # start turnkey
