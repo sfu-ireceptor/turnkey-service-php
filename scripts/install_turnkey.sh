@@ -40,7 +40,7 @@ echo "Done"
 echo
 
 # launch on boot
-$STARTUP_FILE='/etc/rc.local'
+STARTUP_FILE='/etc/rc.local'
 sudo echo '#!/bin/bash' > $STARTUP_FILE
 sudo echo ${SCRIPT_DIR_FULL}/start_turnkey.sh >> $STARTUP_FILE
 sudo chmod +x $STARTUP_FILE
