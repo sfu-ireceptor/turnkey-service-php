@@ -1,6 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 
 SCRIPT_DIR=`dirname "$0"`
+SCRIPT_DIR_FULL="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # install Docker
 echo "Installing Docker.."
@@ -38,13 +39,15 @@ sudo docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnk
 echo "Done"
 echo
 
-# install and enable system service
-sudo cp ${SCRIPT_DIR}/ireceptor_turnkey.service /etc/systemd/system/ireceptor_turnkey.service
-sudo systemctl enable /etc/systemd/system/ireceptor_turnkey.service
+# launch on boot
+$STARTUP_FILE='/etc/rc.local'
+sudo echo '#!/bin/bash' > $STARTUP_FILE
+sudo echo ${SCRIPT_DIR_FULL}/start_turnkey.sh >> $STARTUP_FILE
+sudo chmod +x $STARTUP_FILE
 
 # start turnkey
 echo "Starting iReceptor Service Turnkey.."
-sudo systemctl start ireceptor_turnkey.service
+${SCRIPT_DIR}/start_turnkey.sh
 echo "Done"
 echo
 
