@@ -54,9 +54,7 @@ echo "Done"
 echo
 
 # start turnkey
-echo "Starting iReceptor Service Turnkey.."
 ${SCRIPT_DIR}/start_turnkey.sh
-echo "Done"
 echo
 
 # confirm successful installation
