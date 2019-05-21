@@ -44,7 +44,7 @@ STARTUP_FILE='/etc/rc.local'
 echo "Add code to launch on boot in $STARTUP_FILE .."
 if [[ -f "$STARTUP_FILE" ]]; then
 	OLD_STARTUP_FILE='/etc/rc.local.old'
-    echo "Warning: $STARTUP_FILE already exists, moving to $OLD_STARTUP_FILE"
+    echo "Warning: $STARTUP_FILE already exists, moving it to $OLD_STARTUP_FILE"
     sudo mv "$STARTUP_FILE" "$OLD_STARTUP_FILE"
 fi
 echo '#!/bin/bash' | sudo tee $STARTUP_FILE > /dev/null
