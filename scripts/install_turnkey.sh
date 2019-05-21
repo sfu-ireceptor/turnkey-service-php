@@ -41,6 +41,7 @@ echo
 
 # launch on boot
 STARTUP_FILE='/etc/rc.local'
+echo "Add code to launch on boot in $STARTUP_FILE.."
 if [[ -f "$STARTUP_FILE" ]]; then
 	OLD_STARTUP_FILE='/etc/rc.local.old'
     echo "Warning: $STARTUP_FILE already exists, moving to $OLD_STARTUP_FILE"
@@ -49,6 +50,8 @@ fi
 echo '#!/bin/bash' | sudo tee $STARTUP_FILE > /dev/null
 echo "${SCRIPT_DIR_FULL}/start_turnkey.sh" | sudo tee -a $STARTUP_FILE > /dev/null
 sudo chmod +x $STARTUP_FILE
+echo "Done"
+echo
 
 # start turnkey
 echo "Starting iReceptor Service Turnkey.."
