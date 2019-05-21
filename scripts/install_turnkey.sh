@@ -1,6 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 
 SCRIPT_DIR=`dirname "$0"`
+SCRIPT_DIR_FULL="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # install Docker
 echo "Installing Docker.."
@@ -38,10 +39,22 @@ sudo docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnk
 echo "Done"
 echo
 
-# start Docker containers
-echo "Starting Docker containers.."
-${SCRIPT_DIR}/start_turnkey.sh
+# launch on boot
+STARTUP_FILE='/etc/rc.local'
+echo "Add code to launch on boot in $STARTUP_FILE .."
+if [[ -f "$STARTUP_FILE" ]]; then
+	OLD_STARTUP_FILE='/etc/rc.local.old'
+    echo "Warning: $STARTUP_FILE already exists, moving it to $OLD_STARTUP_FILE"
+    sudo mv "$STARTUP_FILE" "$OLD_STARTUP_FILE"
+fi
+echo '#!/bin/bash' | sudo tee $STARTUP_FILE > /dev/null
+echo "${SCRIPT_DIR_FULL}/start_turnkey.sh" | sudo tee -a $STARTUP_FILE > /dev/null
+sudo chmod +x $STARTUP_FILE
 echo "Done"
+echo
+
+# start turnkey
+${SCRIPT_DIR}/start_turnkey.sh
 echo
 
 # confirm successful installation
