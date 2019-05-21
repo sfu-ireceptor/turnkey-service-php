@@ -10,4 +10,3 @@ echo
 # The Mongo query plans are forgotten each time mongo is stopped.
 # They need to be recreated at startup.
 ${SCRIPT_DIR}/create_database_queryplans.sh
-echo
