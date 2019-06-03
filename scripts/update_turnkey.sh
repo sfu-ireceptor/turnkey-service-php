@@ -10,7 +10,7 @@ echo
 
 # update local git repository
 echo "Updating source code.."
-git pull
+git -C ${SCRIPT_DIR} pull
 echo "Done"
 echo
 
