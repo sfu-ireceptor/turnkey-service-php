@@ -4,15 +4,15 @@ SCRIPT_DIR=`dirname "$0"`
 APACHE_LOG_FOLDER="${SCRIPT_DIR}/../.apache_log"
 AWSTATS_FOLDER="${SCRIPT_DIR}/../.awstats"
 
+mkdir -p "${APACHE_LOG_FOLDER}"
+mkdir -p "${AWSTATS_FOLDER}"
+
 # retrieve absolute paths (required by Docker)
 APACHE_LOG_FOLDER=$(cd $APACHE_LOG_FOLDER; pwd)
 AWSTATS_FOLDER=$(cd $AWSTATS_FOLDER; pwd)
 
-mkdir -p "${APACHE_LOG_FOLDER}"
-mkdir -p "${AWSTATS_FOLDER}"
-
 echo "Delete any existing AWStats container..."
-sudo docker stop awstats && sudo docker rm awstats
+sudo docker stop awstats && sudo docker rm awstats > /dev/null 2>&1
 echo "Done"
 echo
 
