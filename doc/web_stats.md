@@ -17,6 +17,6 @@ Your usage report will then be available at <http://localhost:8088> (if necessar
 
 The script will:
 1. dump the web server log into a local file
-2. download and launch an [AWStats Docker container](https://hub.docker.com/r/pabra/awstats)
+2. download an [AWStats Docker image](https://hub.docker.com/r/pabra/awstats) and launch it
 3. generate AWStats data from the web server log
 4. make available the usage report as an HTML page on port 8088
