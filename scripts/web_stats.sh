@@ -12,7 +12,7 @@ APACHE_LOG_FOLDER=$(cd $APACHE_LOG_FOLDER; pwd)
 AWSTATS_FOLDER=$(cd $AWSTATS_FOLDER; pwd)
 
 echo "Delete any existing AWStats container..."
-sudo docker stop awstats && sudo docker rm awstats > /dev/null 2>&1
+sudo docker stop awstats > /dev/null 2>&1 && sudo docker rm awstats > /dev/null 2>&1
 echo "Done"
 echo
 
