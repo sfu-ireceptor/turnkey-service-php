@@ -4,6 +4,10 @@ SCRIPT_DIR=`dirname "$0"`
 APACHE_LOG_FOLDER="${SCRIPT_DIR}/../.apache_log"
 AWSTATS_FOLDER="${SCRIPT_DIR}/../.awstats"
 
+# retrieve absolute paths (required by Docker)
+APACHE_LOG_FOLDER=$(cd $APACHE_LOG_FOLDER; pwd)
+AWSTATS_FOLDER==$(cd $AWSTATS_FOLDER; pwd)
+
 mkdir -p "${APACHE_LOG_FOLDER}"
 mkdir -p "${AWSTATS_FOLDER}"
 
