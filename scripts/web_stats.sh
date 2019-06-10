@@ -16,7 +16,7 @@ sudo docker stop awstats > /dev/null 2>&1 && sudo docker rm awstats > /dev/null 
 echo "Done"
 echo
 
-echo "Dumping iReceptor Turnkey API container log into ${APACHE_LOG_FOLDER}..."
+echo "Dumping iReceptor Turnkey API container log into ${APACHE_LOG_FOLDER} ..."
 sudo docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service logs ireceptor-api | cut -f2 -d'|' > "${APACHE_LOG_FOLDER}/access.log"
 echo "Done"
 echo
@@ -30,7 +30,7 @@ sudo docker run \
     --env AWSTATS_CONF_LOGFORMAT=' %host %other %logname %time1 %methodurl %code %bytesd %refererquot %uaquot' \
     --volume "${APACHE_LOG_FOLDER}":/var/local/log:ro \
     --volume "${AWSTATS_FOLDER}":/var/lib/awstats \
-    pabra/awstats
+    pabra/awstats > /dev/null
 echo "Done"
 echo
 
