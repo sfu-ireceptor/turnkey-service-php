@@ -100,6 +100,7 @@ Also note that both the load_metadata.sh and the load_rearrangement.sh command p
 - [Moving the database to another folder](doc/moving_the_database_folder.md)
 - [Updating the turnkey](doc/updating.md)
 - [Resetting the turnkey database](doc/resetting.md)
+- [Web statistics](doc/web_stats.md)
 
 ## Contact us
 :envelope: <support@ireceptor.org>
