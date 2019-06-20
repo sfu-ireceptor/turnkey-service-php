@@ -24,6 +24,33 @@ IGBLAST
 * a field name within the metadata uniquely idenfitying each sample
 
 
+## Positional arguments:
+
+  metadata_file      The EXCEL or CSV file containing sample metadata for a
+                     study.
+  API_url_address    The URL associated to your Turnkey, or the URL associated
+                     to the API containing sample metadata.
+  study_id           String value uniquely identifying study. Example:
+                     PRJEB1234, PRJNA1234.
+  annotation_dir     Full path to directory containing annotation
+                     subdirectories for IMGT, MIXCR and IGBLAST annotations.
+  imgt_subdir        Subdirectory found within annotations directory
+                     containing IMGT annotations only.
+  mixcr_subdir       Subdirectory found within annotations directory
+                     containing MIXCR annotations only.
+  igblast_subdir     Subdirectory found within annotations directory
+                     containing IGBLAST annotations only.
+  sanity_level       This option let's you choose the level: H for short
+                     summary, L for details on field name and content, F for
+                     details on number of lines in annotation files against
+                     what is found both in metadata spreadsheet and API
+                     response.
+  unique_identifier  Choose a field name from the sample metadata spreadsheet
+                     which UNIQUELY identifies each sample.
+
+optional arguments:
+  -h, --help         show this help message and exit
+
 ```
 sanitychecking.py [-h]
                          metadata_file API_url_address study_id annotation_dir
