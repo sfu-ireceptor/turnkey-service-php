@@ -53,7 +53,7 @@ python sanitychecking.py /PATH_TO_METADATA_FILE/PRJEB1234_metadata_2019-05-31.xl
 
 ## Sample check report output
 
-Provided all arguments are in place, and all HLF options are asked for in the sanity_level option, the script generate a report covering each level. It will first ensure that the file provided is not corrupt and that all samples are uniquely identified. In the sample below, the metadata file was healthy and all samples were identified uniquely via the field name "ir_rearrangement_number
+Provided all arguments are in place, and all HLF options are asked for in the sanity_level option, the script will generate a report covering each level. It will first ensure that the file provided is not corrupt and that all samples are uniquely identified. In the sample below, the metadata file was healthy and all samples were identified uniquely via the field name "ir_rearrangement_number
 ".
 
 ```
