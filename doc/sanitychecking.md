@@ -173,7 +173,7 @@ Files not found in server: []
  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 ir_sequence_count 			#Lines Annotation F 	Test Result
 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-				API Resp 	 Metadata Resp
+API Resp 	 Metadata Resp
  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 540235 		 540235				540235			True
 
