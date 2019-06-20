@@ -161,3 +161,41 @@ END OF ENTRY
 
 -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
 ```
+
+The last part of the report compares the number of sequences found in metadata, API response against the number of lines in the annotation files, for a given sample. It first ensures that files reported in metadata are found under the path provided. 
+
+```
+ir_rearrangement_number: 655
+Metadata file names: ['SRR12345_a.txz', 'SRR12345_b.txz']
+Files found in server: ['SRR12345_a.txz', 'SRR12345_b.txz']
+Files not found in server: []
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+				ir_sequence_count 			#Lines Annotation F 	Test Result
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+				API Resp 	 Metadata Resp
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+				540235 		 540235		540235			True
+
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+```
+
+Note that this check can work if one of the three components is missing. For example, if the sample is not loaded into the API, the script will report this as "NINAPI" and compare what is in the metadata against the number of lines in annotation file. 
+
+```
+ir_rearrangement_number: 646
+Metadata file names: ['SRR1964798.fmt19']
+Files found in server: ['SRR1964798.fmt19']
+Files not found in server: []
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+				ir_sequence_count 			#Lines Annotation F 	Test Result
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+				API Resp 	 Metadata Resp
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+				NINAPI 		 56075		56075			False
+
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ ```
