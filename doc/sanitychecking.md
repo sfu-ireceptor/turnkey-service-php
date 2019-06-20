@@ -48,6 +48,14 @@ optional arguments:
 ```
 ## Sample Usage
 
+An example with positional arguments
+
+```
+python sanitychecking.py metadata_file API_url_address study_id annotation_dir sanity_level unique_identifier
+
+```
+A working example using specific filename to sample metadata, Turnkey URL http://localhost/v2/samples, study ID PRJEB1234, generic path to annotation files, option LHF and unique identifier field name unique_sample_ID. 
+
 ```
 python sanitychecking.py /PATH_TO_METADATA_FILE/PRJEB1234_metadata_2019-05-31.xlsx http://localhost/v2/samples PRJEB1234 /PATH/TO/ANNOTATION/SUBDIRECTORIES/ LHF unique_sample_ID
 ```
