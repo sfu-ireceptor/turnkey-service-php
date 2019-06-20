@@ -56,12 +56,8 @@ optional arguments:
 ## Sample Usage
 
 ```
-python sanitychecking.py [-h]
-                         metadata_file API_url_address study_id annotation_dir
-                         imgt_subdir mixcr_subdir igblast_subdir sanity_level
-                         unique_identifier
+python sanitychecking.py "./cancer_data_and_papers/PRJEB1234_metadata_2019-05-31.xlsx" http://ipa5.ireceptor.org/v2/samples 'PRJEB1234' '/PATH/TO/ANNOTATION/SUBDIRECTORIES/' "IMGT_FILES/" "MIXCR_FILE/" "IGBLAST_FILES/" "LHF" "unique_sample_ID"
 ```
-
 
 
 
