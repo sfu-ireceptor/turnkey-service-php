@@ -13,14 +13,15 @@ We provide a script that allows to verify that the data was loaded successfuly i
 The sanitychecking.py script takes as input:
 
 * the name of a CSV or EXCEL file containing sample metadata
-the URL associated to the Turnkey
-the study ID uniquely identifying the study
-the full path to a directory containing annotation subdirectories for sequences processed using either MIXCR, IMGT or IGBLAST
-IMGT subdirectory
-MIXCR subdirectory
-IGBLAST subdirectory
-a sanity check level: "H" for summary on number of samples loaded, "L" for details on field name and content, "F" for number of sequences check 
-a field name within the metadata uniquely idenfitying each sample
+* the URL associated to the Turnkey
+* the study ID uniquely identifying the study
+* the full path to a directory containing annotation subdirectories for sequences processed using either MIXCR, IMGT or 
+IGBLAST
+* IMGT subdirectory
+* MIXCR subdirectory
+* IGBLAST subdirectory
+* a sanity check level: "H" for summary on number of samples loaded, "L" for details on field name and content, "F" for number of sequences check 
+* a field name within the metadata uniquely idenfitying each sample
 
 
 ```
