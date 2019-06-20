@@ -48,7 +48,7 @@ optional arguments:
 ## Sample Usage
 
 ```
-python sanitychecking.py '/PATH_TO_METADATA_FILE/PRJEB1234_metadata_2019-05-31.xlsx' http://ipa5.ireceptor.org/v2/samples 'PRJEB1234' '/PATH/TO/ANNOTATION/SUBDIRECTORIES/' 'LHF' 'unique_sample_ID'
+python sanitychecking.py /PATH_TO_METADATA_FILE/PRJEB1234_metadata_2019-05-31.xlsx http://ipa5.ireceptor.org/v2/samples PRJEB1234 /PATH/TO/ANNOTATION/SUBDIRECTORIES/ LHF unique_sample_ID
 ```
 
 
