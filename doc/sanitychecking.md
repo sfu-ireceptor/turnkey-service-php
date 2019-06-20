@@ -15,11 +15,8 @@ The sanitychecking.py script takes as input:
 * the name of a CSV or EXCEL file containing sample metadata
 * the URL associated to the Turnkey
 * the study ID uniquely identifying the study
-* the full path to a directory containing annotation subdirectories for sequences processed using either MIXCR, IMGT or 
+* the full path to a directory containing annotation files for sequences processed using either MIXCR, IMGT or 
 IGBLAST
-* IMGT subdirectory
-* MIXCR subdirectory
-* IGBLAST subdirectory
 * a sanity check level: "H" for summary on number of samples loaded, "L" for details on field name and content, "F" for number of sequences check 
 * a field name within the metadata uniquely idenfitying each sample
 
@@ -33,14 +30,9 @@ IGBLAST
                      to the API containing sample metadata.
   study_id           String value uniquely identifying study. Example:
                      PRJEB1234, PRJNA1234.
-  annotation_dir     Full path to directory containing annotation
-                     subdirectories for IMGT, MIXCR and IGBLAST annotations.
-  imgt_subdir        Subdirectory found within annotations directory
-                     containing IMGT annotations only.
-  mixcr_subdir       Subdirectory found within annotations directory
-                     containing MIXCR annotations only.
-  igblast_subdir     Subdirectory found within annotations directory
-                     containing IGBLAST annotations only.
+  annotation_dir     Full path to directory containing annotation files for
+                     sequences processed using either IMGT, MIXCR and IGBLAST
+                     annotations.
   sanity_level       This option let's you choose the level: H for short
                      summary, L for details on field name and content, F for
                      details on number of lines in annotation files against
@@ -56,10 +48,9 @@ optional arguments:
 ## Sample Usage
 
 ```
-python sanitychecking.py "./cancer_data_and_papers/PRJEB1234_metadata_2019-05-31.xlsx" http://ipa5.ireceptor.org/v2/samples 'PRJEB1234' '/PATH/TO/ANNOTATION/SUBDIRECTORIES/' "IMGT_FILE_DIRECTORY/" "MIXCR_FILE_DIRECTORY/" "IGBLAST_FILE_DIRECTORY/" "LHF" "unique_sample_ID"
+python sanitychecking.py '/PATH_TO_METADATA_FILE/PRJEB1234_metadata_2019-05-31.xlsx' http://ipa5.ireceptor.org/v2/samples 'PRJEB1234' '/PATH/TO/ANNOTATION/SUBDIRECTORIES/' 'LHF' 'unique_sample_ID'
 ```
 
-## What it returns
 
 
 
