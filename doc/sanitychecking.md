@@ -1,6 +1,6 @@
-# Ensuring the data was loaded properly into the Turnkey
+# Ensuring the data was loaded successfully into the Turnkey
 
-We provide a script that allows to verify that the data was loaded successfuly into the Turnkey. Quality assurance is performed on the following levels:
+Due to the dimensions of the metadata and the number of steps involved in curating and loading data, the overall process can be prone to error. We provide a script that allows to verify that the data was loaded successfuly into the Turnkey. Quality assurance is performed on the following levels:
 
 1) Count number of samples found in metadata against the number of samples found in API response for a given study ID
 2) Ensure all samples are uniquely identified for a study in metadata and API response
@@ -56,8 +56,10 @@ optional arguments:
 ## Sample Usage
 
 ```
-python sanitychecking.py "./cancer_data_and_papers/PRJEB1234_metadata_2019-05-31.xlsx" http://ipa5.ireceptor.org/v2/samples 'PRJEB1234' '/PATH/TO/ANNOTATION/SUBDIRECTORIES/' "IMGT_FILES/" "MIXCR_FILE/" "IGBLAST_FILES/" "LHF" "unique_sample_ID"
+python sanitychecking.py "./cancer_data_and_papers/PRJEB1234_metadata_2019-05-31.xlsx" http://ipa5.ireceptor.org/v2/samples 'PRJEB1234' '/PATH/TO/ANNOTATION/SUBDIRECTORIES/' "IMGT_FILE_DIRECTORY/" "MIXCR_FILE_DIRECTORY/" "IGBLAST_FILE_DIRECTORY/" "LHF" "unique_sample_ID"
 ```
+
+## What it returns
 
 
 
