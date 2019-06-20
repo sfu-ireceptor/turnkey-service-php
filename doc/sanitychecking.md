@@ -20,6 +20,7 @@ IGBLAST
 * a sanity check level: "H" for summary on number of samples loaded, "L" for details on field name and content, "F" for number of sequences check 
 * a field name within the metadata uniquely idenfitying each sample
 
+And as output it generates a report covering points 1-4. 
 
 ## Positional arguments:
 
