@@ -53,8 +53,10 @@ optional arguments:
   -h, --help         show this help message and exit
 
 ```
+## Sample Usage
+
 ```
-sanitychecking.py [-h]
+python sanitychecking.py [-h]
                          metadata_file API_url_address study_id annotation_dir
                          imgt_subdir mixcr_subdir igblast_subdir sanity_level
                          unique_identifier
