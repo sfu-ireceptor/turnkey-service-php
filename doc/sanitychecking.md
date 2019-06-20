@@ -180,7 +180,7 @@ API Resp 	 Metadata Resp
  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ```
 
-Note that this check can work if one of the three components is missing. For example, if the sample is not loaded into the API, the script will report this as "NINAPI" and compare what is in the metadata against the number of lines in annotation file. 
+Note that this check can work if one of the three components is missing. For example, if the sample is not loaded into the API, the script will report this as "NINAPI" and compare what is in the metadata against the number of lines in annotation file. If a filename is not found, it will be reported and a 0 will be marked under #Lines Annotation F. 
 
 ```
 ir_rearrangement_number: 646
