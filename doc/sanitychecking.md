@@ -26,6 +26,7 @@ IGBLAST
 
 ## Positional arguments:
 
+```
   metadata_file      The EXCEL or CSV file containing sample metadata for a
                      study.
   API_url_address    The URL associated to your Turnkey, or the URL associated
@@ -51,6 +52,7 @@ IGBLAST
 optional arguments:
   -h, --help         show this help message and exit
 
+```
 ```
 sanitychecking.py [-h]
                          metadata_file API_url_address study_id annotation_dir
