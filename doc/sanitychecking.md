@@ -7,13 +7,6 @@ We provide a script that allows to verify that the data was loaded successfuly i
 3) Ensure field names and content match in metadata and API response
 4) Ensure the number of sequences for each sample matches the annotation files contained in the server and that this number is in accordance to what the API response reports
 
-## Switching to the development version
-
-```
-scripts/stop_turnkey.sh
-cp scripts/.env-dev .env
-scripts/start_turnkey.sh 
-```
 
 ## How it works
 
@@ -38,7 +31,5 @@ sanitychecking.py [-h]
 ```
 
 
-
-The turnkey will then use the development Docker Hub images, which are built from the developement branches of the GitHub repositories.
 
 
