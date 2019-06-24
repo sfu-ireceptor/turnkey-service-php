@@ -14,7 +14,7 @@ scripts/stop_web_stats.sh
 
 Notes:
 - Your AWstats page is accessible to anyone by default. You can prevent that with a dedicated firewall rule, or by turning on your web stats only when you need to look at them.
-- When your turn off your turnkey (using the stop_turnkey.sh script), your AWstats page will be shutdown as well.
+- When your turn off your turnkey (using the stop_turnkey.sh script), your AWstats page will be shut down as well.
 
 ## How it works
 The script start_web_stats.sh will:
