@@ -2,10 +2,10 @@
 
 Due to the dimensions of the metadata and the number of steps involved in curating and loading data, the overall process can be prone to error. We provide a script that allows to verify that the data was loaded successfuly into the Turnkey. Quality assurance is performed on the following levels:
 
-1) Count number of samples found in metadata against the number of samples found in API response, given a study ID
-2) Ensure all samples are uniquely identified for a study in metadata and API response
+1) Count number of samples found in metadata file against the number of samples found in API response, given a study ID
+2) Ensure all samples are uniquely identified for a study in metadata file and API response
 3) Ensure field names and content match in metadata and API response
-4) Ensure the number of sequences for each sample matches the annotation files contained in the server and that this number is in accordance to what the API response reports
+4) Compare the total number of lines found within the annotation files against the number of sequences in the API response. It can also compare this number against what is found within the metadata file. Please ensure to name this field as ir_curator_count to perform this comparison. 
 
 
 ## How it works
