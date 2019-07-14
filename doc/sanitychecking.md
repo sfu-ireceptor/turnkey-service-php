@@ -10,14 +10,13 @@ Due to the dimensions of the metadata and the number of steps involved in curati
 
 ## How it works
 
-The sanitychecking.py script takes as input:
+The verify_dataload.sh script takes as input:
 
 * the name of a CSV or EXCEL file containing sample metadata
 * the URL associated to the Turnkey
 * the study ID uniquely identifying the study
 * the full path to a directory containing annotation files for sequences processed using either MIXCR, IMGT or 
 IGBLAST
-* a sanity check level: "H" for summary on number of samples loaded, "L" for details on field name and content, "F" for number of sequences check 
 * a field name within the metadata uniquely idenfitying each sample
 
 And as output it generates a report covering points 1-4. 
@@ -34,11 +33,6 @@ And as output it generates a report covering points 1-4.
   annotation_dir     Full path to directory containing annotation files for
                      sequences processed using either IMGT, MIXCR and IGBLAST
                      annotations.
-  sanity_level       This option let's you choose the level: H for short
-                     summary, L for details on field name and content, F for
-                     details on number of lines in annotation files against
-                     what is found both in metadata spreadsheet and API
-                     response.
   unique_identifier  Choose a field name from the sample metadata spreadsheet
                      which UNIQUELY identifies each sample.
 
@@ -51,12 +45,12 @@ optional arguments:
 An example with positional arguments
 
 ```
-python sanitychecking.py metadata_file API_url_address study_id annotation_dir sanity_level unique_identifier
+verify_dataload.sh /PATH/TO/metadata_file API_url_address study_id annotation_dir unique_identifier
 ```
-A working example using specific filename for sample metadata, Turnkey URL http://localhost/v2/samples, study ID PRJEB1234, generic path to annotation files, option LHF and unique identifier field name unique_sample_ID. 
+A working example using specific filename for sample metadata, Turnkey URL http://localhost/v2/samples, study ID PRJEB1234, generic path to annotation files, and unique identifier field name unique_sample_ID. 
 
 ```
-python sanitychecking.py /PATH_TO_METADATA_FILE/PRJEB1234_metadata_2019-05-31.xlsx http://localhost/v2/samples PRJEB1234 /PATH/TO/ANNOTATION/SUBDIRECTORIES/ LHF unique_sample_ID
+verify_dataload.sh dataloading-curation/test/mixcr/PRJNA330606_Wang_One_Sample.csv http://localhost/v2/samples PRJEB1234 dataloading-curation/test/mixcr/ unique_sample_ID
 ```
 
 ## Sample check report output
