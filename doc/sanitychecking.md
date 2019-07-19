@@ -47,10 +47,15 @@ An example with positional arguments
 ```
 verify_dataload.sh /PATH/TO/metadata_file API_url_address study_id annotation_dir unique_identifier
 ```
-A working example using specific filename for sample metadata, Turnkey URL http://localhost/v2/samples, study ID PRJEB1234, generic path to annotation files, and unique identifier field name unique_sample_ID. 
+A working example using sample metadata from the [iReceptor Curation github repository](https://github.com/sfu-ireceptor/dataloading-curation) is given below. This assumes:
+- the repertoire metadata and the rearrangments exists in the same directory as per the [iReceptor Curation process](http://www.ireceptor.org/curation)
+- the study from Palanichamy et al with Study ID PRJNA248411 has been loaded into your iReceptor Turnkey at URL http://your.repository.org/v2/samples
+- a unique identifier field name ir_rearrangement_number was used when the study was loaded.
+
+You can download an this example dataset from the github repository above. Once downloaded and loaded into your repository, the data loading process can be verified with the command below:
 
 ```
-verify_dataload.sh dataloading-curation/test/mixcr/PRJNA330606_Wang_One_Sample.csv http://localhost/v2/samples PRJEB1234 dataloading-curation/test/mixcr/ unique_sample_ID
+verify_dataload.sh dataloading-curation/test/imgt/imgt/PRJNA248411_Palanichamy_2018-12-18.csv http://your.repository.org/v2/samples PRJNA248411 dataloading-curation/test/imgt/imgt ir_rearrangement_number
 ```
 
 ## Sample check report output
