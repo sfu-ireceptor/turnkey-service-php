@@ -52,7 +52,7 @@ A working example using sample metadata from the [iReceptor Curation github repo
 - the study from Palanichamy et al with Study ID PRJNA248411 has been loaded into your iReceptor Turnkey at URL http://your.repository.org/v2/samples
 - a unique identifier field name ir_rearrangement_number was used when the study was loaded.
 
-You can download an this example dataset from the github repository above. Once downloaded and loaded into your repository, the data loading process can be verified with the command below:
+You can download this example dataset from the github repository above. Once downloaded and loaded into your repository, the data loading process can be verified with the command below:
 
 ```
 verify_dataload.sh dataloading-curation/test/imgt/imgt/PRJNA248411_Palanichamy_2018-12-18.csv http://your.repository.org/v2/samples PRJNA248411 dataloading-curation/test/imgt/imgt ir_rearrangement_number
