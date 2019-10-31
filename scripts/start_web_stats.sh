@@ -30,7 +30,7 @@ sudo docker run \
     --env AWSTATS_CONF_LOGFORMAT=' %host %other %logname %time1 %methodurl %code %bytesd %refererquot %uaquot' \
     --volume "${APACHE_LOG_FOLDER}":/var/local/log:ro \
     --volume "${AWSTATS_FOLDER}":/var/lib/awstats \
-    pabra/awstats > /dev/null
+    ireceptor/service-awstats:latest > /dev/null
 echo "Done"
 echo
 
