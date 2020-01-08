@@ -17,9 +17,12 @@ The remainder of this document provides directions on how to install and run the
 Docker containers are used to make the installation and future updates clean and simple. For more information, see [How it works](doc/how_it_works.md).
 
 ## Installation
-Get the code and launch the installation. It will take 10-30 min, depending on the download speed.
+Download the code (from the `production` branch) and launch the installation. It will take 10-30 min, depending on the download speed of the Docker images.
 ```
+# download the code
 git clone --branch production https://github.com/sfu-ireceptor/turnkey-service-php.git
+
+# launch the installation (multiple Docker images will be downloaded from DockerHub)
 cd turnkey-service-php
 scripts/install_turnkey.sh
 ```
