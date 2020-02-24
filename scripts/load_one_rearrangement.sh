@@ -24,12 +24,15 @@ LOG_FILE=${LOG_FOLDER}/${TIME1}_${FILE_NAME}.log
 # "ireceptor-dataloading" is the service name defined in docker-compose.yml 
 # sh -c '...' is the command executed inside the container
 # $DB_HOST and $DB_DATABASE are defined in docker-compose.yml and will be substituted only when the python command is executed, INSIDE the container
-sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run --rm \
+sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run --rm -v /home/ubuntu:/external \
 			-e FILE_NAME="$FILE_NAME" \
 			-e FILE_FOLDER="$FILE_FOLDER" \
 			-e REARRANGEMENT_TYPE="$REARRANGEMENT_TYPE" \
 			ireceptor-dataloading \
-				sh -c 'python /app/dataload/dataloader.py -v \
+				sh -c '\
+                                      cd /external/AIRR/airr-standards/lang/python;\
+                                      python3 setup.py install --user;\
+                                      python /app/dataload/dataloader.py -v \
 					--mapfile=/app/config/AIRR-iReceptorMapping.txt \
 					--host=$DB_HOST \
 					--database=$DB_DATABASE \
