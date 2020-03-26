@@ -93,6 +93,9 @@ nohup scripts/load_rearrangements.sh mixcr STUDY_FOLDER/*.txt > rearrangement.lo
 ```
 Also note that both the load_metadata.sh and the load_rearrangement.sh command produce log files for every file that they process. If you want to view the log files simply refere to the files in the log directory. Log files are named using date and the file that was processed.
 
+## Maintenance
+When your data is loaded, make sure to [back up the database](doc/database_backup.md) to avoid going through the loading process again if a problem happens.  
+
 ## More information
 - [How it works](doc/how_it_works.md)
 - [Troubleshooting](doc/troubleshooting.md) :hammer:
