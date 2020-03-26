@@ -48,6 +48,7 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
                                         $API_URL \
                                         $STUDY_ID \
                                         $ANNOTATION_DIR \
+                    					$API_URL \
                                         L \
 					$UNIQUE_ID_FIELD '\
  	2>&1 | tee $LOG_FILE
