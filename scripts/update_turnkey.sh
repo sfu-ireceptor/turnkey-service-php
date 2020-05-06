@@ -26,6 +26,12 @@ ${SCRIPT_DIR}/start_turnkey.sh
 echo "Done"
 echo
 
+# delete stopped containers and dangling images
+echo "Removing old Docker images and containers.."
+sudo docker system prune --force
+echo "Done"
+echo
+
 # confirm successful installation
 echo "Congratulations, your iReceptor Service Turnkey has been updated successfully."
 echo "For more information, go to https://github.com/sfu-ireceptor/turnkey-service-php"
