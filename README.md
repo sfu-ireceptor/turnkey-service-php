@@ -8,7 +8,7 @@ The remainder of this document provides directions on how to install and run the
 
 ## What is it?
 - a database
-- a web application exposing that database through the [iReceptor API](https://github.com/sfu-ireceptor/api)
+- a web application exposing that database through the [AIRR Data Commons (ADC) API](https://docs.airr-community.org/en/latest/api/adc_api.html)
 - some scripts to load your data into the database
 
 ![iReceptor Service Turnkey Architecture](doc/architecture.png)
