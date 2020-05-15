@@ -29,7 +29,7 @@ scripts/install_turnkey.sh
 
 ## Check it's working
 
-Go to <http://localhost/v2/samples> in your browser (if necessary, replace "localhost" with your server URL).
+Go to <http://localhost/airr/v1/info> in your browser (if necessary, replace "localhost" with your server URL).
 
 This returns the list of samples in your database by querying the web application at `/airr/v1/info`, which is an entry point of the [AIRR Data Commons (ADC) API](https://docs.airr-community.org/en/latest/api/adc_api.html). An short information response should be returned.
 
