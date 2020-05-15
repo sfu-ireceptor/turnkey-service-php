@@ -20,7 +20,7 @@ Docker containers are used to make the installation and future updates clean and
 Download the code (from the `production` branch) and excute the install script. It will take 10-30 min, depending on the download speed of the Docker images.
 ```
 # download the code
-git clone --branch production https://github.com/sfu-ireceptor/turnkey-service-php.git
+git clone --branch production-v2 https://github.com/sfu-ireceptor/turnkey-service-php.git
 
 # launch the installation (multiple Docker images will be downloaded from DockerHub)
 cd turnkey-service-php
