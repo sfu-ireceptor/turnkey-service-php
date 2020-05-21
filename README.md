@@ -13,12 +13,16 @@ These components are encapsulated in Docker containers. It makes the installatio
 
 ## Installation
 
-```
-# download the code from the stable production-v3 branch
-git clone --branch production-v3 https://github.com/sfu-ireceptor/turnkey-service-php.git
+Download the code from the stable production-v3 branch:
 
-# launch the installation script.
-# note: Docker images will be downloaded from DockerHub. This can take up to 30 minutes.
+```
+git clone --branch production-v3 https://github.com/sfu-ireceptor/turnkey-service-php.git
+```
+
+Launch the installation script.
+Note: Multiple Docker images will be downloaded from DockerHub. This can take in total up to 30 minutes.
+
+```
 cd turnkey-service-php
 scripts/install_turnkey.sh
 ```
