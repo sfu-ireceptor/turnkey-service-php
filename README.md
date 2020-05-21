@@ -2,9 +2,7 @@
 
 Create an [AIRR-seq data](https://www.nature.com/articles/ni.3873) repository within minutes. 
 
-See the [iReceptor Turnkey](http://www.ireceptor.org/repositories#turnkey) section of the [iReceptor website](http://www.ireceptor.org/) for more information.
-
-The remainder of this document only provides some technical details and the installation procedure. 
+For more information, go to the [iReceptor Turnkey](http://www.ireceptor.org/repositories#turnkey) section of the iReceptor website. The remainder of this document only provides technical details and the installation procedure. 
 
 ## What is the iReceptor Turnkey?
 - a database
