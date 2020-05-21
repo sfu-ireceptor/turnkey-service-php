@@ -2,14 +2,14 @@
 
 Create your own [AIRR Data Commons](https://docs.airr-community.org/en/latest/api/adc.html#datacommons) repository within minutes.
 
-For more background information, go to the [iReceptor Turnkey section](http://www.ireceptor.org/repositories#turnkey) of the iReceptor website. The remainder of this document only provides technical details and the installation procedure. 
+For more background information, go to the [iReceptor Turnkey section](http://www.ireceptor.org/repositories#turnkey) of the iReceptor website. The remainder of this document only provides some technical details and the installation procedure. 
 
 ## What is the iReceptor Turnkey?
 - a database
 - scripts to load your data into the database
 - a web service exposing the database using the [AIRR Data Commons API](https://docs.airr-community.org/en/latest/api/adc_api.html)
 
-These components live in Docker containers. This makes the installation quick and future updates easy. For more details, see [How it works](doc/how_it_works.md).
+These components are encapsulated in Docker containers. This makes the installation quick and future updates easy. For more details, see [How it works](doc/how_it_works.md).
 
 ## Installation
 
