@@ -29,11 +29,11 @@ scripts/install_turnkey.sh
 ## Check it's working
 
 ```
-# if necessary, replace "localhost" with your server URL:
+# replace "localhost" with your server URL if necessary
 curl --data "{}" "http://localhost/airr/v1/repertoire"
 ```
 
-This returns the list of repertoires in your database by querying the web service at `/airr/v1/repertoire`, which is an entry point of the [AIRR Data Commons (ADC) API](https://docs.airr-community.org/en/latest/api/adc_api.html).
+This returns the list of repertoires in your database, by querying the web service at `/airr/v1/repertoire`, which is an entry point of the [ADC API](https://docs.airr-community.org/en/latest/api/adc_api.html).
 
 
 You can also go to <http://localhost> in your browser (replace "localhost" with your server URL if necessary). You should see the home page for your repository, with information about the ADC API and iReceptor.
@@ -41,9 +41,9 @@ You can also go to <http://localhost> in your browser (replace "localhost" with 
 
 ## Loading data
 
-#### The general procedure to load a study that has generated sequence data
-1. load the associated repertoire metadata (using the iReceptor metadata TSV format)
-2. load the sequence annotations (from imgt, mixcr, etc).
+#### General procedure to load a study that has generated sequence data
+1. loading the associated repertoire metadata (using the iReceptor metadata TSV format)
+2. loading the sequence annotations (from imgt, mixcr, etc).
 
 #### Quick example: loading the test data
 The test data is a single repertoire containing 1000 rearrangments. Source: [The Different T-cell Receptor Repertoires in Breast Cancer Tumors, Draining Lymph Nodes, and Adjacent Tissues](https://www.ncbi.nlm.nih.gov/pubmed/28039161).
