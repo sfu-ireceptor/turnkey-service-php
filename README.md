@@ -42,8 +42,8 @@ You can also go to <http://localhost> in your browser (replace "localhost" with 
 ## Loading data
 
 #### General procedure to load a study that has generated sequence data
-1. loading the associated repertoire metadata (using the iReceptor metadata TSV format)
-2. loading the sequence annotations (from imgt, mixcr, etc).
+1. Load the associated repertoire metadata (using the iReceptor metadata TSV format)
+2. Load the sequence annotations (from imgt, mixcr, etc).
 
 #### Quick example: loading the test data
 The test data is a single repertoire containing 1000 rearrangments. Source: [The Different T-cell Receptor Repertoires in Breast Cancer Tumors, Draining Lymph Nodes, and Adjacent Tissues](https://www.ncbi.nlm.nih.gov/pubmed/28039161).
