@@ -1,6 +1,6 @@
 # iReceptor Turnkey
 
-Create your own [AIRR Data Commons](https://docs.airr-community.org/en/latest/api/adc.html#datacommons) repository within minutes.
+Create your own [AIRR Data Commons](https://docs.airr-community.org/en/latest/api/adc.html#datacommons) repository in 30 min.
 
 For more background information, go to the [iReceptor Turnkey section](http://www.ireceptor.org/repositories#turnkey) of the iReceptor website. The remainder of this document only provides some technical details and the installation procedure. 
 
@@ -19,8 +19,7 @@ Download the code from the stable `production-v3` branch:
 git clone --branch production-v3 https://github.com/sfu-ireceptor/turnkey-service-php.git
 ```
 
-Launch the installation script.
-Note: Multiple Docker images will be downloaded from DockerHub. This can take in total up to 30 minutes.
+Launch the installation script. Multiple Docker images will be downloaded from DockerHub, so this can take up to 30 minutes in total.
 
 ```
 cd turnkey-service-php
