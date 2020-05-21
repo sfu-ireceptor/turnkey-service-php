@@ -1,6 +1,6 @@
 # iReceptor Turnkey
 
-Create an [AIRR Data Commons](https://docs.airr-community.org/en/latest/api/adc.html#datacommons) repository within minutes.
+Create your [AIRR Data Commons](https://docs.airr-community.org/en/latest/api/adc.html#datacommons) repository within minutes.
 
 For more background information, go to the [iReceptor Turnkey section](http://www.ireceptor.org/repositories#turnkey) of the iReceptor website. The remainder of this document only provides technical details and the installation procedure. 
 
