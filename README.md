@@ -1,65 +1,65 @@
 # iReceptor Turnkey
 
-The iReceptor Turnkey is a quick and easy mechanism for a researcher or research group to install and manage an [AIRR-seq data](https://www.nature.com/articles/ni.3873) repository. In addition, the included iReceptor Web Service makes it possible to integrate the repository into the [AIRR Data Commons](https://docs.airr-community.org/en/latest/api/adc.html#datacommons). 
+Create an [AIRR-seq data](https://www.nature.com/articles/ni.3873) repository within minutes. 
 
-For more information, refer to the [iReceptor Turnkey](http://www.ireceptor.org/repositories#turnkey) section on the main [iReceptor web site](http://www.ireceptor.org/).
+See the [iReceptor Turnkey](http://www.ireceptor.org/repositories#turnkey) section of the [iReceptor website](http://www.ireceptor.org/) for more information.
 
-The remainder of this document provides directions on how to install and run the iReceptor Turnkey.
+The remainder of this document only provides some technical details and the installation procedure. 
 
-## What is it?
+## What is the iReceptor Turnkey?
 - a database
-- a web application exposing that database through the [AIRR Data Commons (ADC) API](https://docs.airr-community.org/en/latest/api/adc_api.html)
-- some scripts to load your data into the database
+- scripts to load your data into the database
+- a web service exposing the database using the [AIRR Data Commons (ADC) API](https://docs.airr-community.org/en/latest/api/adc_api.html), allowing immediate integration into the [AIRR Data Commons](https://docs.airr-community.org/en/latest/api/adc.html#datacommons).
 
-![iReceptor Service Turnkey Architecture](doc/architecture.png)
-
-## How does it work?
-Docker containers are used to make the installation and future updates clean and simple. For more information, see [How it works](doc/how_it_works.md).
+These components live in Docker containers. This makes the installation quick and future updates easy. For more details, see [How it works](doc/how_it_works.md).
 
 ## Installation
-Download the code (from the `production` branch) and excute the install script. It will take 10-30 min, depending on the download speed of the Docker images.
-```
-# download the code
-git clone --branch production-v2 https://github.com/sfu-ireceptor/turnkey-service-php.git
 
-# launch the installation (multiple Docker images will be downloaded from DockerHub)
+```
+# download the code from the stable production-v3 branch
+git clone --branch production-v3 https://github.com/sfu-ireceptor/turnkey-service-php.git
+
+# launch the installation script.
+# note: Docker images will be downloaded from DockerHub. This can take up to 30 minutes.
 cd turnkey-service-php
 scripts/install_turnkey.sh
 ```
 
 ## Check it's working
 
-Go to <http://localhost/airr/v1/info> in your browser (if necessary, replace "localhost" with your server URL).
-
-This returns the list of samples in your database by querying the web application at `/airr/v1/info`, which is an entry point of the [AIRR Data Commons (ADC) API](https://docs.airr-community.org/en/latest/api/adc_api.html). An short information response should be returned.
-
-You can also use the command line:
 ```
-curl "http://localhost/airr/v1/info"
+# if necessary, replace "localhost" with your server URL:
+curl --data "{}" "http://localhost/airr/v1/repertoire"
 ```
+
+This returns the list of repertoires in your database by querying the web service at `/airr/v1/repertoire`, which is an entry point of the [AIRR Data Commons (ADC) API](https://docs.airr-community.org/en/latest/api/adc_api.html).
+
+
+You can also go to <http://localhost> in your browser (replace "localhost" with your server URL if necessary). You should see the home page for your repository, with information about the ADC API and iReceptor.
+
 
 ## Loading data
 
-#### General procedure
-1. load the metadata associated with a study that has generated sequence data.
+#### The general procedure to load a study that has generated sequence data
+1. load the associated repertoire metadata (using the iReceptor metadata TSV format)
 2. load the sequence annotations (from imgt, mixcr, etc).
 
 #### Quick example: loading the test data
-The example data in this directory is a small subset of the data from the paper "The Different T-cell Receptor Repertoires in Breast Cancer Tumors, Draining Lymph Nodes, and Adjacent Tissues" by Wang et. al. (https://www.ncbi.nlm.nih.gov/pubmed/28039161). The test data set consists of the first 1000 rearrangments from a single repertoire from this study. 
+The test data is a single repertoire containing 1000 rearrangments. Source: [The Different T-cell Receptor Repertoires in Breast Cancer Tumors, Draining Lymph Nodes, and Adjacent Tissues](https://www.ncbi.nlm.nih.gov/pubmed/28039161).
 
-1. Load the iReceptor metadata file [test_data/PRJNA330606_Wang_One_Sample.csv](test_data/PRJNA330606_Wang_One_Sample.csv).
-This file contains the reperotire metadata from a single repertoire from this study. 
+1. Load the repertoire metadata file [test_data/PRJNA330606_Wang_One_Sample.csv](test_data/PRJNA330606_Wang_One_Sample.csv).
 ```
 scripts/load_metadata.sh ireceptor test_data/PRJNA330606_Wang_One_Sample.csv
 ```
 
-To check it worked execute:
+To check it worked, execute:
 ```
 curl --data "{}" "http://localhost/airr/v1/repertoire"
 ```
-This should result in a JSON response that lists the metadata from the study.
 
-2. Load the associated sequence annotations file [test_data/SRR4084215_aa_mixcr_annotation_1000_lines.txt.gz](test_data/SRR4084215_aa_mixcr_annotation_1000_lines.txt.gz):
+This should return the repertoire metadata as JSON.
+
+2. Load the sequence annotations [test_data/SRR4084215_aa_mixcr_annotation_1000_lines.txt.gz](test_data/SRR4084215_aa_mixcr_annotation_1000_lines.txt.gz):
 ```
 scripts/load_rearrangements.sh mixcr test_data/SRR4084215_aa_mixcr_annotation_1000_lines.txt.gz
 ```
