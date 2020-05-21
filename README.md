@@ -46,7 +46,7 @@ You can also go to <http://localhost> in your browser (replace "localhost" with 
 2. Load the sequence annotations (from imgt, mixcr, etc).
 
 #### Quick example: loading the test data
-The test data is a single repertoire containing 1000 rearrangments. Source: [The Different T-cell Receptor Repertoires in Breast Cancer Tumors, Draining Lymph Nodes, and Adjacent Tissues](https://www.ncbi.nlm.nih.gov/pubmed/28039161).
+The test data is a single repertoire containing 1000 rearrangments. It's a data subset from the study [The Different T-cell Receptor Repertoires in Breast Cancer Tumors, Draining Lymph Nodes, and Adjacent Tissues](https://www.ncbi.nlm.nih.gov/pubmed/28039161).
 
 1. Load the repertoire metadata file [test_data/PRJNA330606_Wang_One_Sample.csv](test_data/PRJNA330606_Wang_One_Sample.csv).
 ```
