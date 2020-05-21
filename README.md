@@ -13,7 +13,7 @@ These components are encapsulated in Docker containers. It makes the installatio
 
 ## Installation
 
-Download the code from the stable production-v3 branch:
+Download the code from the stable `production-v3` branch:
 
 ```
 git clone --branch production-v3 https://github.com/sfu-ireceptor/turnkey-service-php.git
