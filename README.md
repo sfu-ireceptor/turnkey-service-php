@@ -1,6 +1,6 @@
 # iReceptor Turnkey
 
-The iReceptor Turnkey is a quick and easy mechanism for a researcher or research group to install and manage an [AIRR-seq data](https://www.nature.com/articles/ni.3873) repository. In addition, the included iReceptor Web Service makes it possible to integrate the repository into the [AIRR Data Commons](http://ireceptor.org/). 
+The iReceptor Turnkey is a quick and easy mechanism for a researcher or research group to install and manage an [AIRR-seq data](https://www.nature.com/articles/ni.3873) repository. In addition, the included iReceptor Web Service makes it possible to integrate the repository into the [AIRR Data Commons](https://docs.airr-community.org/en/latest/api/adc.html#datacommons). 
 
 For more information, refer to the [iReceptor Turnkey](http://www.ireceptor.org/repositories#turnkey) section on the main [iReceptor web site](http://www.ireceptor.org/).
 
@@ -8,7 +8,7 @@ The remainder of this document provides directions on how to install and run the
 
 ## What is it?
 - a database
-- a web application exposing that database through the [iReceptor API](https://github.com/sfu-ireceptor/api)
+- a web application exposing that database through the [AIRR Data Commons (ADC) API](https://docs.airr-community.org/en/latest/api/adc_api.html)
 - some scripts to load your data into the database
 
 ![iReceptor Service Turnkey Architecture](doc/architecture.png)
@@ -20,7 +20,7 @@ Docker containers are used to make the installation and future updates clean and
 Download the code (from the `production` branch) and excute the install script. It will take 10-30 min, depending on the download speed of the Docker images.
 ```
 # download the code
-git clone --branch production https://github.com/sfu-ireceptor/turnkey-service-php.git
+git clone --branch production-v2 https://github.com/sfu-ireceptor/turnkey-service-php.git
 
 # launch the installation (multiple Docker images will be downloaded from DockerHub)
 cd turnkey-service-php
@@ -29,13 +29,13 @@ scripts/install_turnkey.sh
 
 ## Check it's working
 
-Go to <http://localhost/v2/samples> in your browser (if necessary, replace "localhost" with your server URL).
+Go to <http://localhost/airr/v1/info> in your browser (if necessary, replace "localhost" with your server URL).
 
-This returns the list of samples in your database by querying the web application at `/v2/samples`, which is an entry point of the [iReceptor API](https://github.com/sfu-ireceptor/api). An empty array `[]` is returned because the database is currently empty.
+This returns the list of samples in your database by querying the web application at `/airr/v1/info`, which is an entry point of the [AIRR Data Commons (ADC) API](https://docs.airr-community.org/en/latest/api/adc_api.html). An short information response should be returned.
 
 You can also use the command line:
 ```
-curl -X POST -H "Content-Type: application/x-www-form-urlencoded" "http://localhost/v2/samples"
+curl "http://localhost/airr/v1/info"
 ```
 
 ## Loading data
@@ -45,26 +45,30 @@ curl -X POST -H "Content-Type: application/x-www-form-urlencoded" "http://localh
 2. load the sequence annotations (from imgt, mixcr, etc).
 
 #### Quick example: loading the test data
+The example data in this directory is a small subset of the data from the paper "The Different T-cell Receptor Repertoires in Breast Cancer Tumors, Draining Lymph Nodes, and Adjacent Tissues" by Wang et. al. (https://www.ncbi.nlm.nih.gov/pubmed/28039161). The test data set consists of the first 1000 rearrangments from a single repertoire from this study. 
 
-1. Load the metadata file [test_data/metadata_mixcr.csv](test_data/metadata_mixcr.csv):
+1. Load the iReceptor metadata file [test_data/PRJNA330606_Wang_One_Sample.csv](test_data/PRJNA330606_Wang_One_Sample.csv).
+This file contains the reperotire metadata from a single repertoire from this study. 
 ```
-scripts/load_metadata.sh test_data/metadata_mixcr.csv
-```
-
-To check it worked, go to <http://localhost/v2/samples> or execute:
-```
-curl -X POST -H "Content-Type: application/x-www-form-urlencoded" "http://localhost/v2/samples"
+scripts/load_metadata.sh ireceptor test_data/PRJNA330606_Wang_One_Sample.csv
 ```
 
-2. Load the associated sequence annotations file [test_data/rearrangements_mixcr.txt](test_data/rearrangements_mixcr.txt):
+To check it worked execute:
 ```
-scripts/load_rearrangements.sh mixcr test_data/rearrangements_mixcr.txt
+curl --data "{}" "http://localhost/airr/v1/repertoire"
+```
+This should result in a JSON response that lists the metadata from the study.
+
+2. Load the associated sequence annotations file [test_data/SRR4084215_aa_mixcr_annotation_1000_lines.txt.gz](test_data/SRR4084215_aa_mixcr_annotation_1000_lines.txt.gz):
+```
+scripts/load_rearrangements.sh mixcr test_data/SRR4084215_aa_mixcr_annotation_1000_lines.txt.gz
 ```
 
-To check it worked, go to <http://localhost/v2/sequences_summary> or execute:
+To check it worked execute the following command:
 ```
-curl -X POST -H "Content-Type: application/x-www-form-urlencoded" "http://localhost/v2/sequences_summary"
+curl --data "{}" "http://localhost/airr/v1/rearrangement"
 ```
+This should result in a JSON repsonse with all of the sequence rearrangement data for the 1000 sequences in the data file.
 
 Note: to load IMGT or AIRR annotations, replace the `mixcr` parameter by `imgt` or `airr`. Example:
 ```
@@ -82,7 +86,7 @@ Assuming all data for a study can be found in a single directory, it is possible
 1. To load your Repertiore Metadata use the load_metadata.sh scrip as above:
 
 ```
-scripts/load_metadata.sh STUDY_FOLDER/METADATA.csv
+scripts/load_metadata.sh ireceptor STUDY_FOLDER/METADATA.csv
 ```
 
 2. To load your rearrangement data, use the load_rearrangements.sh as given below:
