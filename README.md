@@ -94,13 +94,15 @@ scripts/load_rearrangements.sh mixcr <your study data folder>/*.txt
 ```
 This will load all files ending by `.txt` in your study data folder.
 
+### Loading IMGT or AIRR sequence annotations
 
-Note: to load IMGT or AIRR sequence annotations, replace the `mixcr` parameter by `imgt` or `airr`. Example:
+Just replace the `mixcr` parameter by `imgt` or `airr`. Example:
 ```
 scripts/load_rearrangements.sh imgt <IMGT files>
 ```
 
-:warning: Important: loading many sequence annotations can take a long time.
+### :warning: Loading many sequence annotations
+Loading many sequence annotations can take a long time.
 
 
 
