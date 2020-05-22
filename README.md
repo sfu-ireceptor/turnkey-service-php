@@ -56,10 +56,10 @@ scripts/load_metadata.sh ireceptor test_data/PRJNA330606_Wang_One_Sample.csv
 
 Check it worked:
 ```
+# returns the repertoire metadata as JSON.
 curl --data "{}" "http://localhost/airr/v1/repertoire"
 ```
 
-This returns the repertoire metadata as JSON.
 
 2. Load the sequence annotations file [test_data/SRR4084215_aa_mixcr_annotation_1000_lines.txt.gz](test_data/SRR4084215_aa_mixcr_annotation_1000_lines.txt.gz):
 ```
@@ -68,9 +68,9 @@ scripts/load_rearrangements.sh mixcr test_data/SRR4084215_aa_mixcr_annotation_10
 
 Check it worked:
 ```
+# returns all of the rearrangement data for the 1000 sequences as JSON
 curl --data "{}" "http://localhost/airr/v1/rearrangement"
 ```
-This returns all of the rearrangement data for the 1000 sequences.
 
 Note: to load IMGT or AIRR annotations, replace the `mixcr` parameter by `imgt` or `airr`, for example:
 ```
