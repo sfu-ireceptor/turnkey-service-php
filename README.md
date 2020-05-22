@@ -56,7 +56,7 @@ scripts/load_metadata.sh ireceptor test_data/PRJNA330606_Wang_One_Sample.csv
 
 Check it worked:
 ```
-# returns the repertoire metadata as JSON.
+# returns the repertoire metadata as JSON
 curl --data "{}" "http://localhost/airr/v1/repertoire"
 ```
 
