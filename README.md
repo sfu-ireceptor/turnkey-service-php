@@ -11,9 +11,9 @@ These components are encapsulated in Docker images. The installation script will
 
 [Read more about the iReceptor Turnkey](http://www.ireceptor.org/repositories#turnkey) on the iReceptor website. The remainder of this document only provides installation instructions.
 
-## Systemn requirements
+## System requirements
 
-- Linux Ubuntu. Tested with Ubuntu 16.04 and Ubuntu 18.04.
+- Linux Ubuntu. The turnkey was tested on Ubuntu 16.04 and 18.04.
 - `sudo` without password. It's usually already enabled on virtual machines.
 
 ## Installation
@@ -24,7 +24,7 @@ Download the code from the `production-v3` branch:
 git clone --branch production-v3 https://github.com/sfu-ireceptor/turnkey-service-php.git
 ```
 
-Launch the installation script. Multiple Docker images will be downloaded from DockerHub. Time estimate: 10-30 min.
+Launch the installation script. Note: multiple Docker images will be downloaded from DockerHub. Total time estimate: 10-30 min.
 
 ```
 cd turnkey-service-php
