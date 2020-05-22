@@ -9,7 +9,7 @@ For more background information, go to the [iReceptor Turnkey section](http://ww
 - scripts to load your data into the database
 - a web service exposing the database via the [ADC API](https://docs.airr-community.org/en/latest/api/adc_api.html)
 
-These components are encapsulated in Docker containers. It makes the installation quick, and future updates easy. For more details, see [How it works](doc/how_it_works.md).
+These components are encapsulated in Docker containers. For more details, see [How it works](doc/how_it_works.md).
 
 ## Installation
 
