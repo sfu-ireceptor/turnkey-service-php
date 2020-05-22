@@ -61,8 +61,8 @@ scripts/load_metadata.sh ireceptor test_data/PRJNA330606_Wang_1_sample_metadata.
 Check it worked:
 ```
 curl --data "{}" "http://localhost/airr/v1/repertoire"
-# -> returns the repertoire metadata as JSON
 ```
+The repertoire metadata is returned as JSON.
 
 2. **Load the sequence annotations file** [test_data/SRR4084215_aa_mixcr_annotation_1000_lines.txt.gz](test_data/SRR4084215_aa_mixcr_annotation_1000_lines.txt.gz):
 ```
@@ -72,11 +72,10 @@ scripts/load_rearrangements.sh mixcr test_data/SRR4084215_aa_mixcr_annotation_10
 Check it worked:
 ```
 curl --data "{}" "http://localhost/airr/v1/rearrangement"
-# -> returns all of the rearrangement data for the 1000 sequences as JSON
 ```
+All of the rearrangement data for the 1000 sequences is returned as JSON.
 
-
-Congratulations :relaxed: You can now [reset the turnkey database](doc/resetting.md) and load your own data.
+That's all, congratulations :relaxed: You can now [reset the turnkey database](doc/resetting.md) and load your own data.
 
 ## Loading large data sets
 
