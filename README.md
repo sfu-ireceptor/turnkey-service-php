@@ -49,7 +49,7 @@ The general data loading procedure, for a study which has generated sequence dat
 2. load the sequence annotations (from imgt, mixcr, etc)
 
 ## Loading the test data
-Load the included test data to familiarize yourself with the data loading procedure. You will be able to delete that test ßdata afterwards.
+Load the included test data to familiarize yourself with the data loading procedure. You will delete that test data afterwards.
 
 Note: the test data is a single repertoire with 1000 rearrangments. It's a subset from the study [The Different T-cell Receptor Repertoires in Breast Cancer Tumors, Draining Lymph Nodes, and Adjacent Tissues](https://www.ncbi.nlm.nih.gov/pubmed/28039161) data.
 
@@ -77,28 +77,32 @@ All of the rearrangement data for the 1000 sequences is returned as JSON.
 
 That's all, congratulations :relaxed: You can now [reset the turnkey database](doc/resetting.md) and load your own data.
 
-## Loading large data sets
+## Loading your own data
 
-The above scripts can be used to load large data sets. In particular, the load_rearrangements.sh script can be used to load many rearrangement files in a row. We recommend following a well structured data curation process to help ensure data provenance around your data management. Please refer to the [iReceptor Curation](http://www.ireceptor.org/curation) process and the [iReceptor Curation GitHub repository](https://github.com/sfu-ireceptor/dataloading-curation/tree/master) for more information on recommended data curation approaches.
+Note: use a clearly defined curation process for your data to endure good provenance. Refer to the [iReceptor Curation](http://www.ireceptor.org/curation) process and the [iReceptor Curation GitHub repository](https://github.com/sfu-ireceptor/dataloading-curation/tree/master) for recommended data curation approaches.
 
-Assuming all data for a study can be found in a single directory, it is possible to utilize the two commands described above to load the entire study data. Assuming your data is in a folder called STUDY_DATA, the study metadata is stored in a metadata file called METADATA.csv, and all of your rearrangement files are MiXCR .txt files, you can do the following:
+To load your own data, follow the same procedure as with the test data.
 
-1. To load your Repertiore Metadata use the load_metadata.sh scrip as above:
-
+1. Load your repertoire metadata:
 ```
-scripts/load_metadata.sh ireceptor STUDY_FOLDER/METADATA.csv
-```
-
-2. To load your rearrangement data, use the load_rearrangements.sh as given below:
-
-```
-scripts/load_rearrangements.sh mixcr STUDY_FOLDER/*.txt
+scripts/load_metadata.sh ireceptor <file path of your CSV metadata file>
 ```
 
-Note: to load IMGT or AIRR annotations, replace the `mixcr` parameter by `imgt` or `airr`, for example:
+2. Load your sequence annotations file(s). You can load multiple files at once: 
 ```
-scripts/load_rearrangements.sh imgt <IMGT file>
+scripts/load_rearrangements.sh mixcr <your study data folder>/*.txt
 ```
+This will load all files ending by `.txt` in your study data folder.
+
+
+Note: to load IMGT or AIRR sequence annotations, replace the `mixcr` parameter by `imgt` or `airr`. Example:
+```
+scripts/load_rearrangements.sh imgt <IMGT files>
+```
+
+Important :warning: : loading many sequence annotations can take a long time.
+
+
 
 It is important to note that depending on the size of the data in your rearrangement files, loading the rearrangements can take a very long time. As a result, it is good practice to use the Unix "nohup" command to control the rearrantement loading. The Unix nohup command allows you to run a long running command in the background, redirects the output of that command to a file, and allows you to log out and come back to check on the progress of your command later. You would use the nohup command as follows:
 ```
