@@ -53,7 +53,7 @@ The test data is a single repertoire containing 1000 rearrangments. It's a data 
 scripts/load_metadata.sh ireceptor test_data/PRJNA330606_Wang_One_Sample.csv
 ```
 
-To check it worked, execute:
+Check it worked:
 ```
 curl --data "{}" "http://localhost/airr/v1/repertoire"
 ```
@@ -65,7 +65,7 @@ This should return the repertoire metadata as JSON.
 scripts/load_rearrangements.sh mixcr test_data/SRR4084215_aa_mixcr_annotation_1000_lines.txt.gz
 ```
 
-To check it worked execute the following command:
+Check it worked:
 ```
 curl --data "{}" "http://localhost/airr/v1/rearrangement"
 ```
