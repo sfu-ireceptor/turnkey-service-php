@@ -49,7 +49,7 @@ This is just to get familiar with the workflow. You will delete that data from y
 
 The test data is a single repertoire containing 1000 rearrangments. It's a subset from the study [The Different T-cell Receptor Repertoires in Breast Cancer Tumors, Draining Lymph Nodes, and Adjacent Tissues](https://www.ncbi.nlm.nih.gov/pubmed/28039161) data.
 
-1. Load the repertoire metadata file [test_data/PRJNA330606_Wang_One_Sample.csv](test_data/PRJNA330606_Wang_One_Sample.csv).
+1. **Load the repertoire metadata file** [test_data/PRJNA330606_Wang_One_Sample.csv](test_data/PRJNA330606_Wang_One_Sample.csv).
 ```
 scripts/load_metadata.sh ireceptor test_data/PRJNA330606_Wang_One_Sample.csv
 ```
@@ -61,7 +61,7 @@ curl --data "{}" "http://localhost/airr/v1/repertoire"
 ```
 
 
-2. Load the sequence annotations file [test_data/SRR4084215_aa_mixcr_annotation_1000_lines.txt.gz](test_data/SRR4084215_aa_mixcr_annotation_1000_lines.txt.gz):
+2. **Load the sequence annotations file** [test_data/SRR4084215_aa_mixcr_annotation_1000_lines.txt.gz](test_data/SRR4084215_aa_mixcr_annotation_1000_lines.txt.gz):
 ```
 scripts/load_rearrangements.sh mixcr test_data/SRR4084215_aa_mixcr_annotation_1000_lines.txt.gz
 ```
