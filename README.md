@@ -100,7 +100,7 @@ Note: to load IMGT or AIRR sequence annotations, replace the `mixcr` parameter b
 scripts/load_rearrangements.sh imgt <IMGT files>
 ```
 
-Important :warning: : loading many sequence annotations can take a long time.
+:warning: Important: loading many sequence annotations can take a long time.
 
 
 
