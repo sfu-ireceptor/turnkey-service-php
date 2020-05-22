@@ -34,37 +34,35 @@ scripts/install_turnkey.sh
 ## Check it's working
 
 ```
-# replace "localhost" with your server URL if necessary
 curl --data "{}" "http://localhost/airr/v1/repertoire"
 ```
 
-This returns the list of repertoires in your database, by querying the web service at `/airr/v1/repertoire`, which is an entry point of the [ADC API](https://docs.airr-community.org/en/latest/api/adc_api.html).
+This returns the list of repertoires in your database, by querying the web service at `/airr/v1/repertoire`, an [ADC API](https://docs.airr-community.org/en/latest/api/adc_api.html) entry point.
 
 
-You can also go to <http://localhost> in your browser (replace "localhost" with your server URL if necessary). You should see the home page for your repository, with information about the ADC API and iReceptor.
+You can also visit <http://localhost> in your browser (replace "localhost" with your server URL if necessary). You'll see the home page for your repository, with information about the ADC API and iReceptor.
 
 
 ## Loading data
-The general procedure, for a study which has generated sequence data is to:
-1. load the associated repertoire metadata (using the iReceptor metadata TSV format)
-2. load the sequence annotations (from imgt, mixcr, etc).
+The general data loading procedure, for a study which has generated sequence data is to:
+1. load the associated repertoire metadata (using our metadata CSV format)
+2. load the sequence annotations (from imgt, mixcr, etc)
 
 ## Loading the test data
-This is just to get familiar with the workflow. You will delete that data from your database at the end.
+Load the included test data to familiarize yourself with the data loading procedure. You will be able to delete that test ßdata afterwards.
 
-The test data is a single repertoire containing 1000 rearrangments. It's a subset from the study [The Different T-cell Receptor Repertoires in Breast Cancer Tumors, Draining Lymph Nodes, and Adjacent Tissues](https://www.ncbi.nlm.nih.gov/pubmed/28039161) data.
+Note: the test data is a single repertoire with 1000 rearrangments. It's a subset from the study [The Different T-cell Receptor Repertoires in Breast Cancer Tumors, Draining Lymph Nodes, and Adjacent Tissues](https://www.ncbi.nlm.nih.gov/pubmed/28039161) data.
 
-1. **Load the repertoire metadata file** [test_data/PRJNA330606_Wang_One_Sample.csv](test_data/PRJNA330606_Wang_One_Sample.csv).
+1. **Load the repertoire metadata file** [test_data/PRJNA330606_Wang_1_sample_metadata.csv](test_data/PRJNA330606_Wang_One_Sample.csv).
 ```
-scripts/load_metadata.sh ireceptor test_data/PRJNA330606_Wang_One_Sample.csv
+scripts/load_metadata.sh ireceptor test_data/PRJNA330606_Wang_1_sample_metadata.csv
 ```
 
 Check it worked:
 ```
-# returns the repertoire metadata as JSON
 curl --data "{}" "http://localhost/airr/v1/repertoire"
+# -> returns the repertoire metadata as JSON
 ```
-
 
 2. **Load the sequence annotations file** [test_data/SRR4084215_aa_mixcr_annotation_1000_lines.txt.gz](test_data/SRR4084215_aa_mixcr_annotation_1000_lines.txt.gz):
 ```
@@ -73,8 +71,8 @@ scripts/load_rearrangements.sh mixcr test_data/SRR4084215_aa_mixcr_annotation_10
 
 Check it worked:
 ```
-# returns all of the rearrangement data for the 1000 sequences as JSON
 curl --data "{}" "http://localhost/airr/v1/rearrangement"
+# -> returns all of the rearrangement data for the 1000 sequences as JSON
 ```
 
 
