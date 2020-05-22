@@ -7,7 +7,7 @@ The iReceptor Turnkey is a quick and easy mechanism for researchers to create th
 - scripts to add data to the database
 - a web service exposing the database via the [ADC API](https://docs.airr-community.org/en/latest/api/adc_api.html)
 
-These components are encapsulated in Docker images. The installation script will download and run these images, after having installed Docker.
+These components are packaged as Docker images. The installation script will download and run these images, after having installed Docker.
 
 [Read more about the iReceptor Turnkey](http://www.ireceptor.org/repositories#turnkey) on the iReceptor website. The remainder of this document only provides installation instructions.
 
