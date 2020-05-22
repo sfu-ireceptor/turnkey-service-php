@@ -114,13 +114,15 @@ nohup scripts/load_rearrangements.sh mixcr my_study_folder/*.txt > progress.log 
 When you've loaded your data, we recommend [backing up the database](doc/database_backup.md) to avoid having to load your data again in case a problem happens.
 
 ## More information
-- [How it works](doc/how_it_works.md)
-- [Troubleshooting](doc/troubleshooting.md) :hammer:
-- [Backing up and restoring the database](doc/database_backup.md)
 - [Moving the database to another folder](doc/moving_the_database_folder.md)
-- [Updating the turnkey](doc/updating.md)
+- [Backing up and restoring the database](doc/database_backup.md)
 - [Resetting the turnkey database](doc/resetting.md)
+
+- [How the turnkey works](doc/how_it_works.md)
+- [Updating the turnkey](doc/updating.md)
 - [Web statistics](doc/web_stats.md)
+
+- [Troubleshooting](doc/troubleshooting.md) :hammer:
 
 ## Contact us
 :envelope: <support@ireceptor.org>
