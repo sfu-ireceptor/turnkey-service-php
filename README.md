@@ -113,15 +113,19 @@ nohup scripts/load_rearrangements.sh mixcr my_study_folder/*.txt > progress.log 
 ## Backing up the database
 When you've loaded your data, we recommend [backing up the database](doc/database_backup.md) to avoid having to load your data again in case a problem happens.
 
-## More information
+## Other information
+
+### Managing the database
 - [Moving the database to another folder](doc/moving_the_database_folder.md)
 - [Backing up and restoring the database](doc/database_backup.md)
 - [Resetting the turnkey database](doc/resetting.md)
 
+### Managing the turnkey
 - [How the turnkey works](doc/how_it_works.md)
 - [Updating the turnkey](doc/updating.md)
 - [Web statistics](doc/web_stats.md)
 
+### When the unexpected happens
 - [Troubleshooting](doc/troubleshooting.md) :hammer:
 
 ## Contact us
