@@ -72,10 +72,6 @@ Check it worked:
 curl --data "{}" "http://localhost/airr/v1/rearrangement"
 ```
 
-Note: to load IMGT or AIRR annotations, replace the `mixcr` parameter by `imgt` or `airr`, for example:
-```
-scripts/load_rearrangements.sh imgt <IMGT file>
-```
 
 Congratulations :relaxed: You can now [reset the turnkey database](doc/resetting.md) and load your own data.
 
@@ -96,6 +92,12 @@ scripts/load_metadata.sh ireceptor STUDY_FOLDER/METADATA.csv
 ```
 scripts/load_rearrangements.sh mixcr STUDY_FOLDER/*.txt
 ```
+
+Note: to load IMGT or AIRR annotations, replace the `mixcr` parameter by `imgt` or `airr`, for example:
+```
+scripts/load_rearrangements.sh imgt <IMGT file>
+```
+
 It is important to note that depending on the size of the data in your rearrangement files, loading the rearrangements can take a very long time. As a result, it is good practice to use the Unix "nohup" command to control the rearrantement loading. The Unix nohup command allows you to run a long running command in the background, redirects the output of that command to a file, and allows you to log out and come back to check on the progress of your command later. You would use the nohup command as follows:
 ```
 nohup scripts/load_rearrangements.sh mixcr STUDY_FOLDER/*.txt > rearrangement.log &
