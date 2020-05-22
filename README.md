@@ -125,7 +125,7 @@ When you've loaded your data, we recommend [backing up the database](doc/databas
 - [Updating the turnkey](doc/updating.md)
 - [Web statistics](doc/web_stats.md)
 
-### When the unexpected happens
+### When something's wrong
 - [Troubleshooting](doc/troubleshooting.md) :hammer:
 
 ## Contact us
