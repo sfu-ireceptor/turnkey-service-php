@@ -58,9 +58,9 @@ Check it worked:
 curl --data "{}" "http://localhost/airr/v1/repertoire"
 ```
 
-This should return the repertoire metadata as JSON.
+This returns the repertoire metadata as JSON.
 
-2. Load the sequence annotations [test_data/SRR4084215_aa_mixcr_annotation_1000_lines.txt.gz](test_data/SRR4084215_aa_mixcr_annotation_1000_lines.txt.gz):
+2. Load the sequence annotations file [test_data/SRR4084215_aa_mixcr_annotation_1000_lines.txt.gz](test_data/SRR4084215_aa_mixcr_annotation_1000_lines.txt.gz):
 ```
 scripts/load_rearrangements.sh mixcr test_data/SRR4084215_aa_mixcr_annotation_1000_lines.txt.gz
 ```
@@ -69,9 +69,9 @@ Check it worked:
 ```
 curl --data "{}" "http://localhost/airr/v1/rearrangement"
 ```
-This should result in a JSON repsonse with all of the sequence rearrangement data for the 1000 sequences in the data file.
+This returns all of the rearrangement data for the 1000 sequences.
 
-Note: to load IMGT or AIRR annotations, replace the `mixcr` parameter by `imgt` or `airr`. Example:
+Note: to load IMGT or AIRR annotations, replace the `mixcr` parameter by `imgt` or `airr`, for example:
 ```
 scripts/load_rearrangements.sh imgt <IMGT file>
 ```
