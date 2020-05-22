@@ -75,6 +75,8 @@ curl --data "{}" "http://localhost/airr/v1/rearrangement"
 ```
 All of the rearrangement data for the 1000 sequences is returned as JSON.
 
+Note: both scripts `load_metadata.sh` and `load_rearrangement.sh` produce a log file for each file processed in the `log` directory. Log files are named using the current date, followed by the name of the processed file.
+
 That's all, congratulations :relaxed: You can now [reset the turnkey database](doc/resetting.md) and load your own data.
 
 ## Loading your own data
@@ -101,19 +103,15 @@ Just replace the `mixcr` parameter by `imgt` or `airr`. Example:
 scripts/load_rearrangements.sh imgt <IMGT files>
 ```
 
-### :warning: Loading many sequence annotations
-Loading many sequence annotations can take a long time.
+### Loading many sequence annotations
+:warning: Loading many sequence annotations can take hours. We recomend using `nohup`, a Unix command allowing to run a command in the background. You can redirect the command output to a file. It allows you to log out and come back later to check on the progress of your command. An example of loading sequence annotations using `nohup`:
 
-
-
-It is important to note that depending on the size of the data in your rearrangement files, loading the rearrangements can take a very long time. As a result, it is good practice to use the Unix "nohup" command to control the rearrantement loading. The Unix nohup command allows you to run a long running command in the background, redirects the output of that command to a file, and allows you to log out and come back to check on the progress of your command later. You would use the nohup command as follows:
 ```
-nohup scripts/load_rearrangements.sh mixcr STUDY_FOLDER/*.txt > rearrangement.log &
+nohup scripts/load_rearrangements.sh mixcr my_study_folder/*.txt > progress.log &
 ```
-Also note that both the load_metadata.sh and the load_rearrangement.sh command produce log files for every file that they process. If you want to view the log files simply refere to the files in the log directory. Log files are named using date and the file that was processed.
 
-## Maintenance
-When your data is loaded, make sure to [back up the database](doc/database_backup.md) to avoid going through the loading process again if a problem happens.  
+## Backing up the database
+When you've loaded your data, we recommend [backing up the database](doc/database_backup.md) to avoid having to load your data again in case a problem happens.
 
 ## More information
 - [How it works](doc/how_it_works.md)
