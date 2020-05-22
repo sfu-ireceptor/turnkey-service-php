@@ -40,14 +40,14 @@ You can also go to <http://localhost> in your browser (replace "localhost" with 
 
 
 ## Loading data
-
-#### General procedure
-From a study that has generated sequence data:
+The general procedure, for a study which has generated sequence data is to:
 1. load the associated repertoire metadata (using the iReceptor metadata TSV format)
 2. load the sequence annotations (from imgt, mixcr, etc).
 
-#### Quick example: loading the test data
-The test data is a single repertoire containing 1000 rearrangments. It's a data subset from the study [The Different T-cell Receptor Repertoires in Breast Cancer Tumors, Draining Lymph Nodes, and Adjacent Tissues](https://www.ncbi.nlm.nih.gov/pubmed/28039161).
+## Loading the test data
+This is just to get familiar with the workflow. You will delete that data from your database at the end.
+
+The test data is a single repertoire containing 1000 rearrangments. It's a subset from the study [The Different T-cell Receptor Repertoires in Breast Cancer Tumors, Draining Lymph Nodes, and Adjacent Tissues](https://www.ncbi.nlm.nih.gov/pubmed/28039161) data.
 
 1. Load the repertoire metadata file [test_data/PRJNA330606_Wang_One_Sample.csv](test_data/PRJNA330606_Wang_One_Sample.csv).
 ```
