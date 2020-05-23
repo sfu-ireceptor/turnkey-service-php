@@ -104,7 +104,7 @@ scripts/load_rearrangements.sh imgt <IMGT files>
 ```
 
 ### Loading many sequence annotations
-:warning: Loading many sequence annotations can take hours. We recomend using `nohup`, a Unix command allowing to run a command in the background. You can redirect the command output to a file. It allows you to log out and come back later to check on the progress of your command. An example of loading sequence annotations using `nohup`:
+:warning: Loading many sequence annotations can take hours. We recomend using the Unix command `nohup` to run the script in the background, and to redirect the script output to a log file. So you can log out and come back later to check on the data loading progress by looking at that file. Example:
 
 ```
 nohup scripts/load_rearrangements.sh mixcr my_study_folder/*.txt > progress.log &
