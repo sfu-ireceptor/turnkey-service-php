@@ -94,7 +94,7 @@ scripts/load_metadata.sh ireceptor <file path of your CSV metadata file>
 ```
 scripts/load_rearrangements.sh mixcr <your study data folder>/*.txt
 ```
-This will load all files ending by `.txt` in your study data folder.
+This will load all files ending by `.txt` from your study data folder.
 
 ### Loading IMGT or AIRR sequence annotations
 
