@@ -46,7 +46,7 @@ You can also visit <http://localhost> in your browser (replace "localhost" with 
 ## Loading data
 The general data loading procedure, for a study which has generated sequence data is to:
 1. load the associated repertoire metadata (using the [iReceptior Metadata CSV format](https://github.com/sfu-ireceptor/dataloading-curation/tree/master/metadata))
-2. load the sequence annotations (from imgt, mixcr, etc)
+2. load the sequence annotations (from IMGT, MiXCR, etc)
 
 ## Loading the test data
 Load the included test data to familiarize yourself with the data loading procedure. You will delete that test data afterwards.
@@ -96,6 +96,11 @@ scripts/load_rearrangements.sh mixcr <your study data folder>/*.txt
 ```
 This will load all files ending by `.txt` from your study data folder.
 
+Note: Compressed `.gz` files are supported and can be loaded directly. Example:
+```
+scripts/load_rearrangements.sh mixcr <your study data folder>/*.gz
+```
+
 ### Loading IMGT or AIRR sequence annotations
 
 Just replace the `mixcr` parameter by `imgt` or `airr`. Example:
@@ -103,12 +108,14 @@ Just replace the `mixcr` parameter by `imgt` or `airr`. Example:
 scripts/load_rearrangements.sh imgt <IMGT files>
 ```
 
+
 ### Loading many sequence annotations
 :warning: Loading many sequence annotations can take hours. We recomend using the Unix command `nohup` to run the script in the background, and to redirect the script output to a log file. So you can log out and come back later to check on the data loading progress by looking at that file. Example:
 
 ```
 nohup scripts/load_rearrangements.sh mixcr my_study_folder/*.txt > progress.log &
 ```
+
 
 ## Backing up the database
 When you've loaded your data, we recommend [backing up the database](doc/database_backup.md) to avoid having to load your data again in case a problem happens.
