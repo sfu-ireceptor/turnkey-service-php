@@ -46,7 +46,7 @@ You can also visit <http://localhost> in your browser (replace "localhost" with 
 ## Loading data
 The general data loading procedure, for a study which has generated sequence data is to:
 1. load the associated repertoire metadata (using the [iReceptior Metadata CSV format](https://github.com/sfu-ireceptor/dataloading-curation/tree/master/metadata))
-2. load the sequence annotations (from IMGT, MiXCR, etc)
+2. load the sequence annotation rearrangements (from IMGT, MiXCR, etc)
 
 ## Loading the test data
 Load the included test data to familiarize yourself with the data loading procedure. You will delete that test data afterwards.
@@ -64,7 +64,7 @@ curl --data "{}" "http://localhost/airr/v1/repertoire"
 ```
 The repertoire metadata is returned as JSON.
 
-2. **Load the sequence annotations file** [test_data/SRR4084215_aa_mixcr_annotation_1000_lines.txt](test_data/SRR4084215_aa_mixcr_annotation_1000_lines.txt):
+2. **Load the rearrangements file** [test_data/SRR4084215_aa_mixcr_annotation_1000_lines.txt](test_data/SRR4084215_aa_mixcr_annotation_1000_lines.txt):
 ```
 scripts/load_rearrangements.sh mixcr test_data/SRR4084215_aa_mixcr_annotation_1000_lines.txt
 ```
@@ -90,7 +90,7 @@ To load your own data, follow the same procedure as with the test data.
 scripts/load_metadata.sh ireceptor <file path of your CSV metadata file>
 ```
 
-2. Load your sequence annotations file(s). You can load multiple files at once: 
+2. Load your rearrangements file(s). You can load multiple files at once: 
 ```
 scripts/load_rearrangements.sh mixcr <your study data folder>/*.txt
 ```
@@ -101,7 +101,7 @@ Note: Compressed `.gz` files are supported and can be loaded directly. Example:
 scripts/load_rearrangements.sh mixcr <your study data folder>/*.gz
 ```
 
-### Loading IMGT or AIRR sequence annotations
+### Loading IMGT or AIRR rearrangements
 
 Just replace the `mixcr` parameter by `imgt` or `airr`. Example:
 ```
@@ -109,8 +109,8 @@ scripts/load_rearrangements.sh imgt <IMGT files>
 ```
 
 
-### Loading many sequence annotations
-:warning: Loading many sequence annotations can take hours. We recomend using the Unix command `nohup` to run the script in the background, and to redirect the script output to a log file. So you can log out and come back later to check on the data loading progress by looking at that file. Example:
+### Loading many rearrangements
+:warning: Loading many rearrangements can take hours. We recomend using the Unix command `nohup` to run the script in the background, and to redirect the script output to a log file. So you can log out and come back later to check on the data loading progress by looking at that file. Example:
 
 ```
 nohup scripts/load_rearrangements.sh mixcr my_study_folder/*.txt > progress.log &
@@ -132,7 +132,7 @@ When you've loaded your data, we recommend [backing up the database](doc/databas
 - [Updating the turnkey](doc/updating.md)
 - [Web statistics](doc/web_stats.md)
 
-### When something's wrong
+### If something looks wrong
 - [Troubleshooting](doc/troubleshooting.md) :hammer:
 
 ## Contact us
