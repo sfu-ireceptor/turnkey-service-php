@@ -84,13 +84,14 @@ That's all, congratulations :relaxed: You can now [reset the turnkey database](d
 Note: use a clearly defined curation process for your data to endure good provenance. Refer to the [iReceptor Curation](http://www.ireceptor.org/curation) process and the [iReceptor Curation GitHub repository](https://github.com/sfu-ireceptor/dataloading-curation/tree/master) for recommended data curation approaches.
 
 To load your own data, follow the same procedure as with the test data.
+Note: make sure your rearrangements files are declared in the repertoire metadata file, under the `data_processing_files` column.
 
 1. Load your repertoire metadata:
 ```
 scripts/load_metadata.sh ireceptor <file path of your CSV metadata file>
 ```
 
-2. Load your rearrangements file(s). You can load multiple files at once: 
+2. Load your rearrangements files. You can load multiple files at once:
 ```
 scripts/load_rearrangements.sh mixcr <your study data folder>/*.txt
 ```
@@ -100,6 +101,7 @@ Note: Compressed `.gz` files are supported and can be loaded directly. Example:
 ```
 scripts/load_rearrangements.sh mixcr <your study data folder>/*.gz
 ```
+Note: make sure that the full file name, including the `.gz` extension, was declared in the repertoire metadata file.
 
 ### Loading IMGT or AIRR rearrangements
 
