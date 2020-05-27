@@ -90,6 +90,10 @@ Note: make sure your rearrangements files are declared in the repertoire metadat
 ```
 scripts/load_metadata.sh ireceptor <file path of your CSV metadata file>
 ```
+Note: You can also load the AIRR repertoire JSON file format for repertoire metadata as follows
+```
+scripts/load_metadata.sh repertoire <file path of your AIRR JSON repertoire file>
+```
 
 2. Load your rearrangements files. You can load multiple files at once:
 ```
