@@ -46,7 +46,7 @@ You can also visit <http://localhost> in your browser (replace "localhost" with 
 ## Loading data
 The general data loading procedure, for a study which has generated sequence data is to:
 1. load the associated repertoire metadata (using the [iReceptior Metadata CSV format](https://github.com/sfu-ireceptor/dataloading-curation/tree/master/metadata))
-2. load the sequence annotation rearrangements (from IMGT, MiXCR, etc)
+2. load the sequence annotatios (rearrangements) (from IMGT, MiXCR, etc)
 
 ## Loading the test data
 Load the included test data to familiarize yourself with the data loading procedure. You will delete that test data afterwards.
