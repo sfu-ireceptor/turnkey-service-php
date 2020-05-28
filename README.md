@@ -82,7 +82,7 @@ That's all, congratulations :relaxed: You can now [reset the turnkey database](d
 
 ## Loading your own data
 
-Note: use a clearly defined curation process for your data to endure good provenance. Refer to the [iReceptor Curation](http://www.ireceptor.org/curation) process and the [iReceptor Curation GitHub repository](https://github.com/sfu-ireceptor/dataloading-curation/tree/master) for recommended data curation approaches.
+Note: use a clearly defined curation process for your data to ensure good provenance. Refer to the [iReceptor Curation](http://www.ireceptor.org/curation) process and the [iReceptor Curation GitHub repository](https://github.com/sfu-ireceptor/dataloading-curation/tree/master) for recommended data curation approaches.
 
 To load your own data, follow the same procedure as with the test data.
 Note: make sure your rearrangements files are declared in the repertoire metadata file, under the `data_processing_files` column.
