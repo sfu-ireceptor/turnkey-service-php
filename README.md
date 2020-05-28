@@ -45,14 +45,14 @@ You can also visit <http://localhost> in your browser (replace "localhost" with 
 
 ## Loading data
 The general data loading procedure, for a study which has generated sequence data is to:
-1. load the associated repertoire metadata using the [iReceptior Metadata CSV format](https://github.com/sfu-ireceptor/dataloading-curation/tree/master/metadata). Note: it's also possible to use the [AIRR Repertoire Schema JSON format](https://docs.airr-community.org/en/latest/datarep/metadata.html).
+1. load the associated repertoire metadata using the [iReceptor Metadata CSV format](https://github.com/sfu-ireceptor/dataloading-curation/tree/master/metadata). Note: it's also possible to use the [AIRR Repertoire Schema JSON format](https://docs.airr-community.org/en/latest/datarep/metadata.html).
 
 2. load the sequence annotations (rearrangements) from IMGT, MiXCR, etc.
 
 ## Loading the test data
 Load the included test data to familiarize yourself with the data loading procedure. You will delete that test data afterwards.
 
-Note: the test data is a single repertoire with 1000 rearrangments. It's a subset from the study [The Different T-cell Receptor Repertoires in Breast Cancer Tumors, Draining Lymph Nodes, and Adjacent Tissues](https://www.ncbi.nlm.nih.gov/pubmed/28039161) data.
+Note: the test data is a single repertoire with 1000 rearrangements. It's a subset from the study [The Different T-cell Receptor Repertoires in Breast Cancer Tumors, Draining Lymph Nodes, and Adjacent Tissues](https://www.ncbi.nlm.nih.gov/pubmed/28039161) data.
 
 1. **Load the repertoire metadata file** [test_data/PRJNA330606_Wang_1_sample_metadata.csv](test_data/PRJNA330606_Wang_1_sample_metadata.csv).
 ```
@@ -113,7 +113,7 @@ scripts/load_rearrangements.sh imgt <IMGT files>
 
 
 ### Loading many rearrangements
-:warning: Loading many rearrangements can take hours. We recomend using the Unix command `nohup` to run the script in the background, and to redirect the script output to a log file. So you can log out and come back later to check on the data loading progress by looking at that file. Example:
+:warning: Loading many rearrangements can take hours. We recommend using the Unix command `nohup` to run the script in the background, and to redirect the script output to a log file. So you can log out and come back later to check on the data loading progress by looking at that file. Example:
 
 ```
 nohup scripts/load_rearrangements.sh mixcr my_study_folder/*.txt > progress.log &
