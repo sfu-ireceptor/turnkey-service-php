@@ -45,7 +45,8 @@ You can also visit <http://localhost> in your browser (replace "localhost" with 
 
 ## Loading data
 The general data loading procedure, for a study which has generated sequence data is to:
-1. load the associated repertoire metadata (using the [iReceptior Metadata CSV format](https://github.com/sfu-ireceptor/dataloading-curation/tree/master/metadata))
+1. load the associated repertoire metadata using the [iReceptior Metadata CSV format](https://github.com/sfu-ireceptor/dataloading-curation/tree/master/metadata). Note: it's also possible to use the [AIRR Repertoire Schema JSON format](https://docs.airr-community.org/en/latest/datarep/metadata.html).
+
 2. load the sequence annotations (rearrangements) from IMGT, MiXCR, etc.
 
 ## Loading the test data
@@ -88,11 +89,7 @@ Note: make sure your rearrangements files are declared in the repertoire metadat
 
 1. Load your repertoire metadata:
 ```
-scripts/load_metadata.sh ireceptor <file path of your CSV metadata file>
-```
-Note: You can also load the AIRR repertoire JSON file format for repertoire metadata as follows
-```
-scripts/load_metadata.sh repertoire <file path of your AIRR JSON repertoire file>
+scripts/load_metadata.sh ireceptor <file path of your CSV or JSON metadata file>
 ```
 
 2. Load your rearrangements files. You can load multiple files at once:
