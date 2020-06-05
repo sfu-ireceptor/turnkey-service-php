@@ -41,7 +41,7 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 			-e FILE_FOLDER="$FILE_FOLDER" \
 			-e REPERTOIRE_TYPE="$REPERTOIRE_TYPE" \
 			ireceptor-dataloading  \
-				sh -c 'python /app/dataload/dataloader.py \
+				sh -c 'python /app/dataload/dataloader.py -v \
 					--mapfile=/app/config/AIRR-iReceptorMapping.txt \
 					--host=$DB_HOST \
 					--database=$DB_DATABASE \
