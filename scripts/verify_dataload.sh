@@ -57,8 +57,10 @@ cd dataloading-mongo/verify/
 # Get No filters query
 no_filters=${PWD}"/nofilters.json"
 cd facet_queries_for_sanity_tests/
+mkdir study_id/
+cd study_id/
 # Get Path to JSON files (facet queries)
-json_facet=$PWD
+json_facet=$PWD"/"
 
 cd ${SCRIPT_DIR}
 
