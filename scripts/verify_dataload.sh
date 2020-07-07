@@ -8,9 +8,8 @@ then
     base_url="$1"
     master_md="$2"
     annotation_dir="$3"
-    study_id="$4"
 else
-    echo "usage: $0 base_url master_md annotation_dir study_id"
+    echo "usage: $0 base_url master_md annotation_dir"
     exit
 fi
 
@@ -59,8 +58,6 @@ cd dataloading-mongo/verify/
 # Get No filters query
 no_filters=${PWD}"/nofilters.json"
 cd facet_queries_for_sanity_tests/
-mkdir study_id/
-cd study_id/
 # Get Path to JSON files (facet queries)
 json_facet=$PWD
 
@@ -89,6 +86,8 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
                                         $entry_point \
                                         $no_filters \
  	2>&1 | tee $LOG_FILE
+
+cd ${SCRIPT_DIR}
 
 sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run -v /data:/data --rm \
 			-e mapping_file="$mapping_file" \
