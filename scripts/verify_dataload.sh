@@ -45,10 +45,6 @@ git checkout ipa5-v3
 # Get mapping file
 mapping_file=${PWD}"/AIRR-iReceptorMapping.txt"
 
-# Cleanup 
-cd ../
-rm -r -f config/
-
 cd ${SCRIPT_DIR}
 
 # -----------------------------------------------------------------------------------#
@@ -87,8 +83,6 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
                                         $no_filters \
  	2>&1 | tee $LOG_FILE
 
-cd ${SCRIPT_DIR}
-
 sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run -v /data:/data --rm \
 			-e mapping_file="$mapping_file" \
 			-e base_url="$base_url" \
@@ -113,4 +107,3 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 					$details_dir \
 					$CC-FC '\
  	2>&1 | tee $LOG_FILE
-
