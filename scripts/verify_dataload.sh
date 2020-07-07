@@ -3,7 +3,7 @@
 SCRIPT_DIR=`dirname "$0"`
 
 # Get the command line arguements
-if [ $# -eq 3 ]
+if [ $# -eq 4 ]
 then
     base_url="$1"
     master_md="$2"
