@@ -8,8 +8,9 @@ then
     base_url="$1"
     master_md="$2"
     annotation_dir="$3"
+    study_id="$4" 
 else
-    echo "usage: $0 base_url master_md annotation_dir"
+    echo "usage: $0 base_url master_md annotation_dir study_id"
     exit
 fi
 
