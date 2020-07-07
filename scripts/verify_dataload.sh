@@ -39,6 +39,7 @@ echo "AIRR test version Tag v1.3.0"
 
 # -----------------------------------------------------------------------------------#
 # Mapping file
+echo "Getting mapping file"
 git clone https://github.com/sfu-ireceptor/config
 cd config/
 git pull
@@ -50,6 +51,7 @@ cd ${SCRIPT_DIR}
 
 # -----------------------------------------------------------------------------------#
 # JSON input handling
+echo "Getting JSON main directory"
 git clone https://github.com/sfu-ireceptor/dataloading-mongo
 cd dataloading-mongo/verify/
 # Get No filters query
@@ -73,6 +75,7 @@ details_dir=${SCRIPT_DIR}
 # docker-compose -e: these variables will be available inside the container (but not accessible in docker-compose.yml)
 # "ireceptor-dataloading" is the service name defined in docker-compose.yml 
 # sh -c '...' is the command executed inside the container
+echo "Generating JSON input files"
 sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run -v /data:/data --rm \
 			-e base_url="$base_url" \
 			-e entry_point="$entry_point" \
@@ -85,6 +88,8 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
  	2>&1 | tee $LOG_FILE
 
 cd ${SCRIPT_DIR}
+
+echo "Verifying data at the repertoire level"
 
 sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run -v /data:/data --rm \
 			-e mapping_file="$mapping_file" \
