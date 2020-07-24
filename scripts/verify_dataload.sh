@@ -46,6 +46,7 @@ no_filters="/app/verify/nofilters.json"
 # Get No filters query
 json_facet="/app/facet_queries_for_sanity_tests/"
 entry_point="repertoire"
+# This could also be SCRIPT_DIR, this variable is for the user to indicate where they want the logs and sanity check results
 details_dir=$PWD
 
 # -----------------------------------------------------------------------------------#
