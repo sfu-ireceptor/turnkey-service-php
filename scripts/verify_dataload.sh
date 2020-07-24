@@ -23,7 +23,6 @@ export study_id
 export mapping_file
 export json_files
 export facet_count
-export Coverage
 export details_dir
 export entry_point
 
