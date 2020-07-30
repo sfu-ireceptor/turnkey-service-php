@@ -65,19 +65,18 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 			-e no_filters="$no_filters" \
 			-e study_id="$study_id" \
 			-e mapping_file="$mapping_file" \
-			-e master_md="$master_md" \ 
+			-e master_md="$master_md" \
 			-e annotation_dir="$annotation_dir"\
-			-e details_dir="$details_dir"
+			-e details_dir="$details_dir" \
 			ireceptor-dataloading \
 				sh -c 'bash /app/verify/joint_sanity_testing.sh \
                                         $base_url \
                                         $entry_point \
-                                        /app/facet_queries_for_sanity_tests/ \ 
+                                        /tmp \ 
 					/app/verify/nofilters.json \
 					$study_id \
 					/app/config/AIRR-iReceptorMapping.txt \
 					$master_md \
 					$annotation_dir \
-					$details_dir \
-					
+					$details_dir' \
  	2>&1 | tee $LOG_FILE
