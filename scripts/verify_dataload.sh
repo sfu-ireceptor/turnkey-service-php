@@ -30,10 +30,7 @@ LOG_FILE=${LOG_FOLDER}/${TIME1}_${FILE_NAME}.log
 # Sanity check for mapping and AIRR library version - this changes with time though, might be worth to remove echo message, or update script accordingly
 echo "Mapping file from branch ipa5-v3 https://github.com/sfu-ireceptor/config"
 echo "AIRR test version Tag v1.3.0"
-echo ${base_url}
-echo ${master_md}
-echo ${annotation_dir}
-echo ${study_id}
+
 # -----------------------------------------------------------------------------------#
 # Notes:
 # sudo -E: make current environment variables available to the command run as root
@@ -43,15 +40,15 @@ echo ${study_id}
 # sh -c '...' is the command executed inside the container
 echo "Generating JSON input files - then running ADC API repertoire test"
 sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run -v /data:/data --rm \
-			-e base_url="$base_url" \
-			-e entry_point="$entry_point" \
-			-e json_facet="$json_facet" \
-			-e no_filters="$no_filters" \
-			-e study_id="$study_id" \
-			-e mapping_file="$mapping_file" \
-			-e master_md="$master_md" \
-			-e annotation_dir="$annotation_dir"\
-			-e details_dir="$details_dir" \
+			base_url="$base_url" \
+			entry_point="$entry_point" \
+			json_facet="$json_facet" \
+			no_filters="$no_filters" \
+			study_id="$study_id" \
+			mapping_file="$mapping_file" \
+			master_md="$master_md" \
+			annotation_dir="$annotation_dir"\
+			details_dir="$details_dir" \
 			ireceptor-dataloading \
 				sh -c 'bash /app/verify/joint_sanity_testing.sh \
                                         ${base_url} \
