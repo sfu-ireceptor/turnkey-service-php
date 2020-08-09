@@ -35,6 +35,7 @@ LOG_FILE=${LOG_FOLDER}/${TIME1}_${FILE_NAME}.log
 git clone https://github.com/sfu-ireceptor/dataloading-mongo
 cd dataloading-mongo/
 git pull 
+cd ..
 
 # -----------------------------------------------------------------------------------#
 # Sanity check for mapping and AIRR library version - this changes with time though, might be worth to remove echo message, or update script accordingly
@@ -51,7 +52,7 @@ no_filters="/app/verify/nofilters.json"
 json_facet="/app/facet_queries_for_sanity_tests/"
 entry_point="repertoire"
 # This could also be SCRIPT_DIR, this variable is for the user to indicate where they want the logs and sanity check results
-details_dir=$PWD
+details_dir=${LOG_FOLDER}
 
 # -----------------------------------------------------------------------------------#
 # Generate JSON
