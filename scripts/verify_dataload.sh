@@ -50,7 +50,7 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 			-e annotation_dir="$annotation_dir"\
 			-e details_dir="$details_dir" \
 			ireceptor-dataloading \
-				sh -c '/app/verify/joint_sanity_testing.sh \
+				sh -c 'bash /app/verify/joint_sanity_testing.sh \
                                         $base_url \
                                         "repertoire" \
                                         /app/verify/facet_queries_for_sanity_tests/ \ 
