@@ -51,13 +51,13 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 			-e details_dir="$details_dir" \
 			ireceptor-dataloading \
 				sh -c 'bash /app/verify/joint_sanity_testing.sh \
-                                        $base_url \
+                                        ${base_url} \
                                         "repertoire" \
                                         /app/verify/facet_queries_for_sanity_tests/ \ 
 					/app/verify/nofilters.json \
-					$study_id \
+					${study_id} \
 					/app/config/AIRR-iReceptorMapping.txt \
-					$master_md \
-					$annotation_dir \
+					${master_md} \
+					${annotation_dir} \
 					${LOG_FOLDER}' \
  	2>&1 | tee $LOG_FILE
