@@ -19,6 +19,11 @@ export base_url
 export master_md
 export annotation_dir
 export study_id
+export entry_point
+export json_facet
+export no_filters
+export mapping_file
+export details_dir
 
 # create log file
 LOG_FOLDER=${SCRIPT_DIR}/../log
@@ -41,15 +46,15 @@ echo "AIRR test version Tag v1.3.0"
 echo "Generating JSON input files - then running ADC API repertoire test"
 sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run -v /data:/data --rm \
 			-e base_url="$base_url" \
-			entry_point="$entry_point" \
-			json_facet="$json_facet" \
-			no_filters="$no_filters" \
-			study_id="$study_id" \
-			mapping_file="$mapping_file" \
-			master_md="$master_md" \
-			annotation_dir="$annotation_dir"\
-			details_dir="$details_dir" \
-			ireceptor-dataloading \
+			-e entry_point="$entry_point" \
+			-e json_facet="$json_facet" \
+			-e no_filters="$no_filters" \
+			-e study_id="$study_id" \
+			-e mapping_file="$mapping_file" \
+			-e master_md="$master_md" \
+			-e annotation_dir="$annotation_dir"\
+			-e details_dir="$details_dir" \
+			-e ireceptor-dataloading \
 				sh -c 'bash /app/verify/joint_sanity_testing.sh \
                                         ${base_url} \
                                         "repertoire" \
