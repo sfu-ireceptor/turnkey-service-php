@@ -32,6 +32,10 @@ mkdir -p $LOG_FOLDER
 TIME1=`date +%Y-%m-%d_%H-%M-%S`
 LOG_FILE=${LOG_FOLDER}/${TIME1}_${FILE_NAME}.log
 
+git clone https://github.com/sfu-ireceptor/dataloading-mongo
+cd dataloading-mongo/
+git pull 
+
 # -----------------------------------------------------------------------------------#
 # Sanity check for mapping and AIRR library version - this changes with time though, might be worth to remove echo message, or update script accordingly
 echo "Mapping file from branch ipa5-v3 https://github.com/sfu-ireceptor/config"
