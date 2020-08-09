@@ -76,7 +76,7 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 			-e annotation_dir="$annotation_dir"\
 			-e details_dir="$details_dir" \
 			ireceptor-dataloading \
-				sh -c 'bash dataloading-mongo/verify/joint_sanity_testing.sh \
+				sh -c '/app/verify/joint_sanity_testing.sh \
                                         $base_url \
                                         ${entry_point} \
                                         ${json_facet} \ 
