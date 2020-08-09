@@ -40,7 +40,7 @@ echo "AIRR test version Tag v1.3.0"
 # sh -c '...' is the command executed inside the container
 echo "Generating JSON input files - then running ADC API repertoire test"
 sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run -v /data:/data --rm \
-			base_url="$base_url" \
+			-e base_url="$base_url" \
 			entry_point="$entry_point" \
 			json_facet="$json_facet" \
 			no_filters="$no_filters" \
