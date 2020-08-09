@@ -48,21 +48,21 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 			-e base_url="$base_url" \
 			-e entry_point="$entry_point" \
 			-e json_facet="$json_facet" \
-			-e details_dir="$details_dir" \
+			-e no_filters="$no_filters" \
 			-e study_id="$study_id" \
 			-e mapping_file="$mapping_file" \
 			-e master_md="$master_md" \
 			-e annotation_dir="$annotation_dir"\
-			-e no_filters="$no_filters" \
+			-e details_dir="$details_dir" \
 			ireceptor-dataloading \
 				sh -c 'bash /app/verify/joint_sanity_testing.sh \
                                         ${base_url} \
                                         "repertoire" \
                                         /app/verify/facet_queries_for_sanity_tests/ \ 
-					${LOG_FOLDER}' \
+					/app/verify/nofilters.json \
 					${study_id} \
 					/app/config/AIRR-iReceptorMapping.txt \
 					${master_md} \
 					${annotation_dir} \
-					/app/verify/nofilters.json \
+					${LOG_FOLDER}' \
  	2>&1 | tee $LOG_FILE
