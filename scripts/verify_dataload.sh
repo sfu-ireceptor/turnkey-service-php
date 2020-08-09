@@ -19,12 +19,6 @@ export base_url
 export master_md
 export annotation_dir
 export study_id
-# Not sure if I need to export variables below? 
-export mapping_file
-export json_files
-export facet_count
-export details_dir
-export entry_point
 
 # create log file
 LOG_FOLDER=${SCRIPT_DIR}/../log
@@ -32,32 +26,12 @@ mkdir -p $LOG_FOLDER
 TIME1=`date +%Y-%m-%d_%H-%M-%S`
 LOG_FILE=${LOG_FOLDER}/${TIME1}_${FILE_NAME}.log
 
-git clone https://github.com/sfu-ireceptor/dataloading-mongo
-cd dataloading-mongo/
-git pull
-# JSON input handling
-no_filters="./verify/nofilters.json"
-# Get No filters query
-json_facet="./verify/facet_queries_for_sanity_tests/"
-cd ..
-
 # -----------------------------------------------------------------------------------#
 # Sanity check for mapping and AIRR library version - this changes with time though, might be worth to remove echo message, or update script accordingly
 echo "Mapping file from branch ipa5-v3 https://github.com/sfu-ireceptor/config"
 echo "AIRR test version Tag v1.3.0"
 
 # -----------------------------------------------------------------------------------#
-# INTERNAL VARIABLES 
-# Mapping file
-mapping_file="/app/config/AIRR-iReceptorMapping.txt"
-
-
-entry_point="repertoire"
-# This could also be SCRIPT_DIR, this variable is for the user to indicate where they want the logs and sanity check results
-details_dir=${LOG_FOLDER}
-
-# -----------------------------------------------------------------------------------#
-# Generate JSON
 # Notes:
 # sudo -E: make current environment variables available to the command run as root
 # docker-compose --rm: delete container afterwards 
@@ -78,12 +52,12 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 			ireceptor-dataloading \
 				sh -c '/app/verify/joint_sanity_testing.sh \
                                         $base_url \
-                                        ${entry_point} \
-                                        ${json_facet} \ 
-					${no_filters} \
+                                        "repertoire" \
+                                        /app/verify/facet_queries_for_sanity_tests/ \ 
+					/app/verify/nofilters.json \
 					$study_id \
 					/app/config/AIRR-iReceptorMapping.txt \
 					$master_md \
 					$annotation_dir \
-					$details_dir' \
+					${LOG_FOLDER}' \
  	2>&1 | tee $LOG_FILE
