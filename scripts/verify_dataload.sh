@@ -30,7 +30,10 @@ LOG_FILE=${LOG_FOLDER}/${TIME1}_${FILE_NAME}.log
 # Sanity check for mapping and AIRR library version - this changes with time though, might be worth to remove echo message, or update script accordingly
 echo "Mapping file from branch ipa5-v3 https://github.com/sfu-ireceptor/config"
 echo "AIRR test version Tag v1.3.0"
-
+echo ${base_url}
+echo ${master_md}
+echo ${annotation_dir}
+echo ${study_id}
 # -----------------------------------------------------------------------------------#
 # Notes:
 # sudo -E: make current environment variables available to the command run as root
