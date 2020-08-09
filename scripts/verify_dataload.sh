@@ -54,7 +54,7 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 			-e master_md="$master_md" \
 			-e annotation_dir="$annotation_dir"\
 			-e details_dir="$details_dir" \
-			-e ireceptor-dataloading \
+			ireceptor-dataloading \
 				sh -c 'bash /app/verify/joint_sanity_testing.sh \
                                         ${base_url} \
                                         "repertoire" \
