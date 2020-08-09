@@ -34,7 +34,11 @@ LOG_FILE=${LOG_FOLDER}/${TIME1}_${FILE_NAME}.log
 
 git clone https://github.com/sfu-ireceptor/dataloading-mongo
 cd dataloading-mongo/
-git pull 
+git pull
+# JSON input handling
+no_filters="./verify/nofilters.json"
+# Get No filters query
+json_facet="./verify/facet_queries_for_sanity_tests/"
 cd ..
 
 # -----------------------------------------------------------------------------------#
@@ -46,10 +50,8 @@ echo "AIRR test version Tag v1.3.0"
 # INTERNAL VARIABLES 
 # Mapping file
 mapping_file="/app/config/AIRR-iReceptorMapping.txt"
-# JSON input handling
-no_filters="/app/verify/nofilters.json"
-# Get No filters query
-json_facet="/app/facet_queries_for_sanity_tests/"
+
+
 entry_point="repertoire"
 # This could also be SCRIPT_DIR, this variable is for the user to indicate where they want the logs and sanity check results
 details_dir=${LOG_FOLDER}
@@ -76,9 +78,9 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 			ireceptor-dataloading \
 				sh -c 'bash /app/verify/joint_sanity_testing.sh \
                                         $base_url \
-                                        $entry_point \
-                                        /tmp \ 
-					/app/verify/nofilters.json \
+                                        ${entry_point} \
+                                        ${json_facet} \ 
+					${no_filters} \
 					$study_id \
 					/app/config/AIRR-iReceptorMapping.txt \
 					$master_md \
