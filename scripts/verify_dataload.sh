@@ -58,7 +58,7 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 				sh -c 'bash /app/verify/joint_sanity_testing.sh \
                                         ${base_url} \
                                         "repertoire" \
-                                        /app/verify/facet_queries_for_sanity_tests/ \ 
+                                        /app/verify/facet_queries_for_sanity_tests/ \
 					/app/verify/nofilters.json \
 					${study_id} \
 					/app/config/AIRR-iReceptorMapping.txt \
