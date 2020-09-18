@@ -14,6 +14,9 @@ fi
 REARRANGEMENT_TYPE="$1"
 shift
 
+TIME=`date +%Y-%m-%d %H-%M-%S`
+echo "Starting to load rearrangements at: $TIME"
+
 ${SCRIPT_DIR}/drop_database_indexes_for_dataloading.sh
 
 while [ "$1" != "" ]; do
@@ -22,4 +25,10 @@ while [ "$1" != "" ]; do
 	shift
 done
 
+TIME=`date +%Y-%m-%d %H-%M-%S`
+echo "Done loading rearrangements at: $TIME"
+
 ${SCRIPT_DIR}/create_database_indexes.sh
+
+TIME=`date +%Y-%m-%d %H-%M-%S`
+echo "Done loading rearrangements and done indexes at: $TIME"
