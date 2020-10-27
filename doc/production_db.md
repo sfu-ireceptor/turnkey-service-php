@@ -38,13 +38,21 @@ In order to minimize this impact, the iReceptor team runs a "staging" repository
 that is able to take on more data. These are tpyically running on separate VMs with the "staging" repository a mirror of the "production" repository.
 By mirror, we mean that the MongoDB collections are identical. 
 
-The "production" repository is almost always in production. When a study is being loaded, it is loaded into the "staging" repository. For
+The "production" repository is almost always in production. When a study is being loaded, it is loaded into the "staging" repository. 
+This loading of course has no impact on the "production" repository. For
 large studies, in particular when loading large studies into a repository that already has a large amount of data, this can take a long time.
-Once the "staging" repository is finished loading the new study, the "staging" Turnkey is shutdown and the MongoDB database folder is copied to the to
+Once the "staging" repository is finished loading the new study, the "staging" Turnkey is shutdown and the MongoDB database folder is copied to the
 "production" repository VM in a self contained directory. At this point, the "production" repository has two MongoDB folders, one that is being used
 by the "production" service and one that contains the data from the "staging" repository. When you are ready to move the new data into production, you
 simply bring down the "production" repository, change the location of the "production" repository to point to the new folder from the "staging"
 repository, and the bring the "production" Turnkey repository back on line. This should take a matter of seconds.
+
+Becasue the "staging" and "production" repositories now have the same data, this process can be repeated. That is, a new study can be loaded
+into the "staging" repository, copied to the "production" repository, and the directories switched once again. Once a "production" repository
+becomes "full" (approaches 500M rearrangements), no data is added, and when it is necessary to add a new study, a new, empty "production" repository
+provisioned, the empty "production" repository is mirrored on the "staging" repository, data is loaded into the empty "staging" repopsitory, and once
+done, the new "production" repository is updated as above. To find out more information about the iReceptor Public archive and the cluster of repositories
+from which it is built, please refer to the [iReceptor Repsository web page](http://www.ireceptor.org/repositories).
 
 ### Details
 
