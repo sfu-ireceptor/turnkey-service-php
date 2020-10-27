@@ -126,6 +126,7 @@ When you've loaded your data, we recommend [backing up the database](doc/databas
 ## Other information
 
 ### Managing the database
+- [Starting and stopping the Turnkey](doc/start_stop_turnkey.md)
 - [Running a production Turnkey](doc/production_db.md)
 - [Moving the database to another folder](doc/moving_the_database_folder.md)
 - [Backing up and restoring the database](doc/database_backup.md)
