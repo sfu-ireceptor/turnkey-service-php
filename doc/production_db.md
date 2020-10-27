@@ -49,7 +49,7 @@ repository, and the bring the "production" Turnkey repository back on line. This
 ### Details
 
 - Use the Turnkey stop_turnkey.sh and start_turnkey.sh commands to stop and start the "staging" and "production" Turnkey repositories.
-- Follow the directions in [Moving the database to another folder](doc/moving_the_database_folder.md) to change the active folder being used by MongoDB
+- Follow the directions in [Moving the database to another folder](moving_the_database_folder.md) to change the active folder being used by MongoDB
 - This approach uses the Mongo [Backing up copying underlying data files](https://docs.mongodb.com/manual/core/backups/#back-up-by-copying-underlying-data-files) approach. Note that this is safest to do when Mongo is not running, hence the need to stop the Turnkey during copy and switching directories.
-- It is ALWAYS good practice to back up your repository by performing such operations. You can use the Turnkey [Backing up and restoring the database](doc/database_backup.md) process for this, but because you are not destroying the old Mongo DB directory, you by defintion have a backup of the "production" repository.
+- It is ALWAYS good practice to back up your repository by performing such operations. You can use the Turnkey [Backing up and restoring the database](database_backup.md) process for this, but because you are not destroying the old Mongo DB directory, you by defintion have a backup of the "production" repository.
 
