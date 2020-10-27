@@ -33,7 +33,23 @@ The bottom line. If you have the resources, add a new repository as a repository
 
 ## Optimizing data loading
 
-The data loading process has a significant impact on the production level of a repository. Unless you are able to load
-all of the data into a repository and then bring it on line, the data loading process can have a dramatic impact on your 
-production repository.
+The data loading process has a significant impact on the production level of a repository.
+In order to minimize this impact, the iReceptor team runs a "staging" repository for each "production" repository
+that is able to take on more data. These are tpyically running on separate VMs with the "staging" repository a mirror of the "production" repository.
+By mirror, we mean that the MongoDB collections are identical. 
+
+The "production" repository is almost always in production. When a study is being loaded, it is loaded into the "staging" repository. For
+large studies, in particular when loading large studies into a repository that already has a large amount of data, this can take a long time.
+Once the "staging" repository is finished loading the new study, the "staging" Turnkey is shutdown and the MongoDB database folder is copied to the to
+"production" repository VM in a self contained directory. At this point, the "production" repository has two MongoDB folders, one that is being used
+by the "production" service and one that contains the data from the "staging" repository. When you are ready to move the new data into production, you
+simply bring down the "production" repository, change the location of the "production" repository to point to the new folder from the "staging"
+repository, and the bring the "production" Turnkey repository back on line. This should take a matter of seconds.
+
+### Details
+
+- Use the Turnkey stop_turnkey.sh and start_turnkey.sh commands to stop and start the "staging" and "production" Turnkey repositories.
+- Follow the directions in [Moving the database to another folder](doc/moving_the_database_folder.md) to change the active folder being used by MongoDB
+- This approach uses the Mongo [Backing up copying underlying data files](https://docs.mongodb.com/manual/core/backups/#back-up-by-copying-underlying-data-files) approach. Note that this is safest to do when Mongo is not running, hence the need to stop the Turnkey during copy and switching directories.
+- It is ALWAYS good practice to back up your repository by performing such operations. You can use the Turnkey [Backing up and restoring the database](doc/database_backup.md) process for this, but because you are not destroying the old Mongo DB directory, you by defintion have a backup of the "production" repository.
 
