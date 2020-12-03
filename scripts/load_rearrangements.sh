@@ -11,6 +11,9 @@ then
     exit 1
 fi
 
+echo -n "Starting $0: "
+date
+
 REARRANGEMENT_TYPE="$1"
 shift
 
@@ -23,3 +26,6 @@ while [ "$1" != "" ]; do
 done
 
 ${SCRIPT_DIR}/create_database_indexes.sh
+
+echo -n "Done $0: "
+date

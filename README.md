@@ -45,13 +45,14 @@ You can also visit <http://localhost> in your browser (replace "localhost" with 
 
 ## Loading data
 The general data loading procedure, for a study which has generated sequence data is to:
-1. load the associated repertoire metadata (using the [iReceptior Metadata CSV format](https://github.com/sfu-ireceptor/dataloading-curation/tree/master/metadata))
-2. load the sequence annotatios (rearrangements) (from IMGT, MiXCR, etc)
+1. load the associated repertoire metadata using the [iReceptor Metadata CSV format](https://github.com/sfu-ireceptor/dataloading-curation/tree/master/metadata). Note: it's also possible to use the [AIRR Repertoire Schema JSON format](https://docs.airr-community.org/en/latest/datarep/metadata.html).
+
+2. load the sequence annotations (rearrangements) from IMGT, MiXCR, etc.
 
 ## Loading the test data
 Load the included test data to familiarize yourself with the data loading procedure. You will delete that test data afterwards.
 
-Note: the test data is a single repertoire with 1000 rearrangments. It's a subset from the study [The Different T-cell Receptor Repertoires in Breast Cancer Tumors, Draining Lymph Nodes, and Adjacent Tissues](https://www.ncbi.nlm.nih.gov/pubmed/28039161) data.
+Note: the test data is a single repertoire with 1000 rearrangements. It's a subset from the study [The Different T-cell Receptor Repertoires in Breast Cancer Tumors, Draining Lymph Nodes, and Adjacent Tissues](https://www.ncbi.nlm.nih.gov/pubmed/28039161) data.
 
 1. **Load the repertoire metadata file** [test_data/PRJNA330606_Wang_1_sample_metadata.csv](test_data/PRJNA330606_Wang_1_sample_metadata.csv).
 ```
@@ -81,18 +82,14 @@ That's all, congratulations :relaxed: You can now [reset the turnkey database](d
 
 ## Loading your own data
 
-Note: use a clearly defined curation process for your data to endure good provenance. Refer to the [iReceptor Curation](http://www.ireceptor.org/curation) process and the [iReceptor Curation GitHub repository](https://github.com/sfu-ireceptor/dataloading-curation/tree/master) for recommended data curation approaches.
+Note: use a clearly defined curation process for your data to ensure good provenance. Refer to the [iReceptor Curation](http://www.ireceptor.org/curation) process and the [iReceptor Curation GitHub repository](https://github.com/sfu-ireceptor/dataloading-curation/tree/master) for recommended data curation approaches.
 
 To load your own data, follow the same procedure as with the test data.
 Note: make sure your rearrangements files are declared in the repertoire metadata file, under the `data_processing_files` column.
 
 1. Load your repertoire metadata:
 ```
-scripts/load_metadata.sh ireceptor <file path of your CSV metadata file>
-```
-Note: You can also load the AIRR repertoire JSON file format for repertoire metadata as follows
-```
-scripts/load_metadata.sh repertoire <file path of your AIRR JSON repertoire file>
+scripts/load_metadata.sh ireceptor <file path of your CSV or JSON metadata file>
 ```
 
 2. Load your rearrangements files. You can load multiple files at once:
@@ -116,7 +113,7 @@ scripts/load_rearrangements.sh imgt <IMGT files>
 
 
 ### Loading many rearrangements
-:warning: Loading many rearrangements can take hours. We recomend using the Unix command `nohup` to run the script in the background, and to redirect the script output to a log file. So you can log out and come back later to check on the data loading progress by looking at that file. Example:
+:warning: Loading many rearrangements can take hours. We recommend using the Unix command `nohup` to run the script in the background, and to redirect the script output to a log file. So you can log out and come back later to check on the data loading progress by looking at that file. Example:
 
 ```
 nohup scripts/load_rearrangements.sh mixcr my_study_folder/*.txt > progress.log &
@@ -129,6 +126,8 @@ When you've loaded your data, we recommend [backing up the database](doc/databas
 ## Other information
 
 ### Managing the database
+- [Starting and stopping the Turnkey](doc/start_stop_turnkey.md)
+- [Running a production Turnkey](doc/production_db.md)
 - [Moving the database to another folder](doc/moving_the_database_folder.md)
 - [Backing up and restoring the database](doc/database_backup.md)
 - [Resetting the turnkey database](doc/resetting.md)
