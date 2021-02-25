@@ -118,7 +118,29 @@ scripts/load_rearrangements.sh imgt <IMGT files>
 ```
 nohup scripts/load_rearrangements.sh mixcr my_study_folder/*.txt > progress.log &
 ```
+### Updating repertoire metadata
 
+Invairably you will need to make a change to the repertoire metadata that you loaded.
+There is a simple update_metadata script to perform this for you. As with loading the metadata
+you simply tell the script what type of repertoire metadata you are loading (ireceptor or AIRR Repertoire JSON)
+and the file. Because this is updating the repository live, there is an option to run the entire script and report
+on any updates that the script would perform *without* actually loading any data (--skip-dataload). 
+
+If you edit the test metadata file, and then run:
+
+```
+scripts/update_metadata.sh ireceptor --skipload test_data/PRJNA330606_Wang_1_sample_metadata.csv
+```
+This will  report that it is changing the fields for the repertoire, but it will *not* write those changes to the 
+repository. If you are comfortable with the changes it reports then you can rerun the script without the --skipload 
+option to make the changes.
+
+:warning: This command will update the database. Before making changes to the repository, you should consider making 
+a backup of the database.
+
+```
+scripts/update_metadata.sh ireceptor test_data/PRJNA330606_Wang_1_sample_metadata.csv
+```
 
 ## Backing up the database
 When you've loaded your data, we recommend [backing up the database](doc/database_backup.md) to avoid having to load your data again in case a problem happens.
