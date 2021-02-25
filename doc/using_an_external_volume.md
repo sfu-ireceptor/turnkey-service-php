@@ -19,14 +19,14 @@ We want to create a new MongoDB data directory on our large, XFS volume.
 sudo mkdir /data/mongodb
 ```
 
-1. Stop the turnkey
+2. Stop the turnkey
 
 Whenever you are working with database files directly, the Turnkey should be stopped.
 ```
 scripts/stop_turnkey.sh
 ```
 
-2. Move the current mongodb data folder
+3. Move the current mongodb data folder
 
 The Turnkey uses the .mongodb_data directory as the data directory for MongoDB. We don't want to
 destroy this directory, so we just move it.
@@ -34,17 +34,17 @@ destroy this directory, so we just move it.
 sudo mv .mongodb_data mongodb_data_original
 ```
 
-2. Create a symbolic link to the new location
+4. Create a symbolic link to the new location
 ```
 ln -s /data/mongodb .mongodb_data
 ```
 
-3. Start the turnkey
+5. Start the turnkey
 ```
 scripts/start_turnkey.sh
 ```
 
-4. Check that the data is being written to the new location
+6. Check that the data is being written to the new location
 
 ```
 ls /data/mongodb
