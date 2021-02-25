@@ -124,7 +124,7 @@ Invairably you will need to make a change to the repertoire metadata that you lo
 There is a simple update_metadata script to perform this for you. As with loading the metadata
 you simply tell the script what type of repertoire metadata you are loading (ireceptor or AIRR Repertoire JSON)
 and the file. Because this is updating the repository live, there is an option to run the entire script and report
-on any updates that the script would perform *without* actually loading any data (--skip-dataload). 
+on any updates that the script would perform *without* actually loading any data (--skipload). 
 
 If you edit the test metadata file, and then run:
 
