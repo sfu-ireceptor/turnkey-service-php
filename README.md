@@ -76,7 +76,12 @@ curl --data "{}" "http://localhost/airr/v1/rearrangement"
 ```
 All of the rearrangement data for the 1000 sequences is returned as JSON.
 
-Note: both scripts `load_metadata.sh` and `load_rearrangement.sh` produce a log file for each file processed in the `log` directory. Log files are named using the current date, followed by the name of the processed file.
+3. **Verify the data was loaded correctly**:
+```
+scripts/verify_dataload.sh http://localhost/ PRJNA330606 test_data/ PRJNA330606_Wang_1_sample_metadata.csv /tmp
+```
+
+Note: all of the scripts `load_metadata.sh`, `load_rearrangement.sh`, and `verify_dataload.sh` produce a log file for each file processed in the `log` directory. Log files are named using the current date, followed by the name of the processed file.
 
 That's all, congratulations :relaxed: You can now [reset the turnkey database](doc/resetting.md) and load your own data.
 
