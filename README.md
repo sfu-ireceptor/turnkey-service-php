@@ -80,7 +80,7 @@ All of the rearrangement data for the 1000 sequences is returned as JSON.
 ```
 scripts/verify_dataload.sh http://localhost/ PRJNA330606 test_data/ PRJNA330606_Wang_1_sample_metadata.csv /tmp
 ```
-
+This will output a summary report checking the data that was loaded into the repository against the data that is returned by querying the AIRR Data Commons API and retrieving that data. Hopefully, this will report no errors. If so, the data was loaded and retrieved correctly. Note that this works with data that is loaded as iReceptor metadata files, and requires the metadata file and the rearrangements be in the same directory. For more information on using the verify_dataload.sh script and how to interpret the results of the report please refer to the [Verify Dataloading documentation](doc/sanitychecking.md). 
 Note: all of the scripts `load_metadata.sh`, `load_rearrangement.sh`, and `verify_dataload.sh` produce a log file for each file processed in the `log` directory. Log files are named using the current date, followed by the name of the processed file.
 
 That's all, congratulations :relaxed: You can now [reset the turnkey database](doc/resetting.md) and load your own data.
