@@ -30,6 +30,25 @@ mkdir -p $LOG_FOLDER
 TIME=`date +%Y-%m-%d_%H-%M-%S`
 LOG_FILE=${LOG_FOLDER}/${TIME}_${metadata_file}.log
 
+# Get the full path names for the directories. Docker requires this to mount them.
+study_dir=`realpath $study_dir`
+output_dir=`realpath $output_dir`
+
+# Check to make sure the files and directories exist.
+if [ ! -d "$study_dir" ]; then
+    echo "ERROR: Input study directory $study_dir does not exist."
+    exit 1
+fi
+if [ ! -d "$output_dir" ]; then
+    echo "ERROR: Output study directory $output_dir does not exist."
+    exit 1
+fi
+tmp_filename=$study_dir"/"$metadata_file
+if [ ! -f "$tmp_filename" ]; then
+    echo "ERROR: Metadata file $tmp_filename does not exist."
+    exit 1
+fi
+
 # Tell the user what is going on.
 echo "Starting data verification at $TIME"
 echo "    Verifying study $study_id in repository $base_url"
