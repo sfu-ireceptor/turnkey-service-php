@@ -5,20 +5,18 @@ SCRIPT_DIR=`dirname "$0"`
 # Get the command line arguements. Script assumes that study_dir is a directory
 # and that the directory contains both the $metadata_file as well as all of the
 # annotation files. The output from the command is written to $output_dir.
-if [ $# -eq 5 ]
+if [ $# -eq 4 ]
 then
-    base_url="$1"
-    study_id="$2" 
-    study_dir="$3"
-    metadata_file="$4"
-    output_dir="$5"
+    study_id="$1" 
+    study_dir="$2"
+    metadata_file="$3"
+    output_dir="$4"
 else
-    echo "usage: $0 base_url study_id study_dir metadata_file output_dir"
+    echo "usage: $0 study_id study_dir metadata_file output_dir"
     exit
 fi
 
 # Make available to docker-compose.yml
-export base_url
 export study_id
 export study_dir
 export metadata_file
@@ -51,7 +49,7 @@ fi
 
 # Tell the user what is going on.
 echo "Starting data verification at $TIME"
-echo "    Verifying study $study_id in repository $base_url"
+echo "    Verifying study $study_id"
 echo "    Study directory = $study_dir"
 echo "    Metadata = $study_dir/$metadata_file"
 echo "    Annotations = $study_dir"
@@ -66,12 +64,11 @@ echo "    Output directory = $output_dir"
 # "ireceptor-dataloading" is the service name defined in docker-compose.yml 
 # sh -c '...' is the command executed inside the container
 sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run -v $study_dir:/study -v $output_dir:/output --rm \
-			-e base_url="$base_url" \
 			-e study_id="$study_id" \
 			-e metadata_file="$metadata_file" \
 			ireceptor-dataloading \
 				sh -c 'bash /app/verify/joint_sanity_testing.sh \
-                                        ${base_url} \
+                                        http://ireceptor-api/ \
                                         "repertoire" \
                                         /app/verify/facet_queries_for_sanity_tests/ \
 					/app/verify/nofilters.json \
