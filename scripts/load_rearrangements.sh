@@ -17,7 +17,7 @@ date
 REARRANGEMENT_TYPE="$1"
 shift
 
-${SCRIPT_DIR}/drop_database_indexes_for_dataloading.sh
+${SCRIPT_DIR}/drop_rearrangement_database_indexes_for_dataloading.sh
 
 while [ "$1" != "" ]; do
 	FILE="$1"
@@ -25,7 +25,7 @@ while [ "$1" != "" ]; do
 	shift
 done
 
-${SCRIPT_DIR}/create_database_indexes.sh
+${SCRIPT_DIR}/create_rearrangement_database_indexes.sh
 
 echo -n "Done $0: "
 date
