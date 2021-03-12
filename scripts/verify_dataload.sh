@@ -5,14 +5,15 @@ SCRIPT_DIR=`dirname "$0"`
 # Get the command line arguements. Script assumes that study_dir is a directory
 # and that the directory contains both the $metadata_file as well as all of the
 # annotation files. The output from the command is written to $output_dir.
-if [ $# -eq 4 ]
+if [ $# -eq 5 ]
 then
     study_id="$1" 
     study_dir="$2"
     metadata_file="$3"
-    output_dir="$4"
+    annotation_tool="4"
+    output_dir="$5"
 else
-    echo "usage: $0 study_id study_dir metadata_file output_dir"
+    echo "usage: $0 study_id study_dir metadata_file annotation_tool output_dir"
     exit
 fi
 
@@ -20,6 +21,7 @@ fi
 export study_id
 export study_dir
 export metadata_file
+export annotation_tool
 export output_dir
 
 # create log file
@@ -53,6 +55,7 @@ echo "    Verifying study $study_id"
 echo "    Study directory = $study_dir"
 echo "    Metadata = $study_dir/$metadata_file"
 echo "    Annotations = $study_dir"
+echo "    Annotation tool = $annotation_tool"
 echo "    Output directory = $output_dir"
 
 # -----------------------------------------------------------------------------------#
@@ -66,6 +69,7 @@ echo "    Output directory = $output_dir"
 sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run -v $study_dir:/study -v $output_dir:/output --rm \
 			-e study_id="$study_id" \
 			-e metadata_file="$metadata_file" \
+			-e annotation_tool="$annotation_tool" \
 			ireceptor-dataloading \
 				sh -c 'bash /app/verify/joint_sanity_testing.sh \
                                         http://ireceptor-api/ \
@@ -76,7 +80,8 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 					/app/config/AIRR-iReceptorMapping.txt \
 					/study/${metadata_file} \
 					/study/ \
-					/output/ ' \
+					/output/  \
+					${annotation_tool} '\
  	2>&1 | tee $LOG_FILE
 
 # Get a new time and tell the user we are done.
