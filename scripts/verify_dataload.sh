@@ -10,7 +10,7 @@ then
     study_id="$1" 
     study_dir="$2"
     metadata_file="$3"
-    annotation_tool="4"
+    annotation_tool="$4"
     output_dir="$5"
 else
     echo "usage: $0 study_id study_dir metadata_file annotation_tool output_dir"
