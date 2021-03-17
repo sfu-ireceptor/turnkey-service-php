@@ -121,7 +121,7 @@ Note: make sure that the full file name, including the `.gz` extension, was decl
 
 ### Loading IMGT or AIRR rearrangements
 
-Just replace the `mixcr` parameter by `imgt` or `airr`. Example:
+Just replace the `mixcr` parameter by `mixcr_v3`, `imgt` or `airr`. Example:
 ```
 scripts/load_rearrangements.sh imgt <IMGT files>
 ```
