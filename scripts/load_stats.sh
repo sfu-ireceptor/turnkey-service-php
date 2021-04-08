@@ -48,21 +48,31 @@ echo "    Temporary directory = $stats_dir"
 # docker-compose -v: mount VM volumes in the container. We mount $study_dir where all the input is and $output_dir where the output is written
 # "ireceptor-dataloading" is the service name defined in docker-compose.yml 
 # sh -c '...' is the command executed inside the container
-sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml \
-	               --project-name turnkey-service run \
-		       -v /data:/data -v $stats_dir:/outdir --rm \
-		       -e study_id="$study_id" \
-		       ireceptor-api \
-		       sh -c 'php /data/src/dataloading-mongo/stats/stats_files_create.php \
-			        ${study_id} /outdir'\
- 	2>&1 | tee $LOG_FILE
+#sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml \
+#	               --project-name turnkey-service run \
+#		       -v /data:/data -v $stats_dir:/outdir --rm \
+#		       -e study_id="$study_id" \
+#		       ireceptor-api \
+#		       sh -c 'php /data/src/dataloading-mongo/stats/stats_files_create.php \
+#			        ${study_id} /outdir'\
+# 	2>&1 | tee $LOG_FILE
+#
+#sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml \
+#	               --project-name turnkey-service run \
+#		       -v /data:/data -v $stats_dir:/outdir --rm \
+#		       ireceptor-api \
+#		       sh -c 'php /data/src/dataloading-mongo/stats/stats_files_load.php \
+#			         /outdir/*.json'\
+# 	2>&1 | tee $LOG_FILE
 
 sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml \
 	               --project-name turnkey-service run \
-		       -v /data:/data -v $stats_dir:/outdir --rm \
+		       -v /data:/data \
+		       -v $stats_dir:/outdir --rm \
+		       -e study_id="$study_id" \
 		       ireceptor-api \
-		       sh -c 'php /data/src/dataloading-mongo/stats/stats_files_load.php \
-			         /outdir/*.json'\
+		       sh -c 'bash /data/src/dataloading-mongo/stats/load_stats_mongo.sh \
+			         ${study_id} /outdir'\
  	2>&1 | tee $LOG_FILE
 
 # Get a new time and tell the user we are done.
