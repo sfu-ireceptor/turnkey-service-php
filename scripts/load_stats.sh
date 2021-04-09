@@ -2,9 +2,8 @@
 
 SCRIPT_DIR=`dirname "$0"`
 
-# Get the command line arguements. Script assumes that study_dir is a directory
-# and that the directory contains both the $metadata_file as well as all of the
-# annotation files. The output from the command is written to $output_dir.
+# Get the command line arguements. Script takes a study_id to determine
+# which study to generate stats for.
 if [ $# -eq 1 ]
 then
     study_id="$1" 
