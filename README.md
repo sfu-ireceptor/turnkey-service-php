@@ -78,12 +78,12 @@ All of the rearrangement data for the 1000 sequences is returned as JSON.
 
 3. **Verify the data was loaded correctly**:
 ```
-scripts/verify_dataload.sh http://xx.xx.xx.xx/ PRJNA330606 test_data PRJNA330606_Wang_1_sample_metadata.csv /tmp
+scripts/verify_dataload.sh http://xx.xx.xx.xx/ PRJNA330606 test_data PRJNA330606_Wang_1_sample_metadata.csv mixcr /tmp
 
-scripts/verify_dataload.sh http://server.yourorg.org/ PRJNA330606 test_data PRJNA330606_Wang_1_sample_metadata.csv /tmp
+scripts/verify_dataload.sh http://server.yourorg.org/ PRJNA330606 test_data PRJNA330606_Wang_1_sample_metadata.csv mixcr /tmp
 
 ```
-The above command verifies the provenance of the data loaded with the previous commands (`load_metadata.sh`, `load_rearrangements.sh`), assuming that data is loaded a study at a time as described above. The `verify_dataload.sh` command takes as parameters the URL for the service/repository to test, the Study ID (`PRJNA330606`) of the study to test, the directory in which the study metadata and the rearrangement data is stored (`test_data`), the study metadata file within this directory (`PRJNA330606_Wang_1_sample_metadata.csv`), and a directory (`/tmp`) in which to generate the data provenance report.  
+The above command verifies the provenance of the data loaded with the previous commands (`load_metadata.sh`, `load_rearrangements.sh`), assuming that data is loaded a study at a time as described above. The `verify_dataload.sh` command takes as parameters the URL for the service/repository to test, the Study ID (`PRJNA330606`) of the study to test, the directory in which the study metadata and the rearrangement data is stored (`test_data`), the study metadata file within this directory (`PRJNA330606_Wang_1_sample_metadata.csv`), the file format for the rearrangement files (`mixcr` in this case, but should be one of `mixcr`, `vquest`, or `airr`), and a directory (`/tmp`) in which to generate the data provenance report.  
 
 Note: unlike the loading scripts, `verify_dataload.sh` requires that you provide either an IP number or a fully qualified domain name. Providing `localhost` will not work.
 
