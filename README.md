@@ -2,7 +2,7 @@
 
 The iReceptor Turnkey is a quick and easy mechanism for researchers to create their own [AIRR Data Commons](https://docs.airr-community.org/en/latest/api/adc.html#datacommons) repository.
 
-Current version: 3.1 (May 10, 2021). See [Release Notes](CHANGELOG.md).
+Current version: [3.1 (May 10, 2021)](CHANGELOG.md).
 
 ## What's in the iReceptor Turnkey?
 - a database
