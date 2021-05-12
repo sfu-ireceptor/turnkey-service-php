@@ -1,8 +1,8 @@
 # iReceptor Turnkey
 
 The iReceptor Turnkey is a quick and easy mechanism for researchers to create their own [AIRR Data Commons](https://docs.airr-community.org/en/latest/api/adc.html#datacommons) repository.
-[![DOI](https://zenodo.org/badge/161701589.svg)](https://zenodo.org/badge/latestdoi/161701589)
 
+Current version: 3.1 on May 10, 2021 ([Release Notes](CHANGELOG.md)) [![DOI](https://zenodo.org/badge/161701589.svg)](https://zenodo.org/badge/latestdoi/161701589)
 
 ## What's in the iReceptor Turnkey?
 - a database
