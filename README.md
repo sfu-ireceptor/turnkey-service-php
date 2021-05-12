@@ -28,7 +28,7 @@ Download the `production-v3` code:
 git clone --branch production-v3 https://github.com/sfu-ireceptor/turnkey-service-php.git
 ```
 
-Launch the installation script. Note: multiple Docker images will be downloaded from DockerHub. Total time estimate: 10-30 min.
+Launch the installation script. Note: multiple Docker images will be downloaded from DockerHub. Installation time estimate: 10-30 min.
 
 ```
 cd turnkey-service-php
