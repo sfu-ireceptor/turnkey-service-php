@@ -17,8 +17,8 @@ These components are packaged as Docker images. The installation script will:
 
 ## System requirements
 
-- Linux Ubuntu. The turnkey was tested on Ubuntu 16.04 and 18.04.
-- `sudo` without password. It's usually already enabled on virtual machines.
+- Linux Ubuntu. The turnkey was tested on Ubuntu 16.04, 18.04, and 20.04.
+- `sudo` without password. It's usually the default on virtual machines.
 
 ## Installation
 
