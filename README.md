@@ -11,7 +11,7 @@ Current version: [3.1 (May 10, 2021)](CHANGELOG.md).
 
 These components are packaged as Docker images. The installation script will:
 - install Docker
-- download and run the Docker images
+- download and run these Docker images
 
 [Read more about the iReceptor Turnkey](http://www.ireceptor.org/repositories#turnkey) on the iReceptor website. The remainder of this document only provides installation instructions.
 
