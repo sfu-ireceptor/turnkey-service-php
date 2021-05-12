@@ -2,18 +2,17 @@
 
 ## v3.1 (May 10, 2021)
 
-- Add Release Notes
-
 ### Web service update
 - security update:
 	- Upgrade PHP (7.2 -> 7.3.27)
 	- Update PHP dependencies (via composer)
 	- Disable CGI
 	- Tighten some files permissions
-
 - enable [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
-
 - minor bug fixes
+
+### Other
+- Add Release Notes
 
 ## v3.0 (June 5, 2020) [![DOI](https://zenodo.org/badge/161701589.svg)](https://zenodo.org/badge/latestdoi/161701589)
 
