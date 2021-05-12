@@ -4,7 +4,7 @@
 
 ### Web service update
 - Security update:
-	- PHP 7.2 -> 7.3.27
-	- Update PHP dependencies (through composer)
+	- Upgrade PHP (7.2 -> 7.3.27)
+	- Update PHP dependencies (via composer)
 	- Disable CGI
-	- Restrict some files permissions
+	- Tighten some files permissions
