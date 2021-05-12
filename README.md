@@ -22,7 +22,7 @@ These components are packaged as Docker images. The installation script will:
 
 ## Installation
 
-Download the code from the `production-v3` branch:
+Download the `production-v3` code:
 
 ```
 git clone --branch production-v3 https://github.com/sfu-ireceptor/turnkey-service-php.git
