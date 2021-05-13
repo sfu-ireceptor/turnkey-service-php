@@ -13,6 +13,7 @@
 
 ### Other
 - Add Release Notes
+- Update Docker installation scripts
 
 ## v3.0 (June 5, 2020) [![DOI](https://zenodo.org/badge/161701589.svg)](https://zenodo.org/badge/latestdoi/161701589)
 
