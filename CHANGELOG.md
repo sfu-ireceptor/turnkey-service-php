@@ -3,13 +3,13 @@
 ## v3.1 (May 10, 2021)
 
 ### Web service update
-- security update:
+- Security update:
 	- Upgrade PHP (7.2 -> 7.3.27)
 	- Update PHP dependencies (via composer)
 	- Disable CGI
 	- Tighten some files permissions
-- enable [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
-- minor bug fixes
+- Enable [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
+- Minor bug fixes
 
 ### Other
 - Add Release Notes
