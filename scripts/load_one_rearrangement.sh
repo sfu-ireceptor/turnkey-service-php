@@ -17,6 +17,9 @@ mkdir -p $LOG_FOLDER
 TIME1=`date +%Y-%m-%d_%H-%M-%S`
 LOG_FILE=${LOG_FOLDER}/${TIME1}_${FILE_NAME}.log
 
+echo "Loading file $2"
+echo "Starting at: $TIME1"
+
 # Notes:
 # sudo -E: make current environment variables available to the command run as root
 # docker-compose --rm: delete container afterwards 
@@ -38,3 +41,6 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 					--$REARRANGEMENT_TYPE \
 					-f /scratch/$FILE_NAME' \
  	2>&1 | tee $LOG_FILE
+
+TIME2=`date +%Y-%m-%d_%H-%M-%S`
+echo "Finished at: $TIME2"
