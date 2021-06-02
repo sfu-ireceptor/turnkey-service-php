@@ -30,11 +30,3 @@ services:
             DB_DATABASE: ireceptor
         volumes:
             - ${FILE_FOLDER:-/tmp}:/scratch
-
-    ireceptor-performance-testing:
-        image: ireceptor/dataloading-mongo:${PERFORMANCE_TESTING_TAG:-turnkey-v4-performance}
-        environment:
-            DB_HOST: ireceptor-database
-            DB_DATABASE: ireceptor
-            DB_SAMPLES_COLLECTION: sample
-            DB_SEQUENCES_COLLECTION: sequence
