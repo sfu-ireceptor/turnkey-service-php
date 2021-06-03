@@ -2,7 +2,10 @@
 
 The iReceptor Turnkey is a quick and easy mechanism for researchers to create their own [AIRR Data Commons](https://docs.airr-community.org/en/latest/api/adc.html#datacommons) repository.
 
-Current version: [3.1 (May 10, 2021)](CHANGELOG.md).
+Version | Branch | Status | Last update 
+--- | --- | --- | ---
+**3.1** | [production-v3](https://github.com/sfu-ireceptor/turnkey-service-php/tree/production-v3) | **Stable. Recommended.** | May 10, 2021 \| [Release Notes](https://github.com/sfu-ireceptor/turnkey-service-php/blob/production-v3/CHANGELOG.md) 
+4.0 | [production-v4](https://github.com/sfu-ireceptor/turnkey-service-php/tree/production-v4) | Used internally. Stilll being tested. | June 2, 2021 \| [Release Notes](https://github.com/sfu-ireceptor/turnkey-service-php/blob/production-v4/CHANGELOG.md)
 
 ## What's in the iReceptor Turnkey?
 - a database
