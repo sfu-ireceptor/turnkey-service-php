@@ -20,6 +20,22 @@ sudo docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnk
 echo "Done"
 echo
 
+# update config file
+echo "Downloading AIRR-iReceptor mapping.."
+mkdir -p ${SCRIPT_DIR}/../.config
+curl -# -o ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping_new.txt https://raw.githubusercontent.com/sfu-ireceptor/config/clone-and-stats-mapping/AIRR-iReceptorMapping.txt
+
+if [[ `diff -q ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping_new.txt ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping.txt` != '' ]]
+then
+	mv ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping.txt ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping.old.txt
+	mv ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping_new.txt ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping.txt
+	echo "The mapping was updated, the previous file has been archived to ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping.old.txt"
+fi
+
+echo "Done"
+echo
+
+
 # start Docker containers
 echo "Starting Docker containers.."
 ${SCRIPT_DIR}/start_turnkey.sh
