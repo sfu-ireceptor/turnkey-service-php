@@ -32,6 +32,8 @@ then
 	echo "The mapping was updated, the previous file has been archived to ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping.old.txt"
 fi
 
+rm ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping_new.txt
+
 echo "Done"
 echo
 
