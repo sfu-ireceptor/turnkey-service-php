@@ -53,6 +53,12 @@ sudo chmod +x $STARTUP_FILE
 echo "Done"
 echo
 
+# install config file
+echo "Downloading AIRR-iReceptor mapping.."
+sudo wget -O .config/AIRR-iReceptorMapping.txt https://raw.githubusercontent.com/sfu-ireceptor/config/clone-and-stats-mapping/AIRR-iReceptorMapping.txt
+echo "Done"
+echo
+
 # start turnkey
 ${SCRIPT_DIR}/start_turnkey.sh
 echo
