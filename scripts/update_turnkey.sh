@@ -28,7 +28,7 @@ curl -# -o ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping_new.txt https://raw.gi
 if [[ `diff -q ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping_new.txt ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping.txt` != '' ]]
 then
 	mv ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping.txt ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping.old.txt
-	mv ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping_new.txt ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping.txt
+	cp ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping_new.txt ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping.txt
 	echo "The mapping was updated, the previous file has been archived to ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping.old.txt"
 fi
 
