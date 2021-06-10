@@ -29,7 +29,7 @@ if [[ `diff -q ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping_new.txt ${SCRIPT_D
 then
 	mv ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping.txt ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping.old.txt
 	cp ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping_new.txt ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping.txt
-	echo "INFO: the mapping has been updated. The previous mapping has been archived to ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping.old.txt"
+	echo "INFO: the mapping has been updated (previous mapping was to ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping.old.txt)"
 fi
 
 rm ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping_new.txt
