@@ -55,7 +55,8 @@ echo
 
 # install config file
 echo "Downloading AIRR-iReceptor mapping.."
-sudo wget -O .config/AIRR-iReceptorMapping.txt https://raw.githubusercontent.com/sfu-ireceptor/config/clone-and-stats-mapping/AIRR-iReceptorMapping.txt
+mkdir -p ${SCRIPT_DIR_FULL}/../.config
+sudo wget -O ${SCRIPT_DIR_FULL}/../.config/AIRR-iReceptorMapping.txt https://raw.githubusercontent.com/sfu-ireceptor/config/clone-and-stats-mapping/AIRR-iReceptorMapping.txt
 echo "Done"
 echo
 
