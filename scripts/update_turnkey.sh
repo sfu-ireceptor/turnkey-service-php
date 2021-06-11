@@ -31,8 +31,9 @@ then
 	ARCHIVED_NAME=AIRR-iReceptorMapping_${CURRENT_DATETIME}.txt
 	mv ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping.txt ${SCRIPT_DIR}/../.config/${ARCHIVED_NAME}
 	cp ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping_new.txt ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping.txt
+	ARCHIVED_PATH=`realpath ${SCRIPT_DIR}/../.config/${ARCHIVED_NAME}`
 	echo "INFO: the mapping has been updated"
-	echo "INFO: the previous mapping has been archived to ${SCRIPT_DIR}/../.config/${ARCHIVED_NAME}"
+	echo "INFO: the previous mapping has been archived to $ARCHIVED_PATH"
 fi
 
 rm ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping_new.txt
