@@ -3,6 +3,9 @@
 SCRIPT_DIR=`dirname "$0"`
 SCRIPT_DIR_FULL="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
+# load config file
+source ${SCRIPT_DIR}/config.sh
+
 # install Docker
 echo "Installing Docker.."
 if [ -x "$(command -v docker)" ]; then
@@ -56,7 +59,7 @@ echo
 # install config file
 echo "Downloading AIRR-iReceptor mapping.."
 mkdir -p ${SCRIPT_DIR_FULL}/../.config
-curl -# -o ${SCRIPT_DIR_FULL}/../.config/AIRR-iReceptorMapping.txt https://raw.githubusercontent.com/sfu-ireceptor/config/clone-and-stats-mapping/AIRR-iReceptorMapping.txt
+curl -# -o ${SCRIPT_DIR_FULL}/../.config/AIRR-iReceptorMapping.txt $MAPPING_URL
 echo "Done"
 echo
 

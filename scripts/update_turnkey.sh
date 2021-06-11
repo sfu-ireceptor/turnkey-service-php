@@ -2,6 +2,9 @@
 
 SCRIPT_DIR=`dirname "$0"`
 
+# load config file
+source ${SCRIPT_DIR}/config.sh
+
 # stop Docker containers
 echo "Stopping Docker containers.."
 ${SCRIPT_DIR}/stop_turnkey.sh
@@ -23,7 +26,7 @@ echo
 # update config file
 echo "Downloading AIRR-iReceptor mapping.."
 mkdir -p ${SCRIPT_DIR}/../.config
-curl -# -o ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping_new.txt https://raw.githubusercontent.com/sfu-ireceptor/config/clone-and-stats-mapping/AIRR-iReceptorMapping.txt
+curl -# -o ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping_new.txt $MAPPING_URL
 
 if [[ `diff -q ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping_new.txt ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping.txt` != '' ]]
 then
