@@ -28,7 +28,7 @@ echo "Downloading AIRR-iReceptor mapping.."
 mkdir -p ${SCRIPT_DIR}/../.config
 curl -# -o ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping_new.txt $MAPPING_URL
 
-if [[ `diff -q ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping_new.txt ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping.txt` != '' ]]
+if [[ `diff --new-file --brief ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping_new.txt ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping.txt` != '' ]]
 then
 	CURRENT_DATETIME=`date +%Y-%m-%d_%H-%M-%S`
 	ARCHIVED_NAME=AIRR-iReceptorMapping_${CURRENT_DATETIME}.txt
