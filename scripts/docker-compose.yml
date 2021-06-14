@@ -31,4 +31,5 @@ services:
             DB_HOST: ireceptor-database
             DB_DATABASE: ireceptor
         volumes:
+            - ../.config:/config
             - ${FILE_FOLDER:-/tmp}:/scratch
