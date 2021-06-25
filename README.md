@@ -164,8 +164,30 @@ a backup of the database.
 scripts/update_metadata.sh ireceptor test_data/PRJNA330606_Wang_1_sample_metadata.csv
 ```
 
+
 ## Backing up the database
 When you've loaded your data, we recommend [backing up the database](doc/database_backup.md) to avoid having to load your data again in case a problem happens.
+
+## Adding sequence statistics
+
+The iReceptor repositories support a set of sequence level statistics such as gene usage and CDR3 length. These statistics are
+pre-computed at the repertoire level for rearrangements. They can be accessed using the
+[iReceptor Plus Stats API](https://github.com/ireceptor-plus/specifications/blob/master/stats-api.yaml) extension to the 
+AIRR Data Commons API. The iReceptor Gateway will make use of these stats if your repository supports them.
+
+To load the stats for a study, simply use the load_stats.sh command as follows:
+```
+scripts/load_stats.sh PRJNA330606
+```
+This will generate and load statistics for the study with Study ID `PRJNA330606`
+
+If you update the rearrangements for a study, it will be necessary to remove and reload the statistics for that study. You can do this easily as follows:
+```
+scripts/remove_stats.sh PRJNA330606
+scripts/load_stats.sh PRJNA330606
+```
+Note that removing statistics is a non-recoverable process. As with any operation that deletes data from a repository, it is a good idea to [back up your
+repository](doc/database_backup.md) before this step.
 
 ## Other information
 
