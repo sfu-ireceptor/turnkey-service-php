@@ -27,6 +27,9 @@ LOG_FILE=${LOG_FOLDER}/${TIME1}_${FILE_NAME}.log
 # make available to docker-compose.yml
 export FILE_FOLDER
 
+echo "Loading file $1"
+echo "Starting at: $TIME1"
+
 # Notes:
 # sudo -E: make environment variables available to the command run as root
 # docker-compose --rm: delete container afterwards 
@@ -36,6 +39,7 @@ export FILE_FOLDER
 # sh -c '...' is the command executed inside the container
 # $DB_HOST and $DB_DATABASE are defined in docker-compose.yml and will be
 # substituted only when the python command is executed, INSIDE the container
+
 sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run --rm \
 			-e FILE_NAME="$FILE_NAME" \
 			-e FILE_FOLDER="$FILE_FOLDER" \
@@ -49,3 +53,7 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 					--$REPERTOIRE_TYPE \
 					-f /scratch/$FILE_NAME' \
  	2>&1 | tee $LOG_FILE
+
+
+TIME2=`date +%Y-%m-%d_%H-%M-%S`
+echo "Finished at $TIME2"

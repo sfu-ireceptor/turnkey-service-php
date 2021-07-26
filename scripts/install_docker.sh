@@ -1,6 +1,9 @@
 #!/bin/sh
 set -e
-
+# Docker CE for Linux installation script
+#
+# See https://docs.docker.com/engine/install/ for the installation steps.
+#
 # This script is meant for quick & easy install via:
 #   $ curl -fsSL https://get.docker.com -o get-docker.sh
 #   $ sh get-docker.sh
@@ -16,14 +19,15 @@ set -e
 #
 # Git commit from https://github.com/docker/docker-install when
 # the script was uploaded (Should only be modified by upload job):
-SCRIPT_COMMIT_SHA=4957679
+SCRIPT_COMMIT_SHA="7cae5f8b0decc17d6571f9f52eb840fbc13b2737"
 
 
-# This value will automatically get changed for:
-#   * edge
+# The channel to install from:
+#   * nightly
 #   * test
-#   * experimental
-DEFAULT_CHANNEL_VALUE="edge"
+#   * stable
+#   * edge (deprecated)
+DEFAULT_CHANNEL_VALUE="stable"
 if [ -z "$CHANNEL" ]; then
 	CHANNEL=$DEFAULT_CHANNEL_VALUE
 fi
@@ -37,45 +41,6 @@ DEFAULT_REPO_FILE="docker-ce.repo"
 if [ -z "$REPO_FILE" ]; then
 	REPO_FILE="$DEFAULT_REPO_FILE"
 fi
-
-SUPPORT_MAP="
-x86_64-centos-7
-x86_64-fedora-28
-x86_64-fedora-29
-x86_64-debian-jessie
-x86_64-debian-stretch
-x86_64-debian-buster
-x86_64-ubuntu-trusty
-x86_64-ubuntu-xenial
-x86_64-ubuntu-bionic
-x86_64-ubuntu-cosmic
-s390x-ubuntu-xenial
-s390x-ubuntu-bionic
-s390x-ubuntu-cosmic
-ppc64le-ubuntu-xenial
-ppc64le-ubuntu-bionic
-ppc64le-ubuntu-cosmic
-aarch64-ubuntu-xenial
-aarch64-ubuntu-bionic
-aarch64-ubuntu-cosmic
-aarch64-debian-jessie
-aarch64-debian-stretch
-aarch64-debian-buster
-aarch64-fedora-28
-aarch64-fedora-29
-aarch64-centos-7
-armv6l-raspbian-jessie
-armv7l-raspbian-jessie
-armv6l-raspbian-stretch
-armv7l-raspbian-stretch
-armv7l-debian-jessie
-armv7l-debian-stretch
-armv7l-debian-buster
-armv7l-ubuntu-trusty
-armv7l-ubuntu-xenial
-armv7l-ubuntu-bionic
-armv7l-ubuntu-cosmic
-"
 
 mirror=''
 DRY_RUN=${DRY_RUN:-}
@@ -104,6 +69,12 @@ case "$mirror" in
 		;;
 esac
 
+# docker-ce-rootless-extras is packaged since Docker 20.10.0
+has_rootless_extras="1"
+if echo "$VERSION" | grep -q '^1'; then
+	has_rootless_extras=
+fi
+
 command_exists() {
 	command -v "$@" > /dev/null 2>&1
 }
@@ -114,6 +85,22 @@ is_dry_run() {
 	else
 		return 0
 	fi
+}
+
+is_wsl() {
+	case "$(uname -r)" in
+	*microsoft* ) true ;; # WSL 2
+	*Microsoft* ) true ;; # WSL 1
+	* ) false;;
+	esac
+}
+
+is_darwin() {
+	case "$(uname -s)" in
+	*darwin* ) true ;;
+	*Darwin* ) true ;;
+	* ) false;;
+	esac
 }
 
 deprecation_notice() {
@@ -156,22 +143,30 @@ echo_docker_as_nonroot() {
 			$sh_c 'docker version'
 		) || true
 	fi
-	your_user=your-user
-	[ "$user" != 'root' ] && your_user="$user"
-	# intentionally mixed spaces and tabs here -- tabs are stripped by "<<-EOF", spaces are kept in the output
-	echo "If you would like to use Docker as a non-root user, you should now consider"
-	echo "adding your user to the \"docker\" group with something like:"
-	echo
-	echo "  sudo usermod -aG docker $your_user"
-	echo
-	echo "Remember that you will have to log out and back in for this to take effect!"
-	echo
-	echo "WARNING: Adding a user to the \"docker\" group will grant the ability to run"
-	echo "         containers which can be used to obtain root privileges on the"
-	echo "         docker host."
-	echo "         Refer to https://docs.docker.com/engine/security/security/#docker-daemon-attack-surface"
-	echo "         for more information."
 
+	# intentionally mixed spaces and tabs here -- tabs are stripped by "<<-EOF", spaces are kept in the output
+	echo
+	echo "================================================================================"
+	echo
+	if [ -n "$has_rootless_extras" ]; then
+		echo "To run Docker as a non-privileged user, consider setting up the"
+		echo "Docker daemon in rootless mode for your user:"
+		echo
+		echo "    dockerd-rootless-setuptool.sh install"
+		echo
+		echo "Visit https://docs.docker.com/go/rootless/ to learn about rootless mode."
+		echo
+	fi
+	echo
+	echo "To run the Docker daemon as a fully privileged service, but granting non-root"
+	echo "users access, refer to https://docs.docker.com/go/daemon-access/"
+	echo
+	echo "WARNING: Access to the remote API on a privileged Docker daemon is equivalent"
+	echo "         to root access on the host. Refer to the 'Docker daemon attack surface'"
+	echo "         documentation for details: https://docs.docker.com/go/attack-surface/"
+	echo
+	echo "================================================================================"
+	echo
 }
 
 # Check if this is a forked Linux distro
@@ -211,6 +206,9 @@ check_forked() {
 				fi
 				dist_version="$(sed 's/\/.*//' /etc/debian_version | sed 's/\..*//')"
 				case "$dist_version" in
+					10)
+						dist_version="buster"
+					;;
 					9)
 						dist_version="stretch"
 					;;
@@ -229,15 +227,6 @@ semverParse() {
 	minor="${minor%%.*}"
 	patch="${1#$major.$minor.}"
 	patch="${patch%%[-.]*}"
-}
-
-ee_notice() {
-	echo
-	echo
-	echo "  WARNING: $1 is now only supported by Docker EE"
-	echo "           Check https://store.docker.com for information on Docker EE"
-	echo
-	echo
 }
 
 do_install() {
@@ -287,7 +276,7 @@ do_install() {
 
 			You may press Ctrl+C now to abort this script.
 		EOF
-		#( set -x; sleep 20 )
+		( set -x; sleep 20 )
 	fi
 
 	user="$(id -un 2>/dev/null || true)"
@@ -315,6 +304,18 @@ do_install() {
 	lsb_dist=$( get_distribution )
 	lsb_dist="$(echo "$lsb_dist" | tr '[:upper:]' '[:lower:]')"
 
+	if is_wsl; then
+		echo
+		echo "WSL DETECTED: We recommend using Docker Desktop for Windows."
+		echo "Please get Docker Desktop from https://www.docker.com/products/docker-desktop"
+		echo
+		cat >&2 <<-'EOF'
+
+			You may press Ctrl+C now to abort this script.
+		EOF
+		( set -x; sleep 20 )
+	fi
+
 	case "$lsb_dist" in
 
 		ubuntu)
@@ -329,6 +330,9 @@ do_install() {
 		debian|raspbian)
 			dist_version="$(sed 's/\/.*//' /etc/debian_version | sed 's/\..*//')"
 			case "$dist_version" in
+				10)
+					dist_version="buster"
+				;;
 				9)
 					dist_version="stretch"
 				;;
@@ -338,16 +342,11 @@ do_install() {
 			esac
 		;;
 
-		centos)
+		centos|rhel)
 			if [ -z "$dist_version" ] && [ -r /etc/os-release ]; then
 				dist_version="$(. /etc/os-release && echo "$VERSION_ID")"
 			fi
 		;;
-
-		rhel|ol|sles)
-			ee_notice "$lsb_dist"
-			exit 1
-			;;
 
 		*)
 			if command_exists lsb_release; then
@@ -362,20 +361,6 @@ do_install() {
 
 	# Check if this is a forked Linux distro
 	check_forked
-
-	# Check if we actually support this configuration
-	if ! echo "$SUPPORT_MAP" | grep "$(uname -m)-$lsb_dist-$dist_version" >/dev/null; then
-		cat >&2 <<-'EOF'
-
-		Either your platform is not easily detectable or is not supported by this
-		installer script.
-		Please visit the following URL for more detailed installation instructions:
-
-		https://docs.docker.com/engine/installation/
-
-		EOF
-		exit 1
-	fi
 
 	# Run setup for each distro accordingly
 	case "$lsb_dist" in
@@ -397,7 +382,7 @@ do_install() {
 					set -x
 				fi
 				$sh_c 'apt-get update -qq >/dev/null'
-				$sh_c "apt-get install -y -qq $pre_reqs >/dev/null"
+				$sh_c "DEBIAN_FRONTEND=noninteractive apt-get install -y -qq $pre_reqs >/dev/null"
 				$sh_c "curl -fsSL \"$DOWNLOAD_URL/linux/$lsb_dist/gpg\" | apt-key add -qq - >/dev/null"
 				$sh_c "echo \"$apt_repo\" > /etc/apt/sources.list.d/docker.list"
 				$sh_c 'apt-get update -qq >/dev/null'
@@ -409,7 +394,7 @@ do_install() {
 				else
 					# Will work for incomplete versions IE (17.12), but may not actually grab the "latest" if in the test channel
 					pkg_pattern="$(echo "$VERSION" | sed "s/-ce-/~ce~.*/g" | sed "s/-/.*/g").*-0~$lsb_dist"
-					search_command="apt-cache madison 'docker-ce' | grep '$pkg_pattern' | head -1 | cut -d' ' -f 4"
+					search_command="apt-cache madison 'docker-ce' | grep '$pkg_pattern' | head -1 | awk '{\$1=\$1};1' | cut -d' ' -f 3"
 					pkg_version="$($sh_c "$search_command")"
 					echo "INFO: Searching repository for VERSION '$VERSION'"
 					echo "INFO: $search_command"
@@ -419,6 +404,9 @@ do_install() {
 						echo
 						exit 1
 					fi
+					search_command="apt-cache madison 'docker-ce-cli' | grep '$pkg_pattern' | head -1 | awk '{\$1=\$1};1' | cut -d' ' -f 3"
+					# Don't insert an = for cli_pkg_version, we'll just include it later
+					cli_pkg_version="$($sh_c "$search_command")"
 					pkg_version="=$pkg_version"
 				fi
 			fi
@@ -426,23 +414,26 @@ do_install() {
 				if ! is_dry_run; then
 					set -x
 				fi
+				if [ -n "$cli_pkg_version" ]; then
+					$sh_c "apt-get install -y -qq --no-install-recommends docker-ce-cli=$cli_pkg_version >/dev/null"
+				fi
 				$sh_c "apt-get install -y -qq --no-install-recommends docker-ce$pkg_version >/dev/null"
+				# shellcheck disable=SC2030
+				if [ -n "$has_rootless_extras" ]; then
+					# Install docker-ce-rootless-extras without "--no-install-recommends", so as to install slirp4netns when available
+					$sh_c "DEBIAN_FRONTEND=noninteractive apt-get install -y -qq docker-ce-rootless-extras$pkg_version >/dev/null"
+				fi
 			)
 			echo_docker_as_nonroot
 			exit 0
 			;;
-		centos|fedora)
+		centos|fedora|rhel)
 			yum_repo="$DOWNLOAD_URL/linux/$lsb_dist/$REPO_FILE"
 			if ! curl -Ifs "$yum_repo" > /dev/null; then
 				echo "Error: Unable to curl repository file $yum_repo, is it valid?"
 				exit 1
 			fi
 			if [ "$lsb_dist" = "fedora" ]; then
-				if [ "$dist_version" -lt "28" ]; then
-					echo "Error: Only Fedora >=28 is supported"
-					exit 1
-				fi
-
 				pkg_manager="dnf"
 				config_manager="dnf config-manager"
 				enable_channel_flag="--set-enabled"
@@ -486,6 +477,9 @@ do_install() {
 						echo
 						exit 1
 					fi
+					search_command="$pkg_manager list --showduplicates 'docker-ce-cli' | grep '$pkg_pattern' | tail -1 | awk '{print \$2}'"
+					# It's okay for cli_pkg_version to be blank, since older versions don't support a cli package
+					cli_pkg_version="$($sh_c "$search_command" | cut -d':' -f 2)"
 					# Cut out the epoch and prefix with a '-'
 					pkg_version="-$(echo "$pkg_version" | cut -d':' -f 2)"
 				fi
@@ -494,10 +488,33 @@ do_install() {
 				if ! is_dry_run; then
 					set -x
 				fi
+				# install the correct cli version first
+				if [ -n "$cli_pkg_version" ]; then
+					$sh_c "$pkg_manager install -y -q docker-ce-cli-$cli_pkg_version"
+				fi
 				$sh_c "$pkg_manager install -y -q docker-ce$pkg_version"
+				# shellcheck disable=SC2031
+				if [ -n "$has_rootless_extras" ]; then
+					$sh_c "$pkg_manager install -y -q docker-ce-rootless-extras$pkg_version"
+				fi
 			)
 			echo_docker_as_nonroot
 			exit 0
+			;;
+		*)
+			if [ -z "$lsb_dist" ]; then
+				if is_darwin; then
+					echo
+					echo "ERROR: Unsupported operating system 'macOS'"
+					echo "Please get Docker Desktop from https://www.docker.com/products/docker-desktop"
+					echo
+					exit 1
+				fi
+			fi
+			echo
+			echo "ERROR: Unsupported distribution '$lsb_dist'"
+			echo
+			exit 1
 			;;
 	esac
 	exit 1

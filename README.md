@@ -2,29 +2,36 @@
 
 The iReceptor Turnkey is a quick and easy mechanism for researchers to create their own [AIRR Data Commons](https://docs.airr-community.org/en/latest/api/adc.html#datacommons) repository.
 
+Version | Branch | Status | Last update 
+--- | --- | --- | ---
+**3.1** | [production-v3](https://github.com/sfu-ireceptor/turnkey-service-php/tree/production-v3) | **Stable. Recommended.** | May 10, 2021 \| [Release Notes](https://github.com/sfu-ireceptor/turnkey-service-php/blob/production-v3/CHANGELOG.md) 
+4.0 | [production-v4](https://github.com/sfu-ireceptor/turnkey-service-php/tree/production-v4) | Used internally. Stilll being tested. | June 2, 2021 \| [Release Notes](https://github.com/sfu-ireceptor/turnkey-service-php/blob/production-v4/CHANGELOG.md)
+
 ## What's in the iReceptor Turnkey?
 - a database
 - scripts to add data to the database
 - a web service exposing the database via the [ADC API](https://docs.airr-community.org/en/latest/api/adc_api.html)
 
-These components are packaged as Docker images. The installation script will download and run these images, after having installed Docker.
+These components are packaged as Docker images. The installation script will:
+- install Docker
+- download and run these Docker images
 
 [Read more about the iReceptor Turnkey](http://www.ireceptor.org/repositories#turnkey) on the iReceptor website. The remainder of this document only provides installation instructions.
 
 ## System requirements
 
-- Linux Ubuntu. The turnkey was tested on Ubuntu 16.04 and 18.04.
-- `sudo` without password. It's usually already enabled on virtual machines.
+- Linux Ubuntu. The turnkey was tested on Ubuntu 16.04, 18.04, and 20.04.
+- `sudo` without password. It's usually the default on virtual machines.
 
 ## Installation
 
-Download the code from the `production-v3` branch:
+Download the `production-v3` code:
 
 ```
 git clone --branch production-v3 https://github.com/sfu-ireceptor/turnkey-service-php.git
 ```
 
-Launch the installation script. Note: multiple Docker images will be downloaded from DockerHub. Total time estimate: 10-30 min.
+Launch the installation script. Note: multiple Docker images will be downloaded from DockerHub. Installation time estimate: 10-30 min.
 
 ```
 cd turnkey-service-php
@@ -157,8 +164,30 @@ a backup of the database.
 scripts/update_metadata.sh ireceptor test_data/PRJNA330606_Wang_1_sample_metadata.csv
 ```
 
+
 ## Backing up the database
 When you've loaded your data, we recommend [backing up the database](doc/database_backup.md) to avoid having to load your data again in case a problem happens.
+
+## Adding sequence statistics
+
+The iReceptor repositories support a set of sequence level statistics such as gene usage and CDR3 length. These statistics are
+pre-computed at the repertoire level for rearrangements. They can be accessed using the
+[iReceptor Plus Stats API](https://github.com/ireceptor-plus/specifications/blob/master/stats-api.yaml) extension to the 
+AIRR Data Commons API. The iReceptor Gateway will make use of these stats if your repository supports them.
+
+To load the stats for a study, simply use the load_stats.sh command as follows:
+```
+scripts/load_stats.sh PRJNA330606
+```
+This will generate and load statistics for the study with Study ID `PRJNA330606`
+
+If you update the rearrangements for a study, it will be necessary to remove and reload the statistics for that study. You can do this easily as follows:
+```
+scripts/remove_stats.sh PRJNA330606
+scripts/load_stats.sh PRJNA330606
+```
+Note that removing statistics is a non-recoverable process. As with any operation that deletes data from a repository, it is a good idea to [back up your
+repository](doc/database_backup.md) before this step.
 
 ## Other information
 

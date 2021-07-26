@@ -3,6 +3,9 @@
 SCRIPT_DIR=`dirname "$0"`
 SCRIPT_DIR_FULL="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
+# load config file
+source ${SCRIPT_DIR}/config.sh
+
 # install Docker
 echo "Installing Docker.."
 if [ -x "$(command -v docker)" ]; then
@@ -50,6 +53,13 @@ fi
 echo '#!/bin/bash' | sudo tee $STARTUP_FILE > /dev/null
 echo "${SCRIPT_DIR_FULL}/start_turnkey.sh" | sudo tee -a $STARTUP_FILE > /dev/null
 sudo chmod +x $STARTUP_FILE
+echo "Done"
+echo
+
+# install config file
+echo "Downloading AIRR-iReceptor mapping.."
+mkdir -p ${SCRIPT_DIR_FULL}/../.config
+curl -# -o ${SCRIPT_DIR_FULL}/../.config/AIRR-iReceptorMapping.txt $MAPPING_URL
 echo "Done"
 echo
 
