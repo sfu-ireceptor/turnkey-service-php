@@ -87,11 +87,18 @@ All of the rearrangement data for the 1000 sequences is returned as JSON.
 ```
 scripts/verify_dataload.sh PRJNA330606 test_data PRJNA330606_Wang_1_sample_metadata.csv mixcr /tmp
 ```
-The above command verifies the provenance of the data loaded with the previous commands (`load_metadata.sh`, `load_rearrangements.sh`), assuming that data is loaded a study at a time as described above. The `verify_dataload.sh` command takes as parameters the Study ID (`PRJNA330606`) of the study to test, the directory in which the study metadata and the rearrangement data is stored (`test_data`), the study metadata file within this directory (`PRJNA330606_Wang_1_sample_metadata.csv`), the file format for the rearrangement files (`mixcr` in this case, but should be one of `mixcr`, `vquest`, or `igblast` (igblast includes the airr file format)), and a directory (`/tmp`) in which to generate the data provenance report.  
+The above command verifies the provenance of the data loaded with the previous commands (`load_metadata.sh`, `load_rearrangements.sh`), assuming that data is loaded a study at a time as described above. The `verify_dataload.sh` command takes as parameters the Study ID (`PRJNA330606`) of the study to test, the directory in which the study metadata and the rearrangement data is stored (`test_data`), the study metadata file within this directory (`PRJNA330606_Wang_1_sample_metadata.csv`), the file format for the rearrangement files (`mixcr` in this case, but should be one of `mixcr`, `vquest`, or `airr`), and a directory (`/tmp`) in which to generate the data provenance report.  
 
 This will output a summary report checking the data that was loaded into the repository against the data that is returned by querying the AIRR Data Commons API and retrieving that data. The report compares all of information in the metadata file against what is returned from the ADC API to confirm the data was loaded and is returned correctly. In addition, the process compares the number of rearrangements in the rearrangement files against the count returned by the the ADC API as well as the ir_curator_count field in the metadata file (should that column exist). 
 
-This process should report no errors. If so, the data was loaded and retrieved correctly. Note that this works with data that is loaded as iReceptor metadata files, and requires the metadata file and the rearrangements be in the same directory. For more information on using the `verify_dataload.sh` script and how to interpret the results of the report please refer to the [Verify Dataloading documentation](doc/sanitychecking.md). 
+This process should report no errors. If so, the data was loaded and retrieved correctly. Note that this process has a number of restrictions:
+- it works with data that is loaded as iReceptor metadata files only (AIRR Repertoire files are not supported)
+- it requires the metadata file and the rearrangements be in the same directory
+- it requires that the repertoire_id field in the iReceptor metadata file be populated for verification
+- it expects that the ir_curator_count field in the iReceptor metadata file be populated with the count of the number of lines in the repertoire
+- it expects a set of file extensions to be associated with each file type (`mixcr` and .txt files, `vquest` and txz files, and `airr` either fmt19 or tsv files).
+
+For more information on using the `verify_dataload.sh` script and how to interpret the results of the report please refer to the [Verify Dataloading documentation](doc/sanitychecking.md). 
 
 Note: all of the scripts `load_metadata.sh`, `load_rearrangement.sh`, and `verify_dataload.sh` produce a log file for each file processed in the `log` directory. Log files are named using the current date, followed by the name of the processed file.
 
