@@ -42,11 +42,6 @@ optional arguments:
 ```
 ## Sample Usage
 
-An example with positional arguments
-
-```
-verify_dataload.sh study_id /PATH/TO/STUDY metadata.csv mixcr /tmp
-```
 A working example using sample metadata from the [iReceptor Curation github repository](https://github.com/sfu-ireceptor/dataloading-curation) is given below. The example assumes you have a working iReceptor Turnkey installed, the iReceptor Turnkey has been installed in $HOME/turnkey-service-php, and that it is possible to load data into this repository (the repository is experimental and the data can later be deleted).
 
 ### Checkout the curation data from Github.
