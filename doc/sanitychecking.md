@@ -92,144 +92,66 @@ A summary of potential issues will be provided, with detailed reports in the fol
 The script will generate a report covering each level above. It will first ensure that the file provided is not corrupt and that all samples are uniquely identified. In the sample below, the metadata file was healthy and all samples were identified uniquely.
 
 ```
-########################################################################################################
----------------------------------------VERIFY FILES ARE HEALTHY-----------------------------------------
+DATA PROVENANCE TEST
 
----------------------------------------------Metadata file----------------------------------------------
+--------------------------------------------------------------------------------------------------------
+Check Metadata file
 
-HEALTHY FILE: Proceed with tests
-
-Existence and uniquenes of ir_rearrangement_number in metadata
-TRUE: All entries under  ir_rearrangement_number  in master metadata are unique
-
----------------------------------------------API RESPONSE-----------------------------------------------
-
-Existence and uniqueness of ir_rearrangement_number in API response
-TRUE: ir_rearrangement_number found in API response
-
-TRUE: ir_rearrangement_number unique in API response
+PASS: Metadata file /study/PRJNA248411_Palanichamy_SRR1298740.csv loaded
 ```
-
-Then the script will return information on the study title, authors and ID, and provide a count of the number of samples found in metadata and those successfully loaded into the Turnkey, as well as the number of those not found. In the example below half of the samples were successfully loaded and half were not. 
-
+The test then checks the AIRR Mapping file, which specifies expected fields for both API response and
+data curation fields, against fields in the API response and in the metadata file.
 ```
-########################################################################################################
-------------------------------------------HIGH LEVEL SUMMARY--------------------------------------------
+--------------------------------------------------------------------------------------------------------
+Check AIRR Mapping against API and Metadata file
 
-Study title
+INFO: Sending query to http://ireceptor-api//airr/v1/repertoire
+INFO: Total query time (in seconds): 0.2084512710571289
 
-Author 1, Author 2, Author 3
+INFO: Checking field names from AIRR mapping for API (column ir_adc_api_response) not found in API response
+PASS: No fields missing
 
-Study ID PRJNA12345
-
-PRJNA12345 has a total of 40 entries
-Entries found in API: 20
-Entries not found in API: 20
-
+INFO: Checking field names in AIRR mapping for curation (column ir_curator) not found in metadata fields
+PASS: No fields missing
 ```
-The report will then summarize metadata field names and content. If the number uniquely identifying a sample is not found, it will raise a flag that looks as follows. 
+The test then checks that the data in the fields in the API response match the data in the metadata file. 
+This performs a field to field comparison, across all repertoires. If the test finds any field content
+differences it reports a summary and writes out the details in specified file.
 
+Note: The data verification currently has problems comparing the content in fields that contains arrays
+of strings. So it is expected to have content differences flagged for two AIRR array fields, `study.keywords_study`
+and `data_processing.data_processing_files`. These fields should be checked for errors, but in general messages like
+the ones below are expected.
 ```
-########################################################################################################
------------------------------------------DETAILED SANITY CHECK------------------------------------------
+--------------------------------------------------------------------------------------------------------
+Metadata/API content cross comparison
 
---------------------------BEGIN METADATA AND API FIELD AND CONTENT VERIFICATION-------------------------
-
-ir_rearrangement_number: 645
-JSON file index: []
-
-The ir_rearrangement_number associated to this study was not found in API response
-
-END OF ENTRY
-
--_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+WARN: Some fields may require attention:
+WARN:     In ADC API:  ['study.keywords_study' 'data_processing.0.data_processing_files']
+WARN:     In metadata:  ['keywords_study' 'data_processing_files']
+WARN: For details refer to /output/PRJNA248411_reported_fields_2021-07-28 21:01:56.525629.csv
 ```
-
-If on the other hand the sample is found, it will raise a TRUE flag if no content-related problems were found, otherwise information is provided on mismatches between the metadata file and the API response. This can come in handy when multiple versions of the same study are uploaded, if data has been modified since the first time it was loaded or if field names have been renamed since the first time they were loaded. The example below contains an instance of a field that was renamed with no content-related problems under all other field names. 
-
+The data verification then checks to confirm the validity of the AIRR API response.
 ```
-ir_rearrangement_number: 663
-JSON file index: [532]
+--------------------------------------------------------------------------------------------------------
+AIRR field validation
 
-TEST: FIELD NAMES MATCH
-RESULT --------------------------------------------------------------------------------->False
-
-Summary of non-matching field names 
-
-Field names in API response 
-
-ir_other_rearrangement_file_name
-
-
-Field names in Metadata 
-
-ir_ancillary_rearrangement_file_name
-
-
-TEST: FIELD CONTENT MATCHES
-RESULT --------------------------------------------------------------------------------->TRUE 
-
-END OF ENTRY
-
--_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+INFO: Sending query to http://ireceptor-api//airr/v1/repertoire
+INFO: Total query time (in seconds): 0.20888471603393555
+PASS: AIRR Repertoire is valid
 ```
-
-The next entry contains a report on a field whose content does not match. 
-
+The last step is the most processing intensive. In this step, the data verification request the ADC API
+to count the rearrangements for a repertoire and confirms that that number matches both the number of
+rearrangements in the file that was loaded for the repertoire as well as the curator count field (ir_curator_count)
+in the metadata file.
 ```
-ir_rearrangement_number: 1114
-JSON file index: [140]
+--------------------------------------------------------------------------------------------------------
+Annotation count validation (API, file size, curator count)
 
-TEST: FIELD NAMES MATCH
-RESULT --------------------------------------------------------------------------------->TRUE
-
-TEST: FIELD CONTENT MATCHES
-RESULT --------------------------------------------------------------------------------->FALSE 
-
-Summary of non-matching entries 
-
-ENTRY:  pub_ids
-METADATA ENTRY RETURNS : PMID: 23556777  type: <class 'str'>
-API RESPONSE RETURNS : PMCABCDS3 type: <class 'str'>
-
-END OF ENTRY
-
--_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+INFO: Processing annotations for Repertoire 393 using:
+INFO:   annotation_file_format: vquest
+INFO:   ir_rearrangement_tool: IMGT high-Vquest
+INFO: Sending query to http://ireceptor-api//airr/v1/rearrangement
+INFO: Total query time (in seconds): 0.22046279907226562
+PASS: Repertoire 393 returned TRUE (test passed), see CSV for details
 ```
-
-The last part of the report compares the number of sequences found in metadata, API response against the number of lines in the annotation files, for a given sample. It first ensures that files reported in metadata are found under the path provided. 
-
-```
-ir_rearrangement_number: 655
-Metadata file names: ['SRR12345_a.txz', 'SRR12345_b.txz']
-Files found in server: ['SRR12345_a.txz', 'SRR12345_b.txz']
-Files not found in server: []
-
- . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-ir_sequence_count 			#Lines Annotation F 	Test Result
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-API Resp 	 Metadata Resp
- . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-540235 		 540235				540235			True
-
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-```
-
-Note that this check can work if one or more of the three components is missing. For example, if the sample is not loaded into the API, the script will report this as "NINAPI" and compare what is in the metadata against the number of lines in annotation file. If a filename is not found, it will be reported and a 0 will be marked under #Lines Annotation F. 
-
-```
-ir_rearrangement_number: 646
-Metadata file names: ['SRR1964798.fmt19']
-Files found in server: []
-Files not found in server: ['SRR1964798.fmt19']
-
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-ir_sequence_count 			#Lines Annotation F 	Test Result
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-API Resp 	 Metadata Resp
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-NINAPI 		 56075				0			False
-
-
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
- ```
