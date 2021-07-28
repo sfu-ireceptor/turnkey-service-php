@@ -1,40 +1,40 @@
 # Ensuring the data was loaded successfully into the Turnkey
 
-Due to the dimensions of the metadata and the number of steps involved in curating and loading data, the overall process can be prone to error. We provide a script that allows to verify that the data was loaded successfuly into the Turnkey. Quality assurance is performed on the following levels:
+Due to the dimensions of the metadata and the number of steps involved in curating and loading data, the overall process can be prone to error. We provide a script that allows the user to verify that the data was loaded successfuly into the Turnkey. Quality assurance is performed on the following levels:
 
-1) Count number of samples found in metadata CSV or EXCEL file against the number of samples found in API response, given a study ID
-2) Ensure all samples are uniquely identified for a study in metadata file and API response
+1) Count number of repertoires found in metadata CSV file against the number of repertoires found in API response, given a study ID
+2) Ensure all repertoires are uniquely identified for a study in metadata file and API response
 3) Ensure field names and content match in metadata and API response
-4) Compare the total number of lines found within the annotation files against the number of sequences in the API response. It can also compare this number against what is found within the metadata file. Please ensure to name this field as ir_curator_count in the metadata CSV or EXCEL file to perform this comparison. 
+4) Compare the total number of lines found within the annotation files against the number of sequences in the API response. It can also compare this number against what is found within the metadata file. Please ensure to name this field as ir_curator_count in the metadata CSV file to perform this comparison. 
 
 
 ## How it works
 
 The verify_dataload.sh script takes as input:
 
-* the name of a CSV or EXCEL file containing sample metadata
-* the URL associated to the Turnkey
 * the study ID uniquely identifying the study
-* the full path to a directory containing annotation files for sequences processed using either MIXCR, IMGT or 
-IGBLAST
-* a field name within the metadata uniquely idenfitying each sample
+* the full path to a directory containing the study data (metadata file and annotation files) 
+* the name of a CSV file containing sample metadata
+* the type of data being processed (either MIXCR, IMGT or AIRR)
+* the directory in which to store the output report
+
 
 And as output it generates a report covering points 1-4. 
 
 ## Positional arguments:
 
 ```
-  metadata_file      The EXCEL or CSV file containing sample metadata for a
-                     study.
-  API_url_address    The URL associated to your Turnkey, or the URL associated
-                     to the API containing sample metadata.
+
   study_id           String value uniquely identifying study. Example:
                      PRJEB1234, PRJNA1234.
-  annotation_dir     Full path to directory containing annotation files for
-                     sequences processed using either IMGT, MIXCR and IGBLAST
-                     annotations.
-  unique_identifier  Choose a field name from the sample metadata spreadsheet
-                     which UNIQUELY identifies each sample.
+  study_dir          Full path to directory containing the study metadata and 
+                     annotation files for sequences processed
+  metadata_file      The CSV file containing sample metadata for a
+                     study.
+  annotation_tool    The file format used to store the annotated sequence
+                     data, either vquest, mixcr, or airr.
+  output_dir         The directory in which to store the output of the data
+                     provenance report.
 
 optional arguments:
   -h, --help         show this help message and exit
@@ -45,23 +45,56 @@ optional arguments:
 An example with positional arguments
 
 ```
-verify_dataload.sh /PATH/TO/metadata_file API_url_address study_id annotation_dir unique_identifier
+verify_dataload.sh study_id /PATH/TO/STUDY metadata.csv mixcr /tmp
 ```
-A working example using sample metadata from the [iReceptor Curation github repository](https://github.com/sfu-ireceptor/dataloading-curation) is given below. This assumes:
-- the repertoire metadata and the rearrangments exists in the same directory as per the [iReceptor Curation process](http://www.ireceptor.org/curation). In this case the files from the dataloading_curation github test data set in dataloading-curation/test/imgt/imgt are used. This test data set is from Palanichamy et al with Study ID PRJNA248411.
-- the study above has been loaded into your iReceptor Turnkey at URL http://your.repository.org/v2/samples using the Turnkey data loading process.
-- a unique identifier field name ir_rearrangement_number was used when the study was loaded (this identifier exists in the repertoire metadata file provided with the above study).
+A working example using sample metadata from the [iReceptor Curation github repository](https://github.com/sfu-ireceptor/dataloading-curation) is given below. The example assumes you have a working iReceptor Turnkey installed, the iReceptor Turnkey has been installed in $HOME/turnkey-service-php, and that it is possible to load data into this repository (the repository is experimental and the data can later be deleted).
 
-You can download this example dataset from the github repository above. Once downloaded and loaded into your repository, the data loading process can be verified with the command below:
+### Checkout the curation data from Github.
+
+The example below assumes we are storing the data curation github in the users $HOME directory.
 
 ```
-verify_dataload.sh dataloading-curation/test/imgt/imgt/PRJNA248411_Palanichamy_2018-12-18.csv http://your.repository.org/v2/samples PRJNA248411 dataloading-curation/test/imgt/imgt ir_rearrangement_number
+cd $HOME
+git clone https://github.com/sfu-ireceptor/dataloading-curation.git
+```
+We now have a set of test data sets available for experimentation.
+
+### Load a data set into the iReceptor Turnkey
+
+We will use a IMGT VQuest based data set for our test, in particular a small "toy" data set. This is stored in $HOME/dataloading-curation/test/imgt/imgt_toy. The `verify_dataload.sh` script assumes that all data from the study are in a single directory, and this study follows that protocol. The toy data set is a subset of the data from Palanichamy et al with Study ID PRJNA248411.
+
+First load the study metadata. The "toy" IMGT study only has one repertoire.
+```
+cd $HOME/turnkey-service-php
+scripts/load_metadata.sh ireceptor /home/ubuntu/dataloading-curation/test/imgt/imgt_toy/PRJNA248411_Palanichamy_SRR1298740.csv
+```
+Then load the associated rearrangements (in IMGT VQuest format), check to see if the repertoire was loaded, and check the count of the number of rearrangements that were loaded for the repertoire.
+```
+scripts/load_rearrangements.sh imgt /home/ubuntu/dataloading-curation/test/imgt/imgt_toy/SRR1298740.txz
+curl --data "{}" "http://localhost/airr/v1/repertoire"
+curl --data '{"facets":"repertoire_id"}' "http://localhost/airr/v1/rearrangement"
 ```
 
-## Sample check report output
+### Perform a data provenance check
 
-Provided all arguments are in place, and all HLF options are asked for in the sanity_level option, the script will generate a report covering each level. It will first ensure that the file provided is not corrupt and that all samples are uniquely identified. In the sample below, the metadata file was healthy and all samples were identified uniquely via the field name "ir_rearrangement_number
-".
+Performing a data provenance check given the above is straight forward using the `verify_dataload.sh` script.
+```
+scripts/verify_dataload.sh PRJNA248411 /home/ubuntu/dataloading-curation/test/imgt/imgt_toy PRJNA248411_Palanichamy_SRR1298740.csv vquest /tmp
+```
+This will provide a report in the output directory provided (/tmp in this case). The output of the command will report on several test phases:
+- It will check the metadata file provided and warn of any errors.
+- It will report on any fields that are expected in the API and are missing
+- It will report on any curatore fields that are expected in the metadata file and are missing
+- It will report on any discrepancies between the content of data fields in the metadata file and those returned by the API
+- It will report on any discrepancies between sequences counts that are returned from the API (and therefore the repository), those that were in the original file that was loaded, and the count in the internal iReceptor metadata field (ir_curator_count) in the metadata file.
+
+A summary of potential issues will be provided, with detailed reports in the following files in the output directory (/tmp)
+- PRJNA248411_Facet_Count_curator_count_Annotation_count_DATETIME.csv
+- PRJNA248411_reported_fields_DATETIME.csv
+
+## Check the sample report output
+
+The script will generate a report covering each level above. It will first ensure that the file provided is not corrupt and that all samples are uniquely identified. In the sample below, the metadata file was healthy and all samples were identified uniquely.
 
 ```
 ########################################################################################################
