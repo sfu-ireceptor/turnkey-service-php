@@ -24,7 +24,7 @@ echo "Done"
 echo
 
 # update config file
-echo "Downloading AIRR-iReceptor mapping.."
+echo "Downloading AIRR-iReceptor mapping ${MAPPING_URL}"
 mkdir -p ${SCRIPT_DIR}/../.config
 curl -# -o ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping_new.txt $MAPPING_URL
 
