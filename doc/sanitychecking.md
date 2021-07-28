@@ -61,11 +61,11 @@ We will use a IMGT VQuest based data set for our test, in particular a small "to
 First load the study metadata. The "toy" IMGT study only has one repertoire.
 ```
 cd $HOME/turnkey-service-php
-scripts/load_metadata.sh ireceptor /home/ubuntu/dataloading-curation/test/imgt/imgt_toy/PRJNA248411_Palanichamy_SRR1298740.csv
+scripts/load_metadata.sh ireceptor $HOME/dataloading-curation/test/imgt/imgt_toy/PRJNA248411_Palanichamy_SRR1298740.csv
 ```
 Then load the associated rearrangements (in IMGT VQuest format), check to see if the repertoire was loaded, and check the count of the number of rearrangements that were loaded for the repertoire.
 ```
-scripts/load_rearrangements.sh imgt /home/ubuntu/dataloading-curation/test/imgt/imgt_toy/SRR1298740.txz
+scripts/load_rearrangements.sh imgt $HOME/dataloading-curation/test/imgt/imgt_toy/SRR1298740.txz
 curl --data "{}" "http://localhost/airr/v1/repertoire"
 curl --data '{"facets":"repertoire_id"}' "http://localhost/airr/v1/rearrangement"
 ```
@@ -74,7 +74,7 @@ curl --data '{"facets":"repertoire_id"}' "http://localhost/airr/v1/rearrangement
 
 Performing a data provenance check given the above is straight forward using the `verify_dataload.sh` script.
 ```
-scripts/verify_dataload.sh PRJNA248411 /home/ubuntu/dataloading-curation/test/imgt/imgt_toy PRJNA248411_Palanichamy_SRR1298740.csv vquest /tmp
+scripts/verify_dataload.sh PRJNA248411 $HOME/dataloading-curation/test/imgt/imgt_toy PRJNA248411_Palanichamy_SRR1298740.csv vquest /tmp
 ```
 This will provide a report in the output directory provided (/tmp in this case). The output of the command will report on several test phases:
 - It will check the metadata file provided and warn of any errors.
