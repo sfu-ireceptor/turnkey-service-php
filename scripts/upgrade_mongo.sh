@@ -66,7 +66,7 @@ if [[ $CMP = 1 ]]
     then
         echo "Upgrading MongoDB database to 4.0.."
         sudo docker run --name mongo4.0 -v ${SCRIPT_DIR_FULL}/../.mongodb_data:/data/db --rm -d -t ireceptor/repository-mongodb:mongo4.0
-        docker exec -it mongo4.0 sh -c 'mongo --quiet --eval "db.adminCommand({setFeatureCompatibilityVersion:\"4.0\"})" $MONGO_INITDB_DATABASE'
+        sudo docker exec -it mongo4.0 sh -c 'mongo --quiet --eval "db.adminCommand({setFeatureCompatibilityVersion:\"4.0\"})" $MONGO_INITDB_DATABASE'
         sudo docker stop mongo4.0
         MONGO_VERSION=4.0
         echo "Done"
@@ -80,7 +80,7 @@ if [[ $CMP = 1 ]]
     then
         echo "Upgrading MongoDB database to 4.2.."
         sudo docker run --name mongo4.2 -v ${SCRIPT_DIR_FULL}/../.mongodb_data:/data/db --rm -d -t ireceptor/repository-mongodb:mongo4.2
-        docker exec -it mongo4.2 sh -c 'mongo --quiet --eval "db.adminCommand({setFeatureCompatibilityVersion:\"4.2\"})" $MONGO_INITDB_DATABASE'
+        sudo docker exec -it mongo4.2 sh -c 'mongo --quiet --eval "db.adminCommand({setFeatureCompatibilityVersion:\"4.2\"})" $MONGO_INITDB_DATABASE'
         sudo docker stop mongo4.2
         MONGO_VERSION=4.2
         echo "Done"
@@ -94,7 +94,7 @@ if [[ $CMP = 1 ]]
     then
         echo "Upgrading MongoDB database to 4.4.."
         sudo docker run --name mongo4.4 -v ${SCRIPT_DIR_FULL}/../.mongodb_data:/data/db --rm -d -t ireceptor/repository-mongodb:mongo4.4
-        docker exec -it mongo4.4 sh -c 'mongo --quiet --eval "db.adminCommand({setFeatureCompatibilityVersion:\"4.4\"})" $MONGO_INITDB_DATABASE'
+        sudo docker exec -it mongo4.4 sh -c 'mongo --quiet --eval "db.adminCommand({setFeatureCompatibilityVersion:\"4.4\"})" $MONGO_INITDB_DATABASE'
         sudo docker stop mongo4.4
         MONGO_VERSION=4.4
         echo "Done"
