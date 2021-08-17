@@ -2,6 +2,8 @@
 
 SCRIPT_DIR=`dirname "$0"`
 
+MONGO_VERSION=`sudo docker-compose --file  ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service exec -T ireceptor-database sh -c 'mongo --quiet --eval "db.version()" $MONGO_INITDB_DATABASE'`
+
 # stop Docker containers
 echo "Stopping Docker containers.."
 ${SCRIPT_DIR}/stop_turnkey.sh
@@ -13,6 +15,9 @@ echo "Updating source code.."
 git -C ${SCRIPT_DIR} pull
 echo "Done"
 echo
+
+# update database to Mongo 4.4 if necessary
+${SCRIPT_DIR}/upgrade_mongo.sh $MONGO_VERSION
 
 # download latest Docker images from Docker Hub
 echo "Downloading Docker images from Docker Hub.."
