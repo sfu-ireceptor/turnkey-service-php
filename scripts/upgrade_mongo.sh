@@ -66,9 +66,9 @@ if [[ $CMP = 1 ]]
         MONGO_DOWN=1
         while [[ $MONGO_DOWN = 1 ]]
         do
-            echo '.'
+            printf .
             sleep 1
-            sudo docker exec -it mongo4.0 sh -c 'mongo --quiet --eval "db.version()" $MONGO_INITDB_DATABASE'        
+            sudo docker exec -it mongo4.0 sh -c 'mongo --quiet --eval "db.version()" $MONGO_INITDB_DATABASE' > /dev/null 2>&1     
             MONGO_DOWN=$?
         done
 
