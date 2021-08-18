@@ -2,6 +2,7 @@
 
 # Functions ############################################
 
+# compare version numbers
 # from https://stackoverflow.com/a/4025065/91225
 vercomp () {
     if [[ $1 == $2 ]]
@@ -34,6 +35,19 @@ vercomp () {
     return 0
 }
 
+# wait for Mongo container to be able to receive queries
+waitformongo () {
+    local CONTAINER=$1
+    local MONGO_DOWN=1
+    while [[ $MONGO_DOWN = 1 ]]
+    do
+        printf .
+        sleep 1
+        sudo docker exec -it $CONTAINER sh -c 'mongo --quiet --eval "db.version()" $MONGO_INITDB_DATABASE' > /dev/null 2>&1     
+        MONGO_DOWN=$?
+    done
+}
+
 # Main ################################################
 
 SCRIPT_DIR=`dirname "$0"`
@@ -54,6 +68,11 @@ if [[ $CMP != 1 ]]
         exit 0
 fi
 
+# stop any running temporary containers
+sudo docker stop mongo4.0 > /dev/null 2>&1 
+sudo docker stop mongo4.2 > /dev/null 2>&1 
+sudo docker stop mongo4.4 > /dev/null 2>&1 
+
 # If current MongoDB version < 4.0
 vercomp 4.0 $MONGO_VERSION
 CMP=$?
@@ -61,16 +80,16 @@ if [[ $CMP = 1 ]]
     then
         echo "Upgrading MongoDB database to 4.0.."
         sudo docker run --name mongo4.0 -v ${SCRIPT_DIR_FULL}/../.mongodb_data:/data/db --rm -d -t ireceptor/repository-mongodb:mongo4.0
-
-        # wait for database to be ready to accept queries
-        MONGO_DOWN=1
-        while [[ $MONGO_DOWN = 1 ]]
-        do
-            printf .
-            sleep 1
-            sudo docker exec -it mongo4.0 sh -c 'mongo --quiet --eval "db.version()" $MONGO_INITDB_DATABASE' > /dev/null 2>&1     
-            MONGO_DOWN=$?
-        done
+        waitformongo mongo4.0
+        # # wait for database to be ready to accept queries
+        # MONGO_DOWN=1
+        # while [[ $MONGO_DOWN = 1 ]]
+        # do
+        #     printf .
+        #     sleep 1
+        #     sudo docker exec -it mongo4.0 sh -c 'mongo --quiet --eval "db.version()" $MONGO_INITDB_DATABASE' > /dev/null 2>&1     
+        #     MONGO_DOWN=$?
+        # done
 
         sudo docker exec -it mongo4.0 sh -c 'mongo --quiet --eval "db.adminCommand({setFeatureCompatibilityVersion:\"4.0\"})" $MONGO_INITDB_DATABASE'
         sudo docker stop mongo4.0
