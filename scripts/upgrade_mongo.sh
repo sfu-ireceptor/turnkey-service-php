@@ -41,7 +41,7 @@ SCRIPT_DIR_FULL="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd
 
 MONGO_VERSION=$1
 
-echo "Upgrating database.."
+echo "Upgrading database.."
 
 # If current MongoDB version >= 4.4, do nothing
 vercomp 4.4 $MONGO_VERSION
@@ -61,7 +61,17 @@ if [[ $CMP = 1 ]]
     then
         echo "Upgrading MongoDB database to 4.0.."
         sudo docker run --name mongo4.0 -v ${SCRIPT_DIR_FULL}/../.mongodb_data:/data/db --rm -d -t ireceptor/repository-mongodb:mongo4.0
-        sleep 3 # wait for database to be ready to accept queries
+
+        # wait for database to be ready to accept queries
+        MONGO_DOWN=1
+        while [[ $MONGO_DOWN = 1 ]]
+        do
+            echo '.'
+            sleep 1
+            sudo docker exec -it mongo4.0 sh -c 'mongo --quiet --eval "db.version()" $MONGO_INITDB_DATABASE'        
+            MONGO_DOWN=$?
+        done
+
         sudo docker exec -it mongo4.0 sh -c 'mongo --quiet --eval "db.adminCommand({setFeatureCompatibilityVersion:\"4.0\"})" $MONGO_INITDB_DATABASE'
         sudo docker stop mongo4.0
         MONGO_VERSION=4.0
