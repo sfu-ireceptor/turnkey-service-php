@@ -41,12 +41,15 @@ SCRIPT_DIR_FULL="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd
 
 MONGO_VERSION=$1
 
+echo "Upgrating database.."
+
 # If current MongoDB version >= 4.4, do nothing
 vercomp 4.4 $MONGO_VERSION
 CMP=$?
 if [[ $CMP != 1 ]]
     then
-        echo "Database: already using MongoDB 4.4, no need to upgrade."
+        echo "Already using MongoDB 4.4, no need to upgrade."
+        echo "Done"
         echo
         exit 0
 fi
