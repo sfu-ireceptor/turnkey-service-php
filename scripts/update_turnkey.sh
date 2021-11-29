@@ -20,6 +20,13 @@ sudo docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnk
 echo "Done"
 echo
 
+# install SSL certificate
+echo "Updating SSL certificate.."
+mkdir -p ${SCRIPT_DIR_FULL}/../.ssl
+cp ${SCRIPT_DIR_FULL}/../ssl/default/*.pem ${SCRIPT_DIR_FULL}/../.ssl
+echo "Done"
+echo
+
 # start Docker containers
 echo "Starting Docker containers.."
 ${SCRIPT_DIR}/start_turnkey.sh

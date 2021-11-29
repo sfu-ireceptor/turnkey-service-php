@@ -39,6 +39,13 @@ sudo docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnk
 echo "Done"
 echo
 
+# install SSL certificate
+echo "Installing SSL certificate.."
+mkdir -p ${SCRIPT_DIR_FULL}/../.ssl
+cp ${SCRIPT_DIR_FULL}/../ssl/default/*.pem ${SCRIPT_DIR_FULL}/../.ssl
+echo "Done"
+echo
+
 # launch on boot
 STARTUP_FILE='/etc/rc.local'
 echo "Add code to launch on boot in $STARTUP_FILE .."
