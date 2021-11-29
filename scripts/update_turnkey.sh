@@ -1,6 +1,7 @@
 #!/bin/sh
 
 SCRIPT_DIR=`dirname "$0"`
+SCRIPT_DIR_FULL="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # stop Docker containers
 echo "Stopping Docker containers.."
