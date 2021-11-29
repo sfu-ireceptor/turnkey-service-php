@@ -1,7 +1,6 @@
 #!/bin/sh
 
 SCRIPT_DIR=`dirname "$0"`
-SCRIPT_DIR_FULL="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # stop Docker containers
 echo "Stopping Docker containers.."
@@ -23,8 +22,8 @@ echo
 
 # install SSL certificate
 echo "Updating SSL certificate.."
-mkdir -p ${SCRIPT_DIR_FULL}/../.ssl
-cp ${SCRIPT_DIR_FULL}/../ssl/default/*.pem ${SCRIPT_DIR_FULL}/../.ssl
+mkdir -p ${SCRIPT_DIR}/../.ssl
+cp ${SCRIPT_DIR}/../ssl/default/*.pem ${SCRIPT_DIR}/../.ssl
 echo "Done"
 echo
 
