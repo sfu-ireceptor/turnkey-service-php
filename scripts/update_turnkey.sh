@@ -20,12 +20,18 @@ sudo docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnk
 echo "Done"
 echo
 
-# install SSL certificate
-echo "Updating SSL certificate.."
-mkdir -p ${SCRIPT_DIR}/../.ssl
-cp ${SCRIPT_DIR}/../ssl/default/*.pem ${SCRIPT_DIR}/../.ssl
-echo "Done"
-echo
+# generate and install self-signed SSL certificate for HTTPS
+SSL_FOLDER="${SCRIPT_DIR}/../.ssl"
+if [[ ! -e $SSL_FOLDER ]]; then
+	echo "Installing self-signed SSL certificate.."
+	mkdir -p $SSL_FOLDER
+	openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 \
+	    -subj "/C=CA/ST=BC/L=Vancouver/O=iReceptor/CN=ireceptor-turnkey" \
+	    -keyout $SSL_FOLDER/private-key.pem  -out $SSL_FOLDER/certificate.pem
+	cp $SSL_FOLDER/certificate.pem $SSL_FOLDER/intermediate.pem
+	echo "Done"
+	echo
+fi
 
 # start Docker containers
 echo "Starting Docker containers.."
