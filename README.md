@@ -41,13 +41,13 @@ scripts/install_turnkey.sh
 ## Check it's working
 
 ```
-curl --data "{}" "http://localhost/airr/v1/repertoire"
+curl -k --data "{}" "https://localhost/airr/v1/repertoire"
 ```
 
 This returns the list of repertoires in your database, by querying the web service at `/airr/v1/repertoire`, an [ADC API](https://docs.airr-community.org/en/latest/api/adc_api.html) entry point.
 
 
-You can also visit <http://localhost> in your browser (replace "localhost" with your server URL if necessary). You'll see the home page for your repository, with information about the ADC API and iReceptor.
+You can also visit <https://localhost> in your browser (replace "localhost" with your server URL if necessary). You'll see the home page for your repository, with information about the ADC API and iReceptor. Note: a self-signed SSL certificate is used by default, so you might see a security warning. But you can [install your own SSL certificate](doc/install_custom_ssl_certificate.md).
 
 
 ## Loading data
@@ -68,7 +68,7 @@ scripts/load_metadata.sh ireceptor test_data/PRJNA330606_Wang_1_sample_metadata.
 
 Check it worked:
 ```
-curl --data "{}" "http://localhost/airr/v1/repertoire"
+curl -k --data "{}" "https://localhost/airr/v1/repertoire"
 ```
 The repertoire metadata is returned as JSON.
 
@@ -79,7 +79,7 @@ scripts/load_rearrangements.sh mixcr test_data/SRR4084215_aa_mixcr_annotation_10
 
 Check it worked:
 ```
-curl --data "{}" "http://localhost/airr/v1/rearrangement"
+curl -k --data "{}" "https://localhost/airr/v1/rearrangement"
 ```
 All of the rearrangement data for the 1000 sequences is returned as JSON.
 

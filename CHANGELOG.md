@@ -1,5 +1,8 @@
 # Release Notes
 
+## v4.1 (Dec 6, 2021)
+- Use HTTPS by default (with a generated self-signed SSL certificate)
+
 ## v3.1 (May 10, 2021)
 
 ### Web service update

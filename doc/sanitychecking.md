@@ -48,14 +48,14 @@ An example with positional arguments
 verify_dataload.sh /PATH/TO/metadata_file API_url_address study_id annotation_dir unique_identifier
 ```
 A working example using sample metadata from the [iReceptor Curation github repository](https://github.com/sfu-ireceptor/dataloading-curation) is given below. This assumes:
-- the repertoire metadata and the rearrangments exists in the same directory as per the [iReceptor Curation process](http://www.ireceptor.org/curation). In this case the files from the dataloading_curation github test data set in dataloading-curation/test/imgt/imgt are used. This test data set is from Palanichamy et al with Study ID PRJNA248411.
-- the study above has been loaded into your iReceptor Turnkey at URL http://your.repository.org/v2/samples using the Turnkey data loading process.
+- the repertoire metadata and the rearrangments exists in the same directory as per the [iReceptor Curation process](https://ireceptor.org/curation). In this case the files from the dataloading_curation github test data set in dataloading-curation/test/imgt/imgt are used. This test data set is from Palanichamy et al with Study ID PRJNA248411.
+- the study above has been loaded into your iReceptor Turnkey at URL https://your.repository.org/v2/samples using the Turnkey data loading process.
 - a unique identifier field name ir_rearrangement_number was used when the study was loaded (this identifier exists in the repertoire metadata file provided with the above study).
 
 You can download this example dataset from the github repository above. Once downloaded and loaded into your repository, the data loading process can be verified with the command below:
 
 ```
-verify_dataload.sh dataloading-curation/test/imgt/imgt/PRJNA248411_Palanichamy_2018-12-18.csv http://your.repository.org/v2/samples PRJNA248411 dataloading-curation/test/imgt/imgt ir_rearrangement_number
+verify_dataload.sh dataloading-curation/test/imgt/imgt/PRJNA248411_Palanichamy_2018-12-18.csv https://your.repository.org/v2/samples PRJNA248411 dataloading-curation/test/imgt/imgt ir_rearrangement_number
 ```
 
 ## Sample check report output
