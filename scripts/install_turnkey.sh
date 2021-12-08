@@ -44,6 +44,7 @@ SSL_FOLDER="${SCRIPT_DIR}/../.ssl"
 if [[ ! -e $SSL_FOLDER ]]; then
 	echo "Installing self-signed SSL certificate.."
 	mkdir -p $SSL_FOLDER
+	openssl rand -out ~/.rnd -hex 256
 	openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 \
 	    -subj "/C=CA/ST=BC/L=Vancouver/O=iReceptor/CN=ireceptor-turnkey" \
 	    -keyout $SSL_FOLDER/private-key.pem  -out $SSL_FOLDER/certificate.pem
