@@ -25,10 +25,10 @@ These components are packaged as Docker images. The installation script will:
 
 ## Installation
 
-Download the `production-v3` code:
+Download the `production-v4` code:
 
 ```
-git clone --branch production-v3 https://github.com/sfu-ireceptor/turnkey-service-php.git
+git clone --branch production-v4 https://github.com/sfu-ireceptor/turnkey-service-php.git
 ```
 
 Launch the installation script. Note: multiple Docker images will be downloaded from DockerHub. Installation time estimate: 10-30 min.
