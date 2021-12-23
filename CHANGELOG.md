@@ -1,5 +1,11 @@
 # Release Notes
 
+## v4.0 (work in progress)
+- use web service ``turnkey-v4`` branch
+- add stats loading script
+- add clone loading script
+- add metadata update script
+
 ## v3.1 (May 10, 2021)
 
 ### Web service update
