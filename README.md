@@ -169,18 +169,18 @@ When you've loaded your data, we recommend [backing up the database](doc/databas
 
 ## Other information
 
-### Managing the database
+### Managing the turnkey
 - [Starting and stopping the Turnkey](doc/start_stop_turnkey.md)
 - [Running a production Turnkey](doc/production_db.md)
+- [Updating the turnkey](doc/updating.md)
+- [Enabling web statistics](doc/web_stats.md)
+- [How the turnkey works](doc/how_it_works.md)
+
+### Managing the database
 - [Moving the database to another folder](doc/moving_the_database_folder.md)
 - [Using an external volume](doc/using_an_external_volume.md)
 - [Backing up and restoring the database](doc/database_backup.md)
 - [Resetting the turnkey database](doc/resetting.md)
-
-### Managing the turnkey
-- [How the turnkey works](doc/how_it_works.md)
-- [Updating the turnkey](doc/updating.md)
-- [Web statistics](doc/web_stats.md)
 
 ### If something looks wrong
 - [Troubleshooting](doc/troubleshooting.md) :hammer:
