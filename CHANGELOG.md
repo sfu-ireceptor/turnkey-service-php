@@ -1,7 +1,11 @@
 # Release Notes
 
-## v4.1 (Dec 6, 2021)
+## v4.0 (work in progress)
 - Use HTTPS by default (with a generated self-signed SSL certificate)
+- Use web service ``turnkey-v4`` branch
+- Add stats loading script
+- Add clone loading script
+- Add metadata update script
 
 ## v3.1 (May 10, 2021)
 
