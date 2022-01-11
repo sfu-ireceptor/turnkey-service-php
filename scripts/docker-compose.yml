@@ -12,7 +12,7 @@ services:
     ireceptor-api:
         depends_on:
             - ireceptor-database
-        image: ireceptor/service-php-mongodb:${API_TAG:-turnkey-v4-https}
+        image: ireceptor/service-php-mongodb:${API_TAG:-turnkey-v4}
         environment:
             DB_HOST: ireceptor-database
             DB_DATABASE: ireceptor
