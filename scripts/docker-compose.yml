@@ -18,6 +18,7 @@ services:
             DB_DATABASE: ireceptor
             DB_SAMPLES_COLLECTION: sample
             DB_SEQUENCES_COLLECTION: sequence
+            DB_CELL_COLLECTION: cell
         volumes:
             - ../.config:/config
         ports:
@@ -33,3 +34,4 @@ services:
         volumes:
             - ../.config:/config
             - ${FILE_FOLDER:-/tmp}:/scratch
+            - /data:/data
