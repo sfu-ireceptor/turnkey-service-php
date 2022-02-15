@@ -10,7 +10,7 @@ resources. As such, some or all of the approach described below may not be appro
 
 iReceptor recommends [horizontal scalability](https://en.wikipedia.org/wiki/Scalability) as you add more data. When you add data to an iReceptor Turnkey, searches
 over the data are slower. We carefully optimize indexes for common searches, with particular attention to the searches
-performed by the [iReceptor Gateway](http://gateway.ireceptor.org) but eventually a single server with a single disk
+performed by the [iReceptor Gateway](https://gateway.ireceptor.org) but eventually a single server with a single disk
 reaches its limits. We solve this problem by simply adding another repository/server/virtual machine (horizontal scalability). As a result,
 we run a cluster of repositories each with a fixed amount of data. Our repositories are federated at the client layer,
 with the iReceptor Gateway presenting the cluster of repositories as a single large repository to the end user.
@@ -52,7 +52,7 @@ into the "staging" repository, copied to the "production" repository, and the di
 becomes "full" (approaches 500M rearrangements), no data is added, and when it is necessary to add a new study, a new, empty "production" repository
 provisioned, the empty "production" repository is mirrored on the "staging" repository, data is loaded into the empty "staging" repopsitory, and once
 done, the new "production" repository is updated as above. To find out more information about the iReceptor Public archive and the cluster of repositories
-from which it is built, please refer to the [iReceptor Repsository web page](http://www.ireceptor.org/repositories).
+from which it is built, please refer to the [iReceptor Repsository web page](https://ireceptor.org/repositories).
 
 ### Details
 

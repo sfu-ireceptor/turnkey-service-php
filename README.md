@@ -5,7 +5,7 @@ The iReceptor Turnkey is a quick and easy mechanism for researchers to create th
 Version | Branch | Status | Last update 
 --- | --- | --- | ---
 **3.1** | [production-v3](https://github.com/sfu-ireceptor/turnkey-service-php/tree/production-v3) | **Stable. Recommended.** | May 10, 2021 \| [Release Notes](https://github.com/sfu-ireceptor/turnkey-service-php/blob/production-v3/CHANGELOG.md) 
-4.0 | [production-v4](https://github.com/sfu-ireceptor/turnkey-service-php/tree/production-v4) | Used internally. Stilll being tested. | June 2, 2021 \| [Release Notes](https://github.com/sfu-ireceptor/turnkey-service-php/blob/production-v4/CHANGELOG.md)
+4.0 | [production-v4](https://github.com/sfu-ireceptor/turnkey-service-php/tree/production-v4) | Stable. Used internally. Features stilll being added. | Dec 22, 2021 \| [Release Notes](CHANGELOG.md)
 
 ## What's in the iReceptor Turnkey?
 - a database
@@ -41,13 +41,13 @@ scripts/install_turnkey.sh
 ## Check it's working
 
 ```
-curl --data "{}" "http://localhost/airr/v1/repertoire"
+curl -k --data "{}" "https://localhost/airr/v1/repertoire"
 ```
 
 This returns the list of repertoires in your database, by querying the web service at `/airr/v1/repertoire`, an [ADC API](https://docs.airr-community.org/en/latest/api/adc_api.html) entry point.
 
 
-You can also visit <http://localhost> in your browser (replace "localhost" with your server URL if necessary). You'll see the home page for your repository, with information about the ADC API and iReceptor.
+You can also visit <https://localhost> in your browser (replace "localhost" with your server URL if necessary). You'll see the home page for your repository, with information about the ADC API and iReceptor. Note: a self-signed SSL certificate is used by default, so you might see a security warning. But you can [install your own SSL certificate](doc/installing_a_custom_ssl_certificate.md). If you don't want to the turnkey to use HTTPS, you can easily [disable HTTPS](doc/disabling_https.md).
 
 
 ## Loading data
@@ -68,7 +68,7 @@ scripts/load_metadata.sh ireceptor test_data/PRJNA330606_Wang_1_sample_metadata.
 
 Check it worked:
 ```
-curl --data "{}" "http://localhost/airr/v1/repertoire"
+curl -k --data "{}" "https://localhost/airr/v1/repertoire"
 ```
 The repertoire metadata is returned as JSON.
 
@@ -79,7 +79,7 @@ scripts/load_rearrangements.sh mixcr test_data/SRR4084215_aa_mixcr_annotation_10
 
 Check it worked:
 ```
-curl --data "{}" "http://localhost/airr/v1/rearrangement"
+curl -k --data "{}" "https://localhost/airr/v1/rearrangement"
 ```
 All of the rearrangement data for the 1000 sequences is returned as JSON.
 
