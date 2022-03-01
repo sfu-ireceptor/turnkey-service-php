@@ -115,7 +115,6 @@ Note: make sure your rearrangements files are declared in the repertoire metadat
 ```
 scripts/load_metadata.sh ireceptor <file path of your CSV or JSON metadata file>
 ```
-
 ### Load your rearrangement files.
 The following command will load all AIRR Rearrangement TSV files ending with `.tsv` from <your study data folder>.
 ```
@@ -138,7 +137,23 @@ scripts/load_clones.sh airr-clone <your study data folder>/*.json
 ```
 Again, compressed files are allowed, but the full compressed file name must be listed for the repertoire in the metadata file.
 
-### Loading many rearrangements/clones/cells/expression data.
+### Load your cell files
+
+The following command will load all AIRR Cell JSON files ending with `.json` from <your study data folder>.
+```
+scripts/load_cells.sh airr-cell <your study data folder>/*.json
+```
+Again, compressed files are allowed, but the full compressed file name must be listed for the repertoire in the metadata file.
+  
+### Load your gene expression files
+
+The following command will load all AIRR Expression JSON files ending with `.json` from <your study data folder>.
+```
+scripts/load_expression.sh airr-expression <your study data folder>/*.json
+```
+Again, compressed files are allowed, but the full compressed file name must be listed for the repertoire in the metadata file.
+ 
+### Loading large rearrangement/clone/cell/expression data files.
 :warning: Loading many rearrangements can take hours. We recommend using the Unix command `nohup` to run the script in the background, and to redirect the script output to a log file. So you can log out and come back later to check on the data loading progress by looking at that file. Example:
 
 ```
