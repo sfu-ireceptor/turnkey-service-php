@@ -7,7 +7,7 @@ NB_ARGS=2
 if [ $# -lt $NB_ARGS ];
 then
     echo "$0: wrong number of arguments ($# instead of at least $NB_ARGS)"
-    echo "usage: $0 (mixcr-clone) <clone_file> [<another_clone_file> ...]"
+    echo "usage: $0 (airr-clone|mixcr-clone) <clone_file> [<another_clone_file> ...]"
     exit 1
 fi
 
