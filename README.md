@@ -111,32 +111,34 @@ Note: use a clearly defined curation process for your data to ensure good proven
 To load your own data, follow the same procedure as with the test data.
 Note: make sure your rearrangements files are declared in the repertoire metadata file, under the `data_processing_files` column.
 
-1. Load your repertoire metadata:
+### Load your repertoire metadata:
 ```
 scripts/load_metadata.sh ireceptor <file path of your CSV or JSON metadata file>
 ```
 
-2. Load your rearrangements files. You can load multiple files at once:
+### Load your rearrangement files.
+The following command will load all AIRR Rearrangement TSV files ending with `.tsv` from <your study data folder>.
 ```
-scripts/load_rearrangements.sh mixcr <your study data folder>/*.txt
+scripts/load_rearrangements.sh airr <your study data folder>/*.tsv
 ```
-This will load all files ending by `.txt` from your study data folder.
-
-Note: Compressed `.gz` files are supported and can be loaded directly. Example:
+Compressed `.gz` files are supported and can be loaded directly. Example:
 ```
-scripts/load_rearrangements.sh mixcr <your study data folder>/*.gz
+scripts/load_rearrangements.sh airr <your study data folder>/*.gz
 ```
 Note: make sure that the full file name, including the `.gz` extension, was declared in the repertoire metadata file.
 
-### Loading IMGT or AIRR rearrangements
+Simply type the loading command to get a help message to determine which rearrangement file types are supported by
+the data loader (e.g. `airr`, `mixcr`, `mixcr_v3`, or `imgt`)
 
-Just replace the `mixcr` parameter by `mixcr_v3`, `imgt` or `airr`. Example:
+### Load your clone files
+
+The following command will load all AIRR Clone JSON files ending with `.json` from <your study data folder>.
 ```
-scripts/load_rearrangements.sh imgt <IMGT files>
+scripts/load_clones.sh airr-clone <your study data folder>/*.json
 ```
+Again, compressed files are allowed, but the full compressed file name must be listed for the repertoire in the metadata file.
 
-
-### Loading many rearrangements
+### Loading many rearrangements/clones/cells/expression data.
 :warning: Loading many rearrangements can take hours. We recommend using the Unix command `nohup` to run the script in the background, and to redirect the script output to a log file. So you can log out and come back later to check on the data loading progress by looking at that file. Example:
 
 ```
