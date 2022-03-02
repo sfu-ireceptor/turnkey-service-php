@@ -155,7 +155,7 @@ scripts/load_expression.sh airr-expression <your study data folder>/*.json
 Again, compressed files are allowed, but the full compressed file name must be listed for the repertoire in the metadata file.
  
 ### Loading large rearrangement/clone/cell/expression data files.
-:warning: Loading many rearrangements can take hours. We recommend using the Unix command `nohup` to run the script in the background, and to redirect the script output to a log file. So you can log out and come back later to check on the data loading progress by looking at that file. Example:
+:warning: Loading many rearrangements, clones, cells, or expression data can take hours. We recommend using the Unix command `nohup` to run the script in the background, and to redirect the script output to a log file. So you can log out and come back later to check on the data loading progress by looking at that file. Example:
 
 ```
 nohup scripts/load_rearrangements.sh mixcr my_study_folder/*.txt > progress.log &
