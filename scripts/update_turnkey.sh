@@ -65,7 +65,6 @@ if [[ ! -e $SSL_FOLDER ]]; then
 	echo
 fi
 
-
 # start Docker containers
 echo "Starting Docker containers.."
 ${SCRIPT_DIR}/start_turnkey.sh
@@ -81,3 +80,5 @@ echo
 # confirm successful installation
 echo "Congratulations, your iReceptor Service Turnkey has been updated successfully."
 echo "For more information, go to https://github.com/sfu-ireceptor/turnkey-service-php"
+echo
+echo "Note: HTTPS is enabled. If you prefer not use HTTPS (not recommended), run disable_https.sh"
