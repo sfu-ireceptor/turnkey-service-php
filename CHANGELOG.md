@@ -1,6 +1,12 @@
 # Release Notes
 
-## v4.0 (Dec 22, 2021)
+## v4.0-pre (Apr 4, 2022)
+- Add clone support
+- Add cell support
+- Add expression support
+- Add stats removal
+
+## v4.0-pre (Dec 22, 2021)
 - Use HTTPS by default (with a generated self-signed SSL certificate)
 - Use web service ``turnkey-v4`` branch
 - Add stats loading script
