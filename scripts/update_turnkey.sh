@@ -54,8 +54,14 @@ echo
 # generate and install self-signed SSL certificate for HTTPS
 SSL_FOLDER="${SCRIPT_DIR}/../.ssl"
 if [[ ! -e $SSL_FOLDER ]]; then
-	echo "Installing self-signed SSL certificate.."
+	echo "Creating SSL folder.."
 	mkdir -p $SSL_FOLDER
+fi
+
+SSL_FOLDER_CONTENTS=`ls -A $SSL_FOLDER`
+if [ -z SSL_FOLDER_CONTENTS ]; then
+	echo "Installing self-signed SSL certificate.."
+	sudo chmod 777 $SSL_FOLDER
 	openssl rand -out ~/.rnd -hex 256
 	openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 \
 	    -subj "/C=CA/ST=BC/L=Vancouver/O=iReceptor/CN=ireceptor-turnkey" \
