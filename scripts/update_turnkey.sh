@@ -63,7 +63,7 @@ if [[ ! -e $SSL_FOLDER ]]; then
 fi
 
 SSL_FOLDER_CONTENTS=`ls -A $SSL_FOLDER`
-if [ -z $SSL_FOLDER_CONTENTS ]; then
+if [ -z "$SSL_FOLDER_CONTENTS" ]; then
 	echo "Installing self-signed SSL certificate.."
 	sudo chmod 777 $SSL_FOLDER
 	openssl rand -out ~/.rnd -hex 256
