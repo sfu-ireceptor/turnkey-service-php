@@ -24,28 +24,30 @@ echo "Done"
 echo
 
 # update config file
+CONFIG_FOLDER="${SCRIPT_DIR}/../.config"
 echo "Downloading AIRR-iReceptor mapping ${MAPPING_URL}"
-mkdir -p ${SCRIPT_DIR}/../.config
-curl -# -o ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping_new.txt $MAPPING_URL
+mkdir -p $CONFIG_FOLDER
+sudo chmod 777 $CONFIG_FOLDER
+curl -# -o $CONFIG_FOLDER/AIRR-iReceptorMapping_new.txt $MAPPING_URL
 
 # if there wasn't any config file
-if [ ! -f ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping.txt ]; then
-	cp ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping_new.txt ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping.txt
+if [ ! -f $CONFIG_FOLDER/AIRR-iReceptorMapping.txt ]; then
+	cp $CONFIG_FOLDER/AIRR-iReceptorMapping_new.txt $CONFIG_FOLDER/AIRR-iReceptorMapping.txt
 fi
 
 # if the new config file is different
-if [[ `diff --brief ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping_new.txt ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping.txt` != '' ]]
+if [[ `diff --brief $CONFIG_FOLDER/AIRR-iReceptorMapping_new.txt $CONFIG_FOLDER/AIRR-iReceptorMapping.txt` != '' ]]
 then
 	CURRENT_DATETIME=`date +%Y-%m-%d_%H-%M-%S`
 	ARCHIVED_NAME=AIRR-iReceptorMapping_${CURRENT_DATETIME}.txt
-	mv ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping.txt ${SCRIPT_DIR}/../.config/${ARCHIVED_NAME}
-	cp ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping_new.txt ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping.txt
-	ARCHIVED_PATH=`realpath ${SCRIPT_DIR}/../.config/${ARCHIVED_NAME}`
+	mv $CONFIG_FOLDER/AIRR-iReceptorMapping.txt $CONFIG_FOLDER/${ARCHIVED_NAME}
+	cp $CONFIG_FOLDER/AIRR-iReceptorMapping_new.txt $CONFIG_FOLDER/AIRR-iReceptorMapping.txt
+	ARCHIVED_PATH=`realpath $CONFIG_FOLDER/${ARCHIVED_NAME}`
 	echo "INFO: the mapping has been updated"
 	echo "INFO: the previous mapping has been archived to $ARCHIVED_PATH"
 fi
 
-rm ${SCRIPT_DIR}/../.config/AIRR-iReceptorMapping_new.txt
+rm $CONFIG_FOLDER/AIRR-iReceptorMapping_new.txt
 
 echo "Done"
 echo
