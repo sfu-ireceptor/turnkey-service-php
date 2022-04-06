@@ -56,6 +56,8 @@ SSL_FOLDER="${SCRIPT_DIR}/../.ssl"
 if [[ ! -e $SSL_FOLDER ]]; then
 	echo "Creating SSL folder.."
 	mkdir -p $SSL_FOLDER
+	echo "Done"
+	echo
 fi
 
 SSL_FOLDER_CONTENTS=`ls -A $SSL_FOLDER`
