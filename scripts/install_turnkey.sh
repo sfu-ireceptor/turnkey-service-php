@@ -56,19 +56,35 @@ if [[ ! -e $SSL_FOLDER ]]; then
 	echo
 fi
 
-# launch on boot
-STARTUP_FILE='/etc/rc.local'
-echo "Add code to launch on boot in $STARTUP_FILE .."
-if [[ -f "$STARTUP_FILE" ]]; then
-	OLD_STARTUP_FILE='/etc/rc.local.old'
-    echo "Warning: $STARTUP_FILE already exists, moving it to $OLD_STARTUP_FILE"
-    sudo mv "$STARTUP_FILE" "$OLD_STARTUP_FILE"
-fi
-echo '#!/bin/bash' | sudo tee $STARTUP_FILE > /dev/null
-echo "${SCRIPT_DIR_FULL}/start_turnkey.sh" | sudo tee -a $STARTUP_FILE > /dev/null
-sudo chmod +x $STARTUP_FILE
+# start on boot using systemd
+SYSTEMD_SERVICE_FILE='/etc/systemd/system/ireceptor-turnkey.service'
+echo "Creating systemd service $SYSTEMD_SERVICE_FILE to start turnkey on boot.."
+echo '[Unit]' | sudo tee $STARTUP_FILE > /dev/null
+echo 'Description=iReceptor Turnkey' | sudo tee $STARTUP_FILE > /dev/null
+echo '[Service]' | sudo tee $STARTUP_FILE > /dev/null
+echo "ExecStart=${SCRIPT_DIR_FULL}/start_turnkey.sh" | sudo tee $STARTUP_FILE > /dev/null
+echo '[Install]' | sudo tee $STARTUP_FILE > /dev/null
+echo 'WantedBy=multi-user.target' | sudo tee $STARTUP_FILE > /dev/null
 echo "Done"
 echo
+echo "Enabling ireceptor-turneky systemd service on startup"
+sudo systemctl enable ireceptor-turnkey
+echo "Done"
+echo
+
+# # launch on boot
+# STARTUP_FILE='/etc/rc.local'
+# echo "Add code to launch on boot in $STARTUP_FILE .."
+# if [[ -f "$STARTUP_FILE" ]]; then
+# 	OLD_STARTUP_FILE='/etc/rc.local.old'
+#     echo "Warning: $STARTUP_FILE already exists, moving it to $OLD_STARTUP_FILE"
+#     sudo mv "$STARTUP_FILE" "$OLD_STARTUP_FILE"
+# fi
+# echo '#!/bin/bash' | sudo tee $STARTUP_FILE > /dev/null
+# echo "${SCRIPT_DIR_FULL}/start_turnkey.sh" | sudo tee -a $STARTUP_FILE > /dev/null
+# sudo chmod +x $STARTUP_FILE
+# echo "Done"
+# echo
 
 # install config file
 echo "Downloading AIRR-iReceptor mapping.."
