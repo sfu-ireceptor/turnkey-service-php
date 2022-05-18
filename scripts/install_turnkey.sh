@@ -59,12 +59,12 @@ fi
 # start on boot using systemd
 SYSTEMD_SERVICE_FILE='/etc/systemd/system/ireceptor-turnkey.service'
 echo "Creating systemd service $SYSTEMD_SERVICE_FILE to start turnkey on boot.."
-echo '[Unit]' > $SYSTEMD_SERVICE_FILE
-echo 'Description=iReceptor Turnkey' >> $SYSTEMD_SERVICE_FILE
-echo '[Service]' >> $SYSTEMD_SERVICE_FILE
-echo "ExecStart=${SCRIPT_DIR_FULL}/start_turnkey.sh" >> $SYSTEMD_SERVICE_FILE
-echo '[Install]' >> $SYSTEMD_SERVICE_FILE
-echo 'WantedBy=multi-user.target' >> $SYSTEMD_SERVICE_FILE
+echo '[Unit]' | sudo tee $SYSTEMD_SERVICE_FILE > /dev/null
+echo 'Description=iReceptor Turnkey' | sudo tee -a $SYSTEMD_SERVICE_FILE > /dev/null
+echo '[Service]' | sudo tee -a $SYSTEMD_SERVICE_FILE > /dev/null
+echo "ExecStart=${SCRIPT_DIR_FULL}/start_turnkey.sh" | sudo tee -a $SYSTEMD_SERVICE_FILE > /dev/null
+echo '[Install]' | sudo tee -a $SYSTEMD_SERVICE_FILE > /dev/null
+echo 'WantedBy=multi-user.target' | sudo tee -a $SYSTEMD_SERVICE_FILE > /dev/null
 echo "Done"
 echo
 echo "Enabling ireceptor-turneky systemd service on startup"
