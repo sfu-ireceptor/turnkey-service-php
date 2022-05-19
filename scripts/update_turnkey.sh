@@ -75,6 +75,30 @@ if [ -z "$SSL_FOLDER_CONTENTS" ]; then
 	echo
 fi
 
+# start on boot using systemd
+SYSTEMD_SERVICE_FILE='/etc/systemd/system/ireceptor-turnkey.service'
+echo "Creating systemd service to start turnkey on boot.."
+echo "[Unit]" | sudo tee $SYSTEMD_SERVICE_FILE > /dev/null
+echo "Description=iReceptor Turnkey" | sudo tee -a $SYSTEMD_SERVICE_FILE > /dev/null
+echo "Requires=docker.service" | sudo tee -a $SYSTEMD_SERVICE_FILE > /dev/null
+echo "After=docker.service" | sudo tee -a $SYSTEMD_SERVICE_FILE > /dev/null
+echo "" | sudo tee -a $SYSTEMD_SERVICE_FILE > /dev/null
+echo "[Service]" | sudo tee -a $SYSTEMD_SERVICE_FILE > /dev/null
+echo "ExecStart=${SCRIPT_DIR_FULL}/start_turnkey.sh" | sudo tee -a $SYSTEMD_SERVICE_FILE > /dev/null
+echo "TimeoutStartSec=0" | sudo tee -a $SYSTEMD_SERVICE_FILE > /dev/null
+echo "Restart=on-failure" | sudo tee -a $SYSTEMD_SERVICE_FILE > /dev/null
+echo "StartLimitIntervalSec=60" | sudo tee -a $SYSTEMD_SERVICE_FILE > /dev/null
+echo "StartLimitBurst=3" | sudo tee -a $SYSTEMD_SERVICE_FILE > /dev/null
+echo "" | sudo tee -a $SYSTEMD_SERVICE_FILE > /dev/null
+echo "[Install]" | sudo tee -a $SYSTEMD_SERVICE_FILE > /dev/null
+echo "WantedBy=multi-user.target" | sudo tee -a $SYSTEMD_SERVICE_FILE > /dev/null
+echo "Done"
+echo
+echo "Enabling ireceptor-turneky systemd service startup on boot.."
+sudo systemctl enable ireceptor-turnkey.service
+echo "Done"
+echo
+
 # start Docker containers
 echo "Starting Docker containers.."
 ${SCRIPT_DIR}/start_turnkey.sh
