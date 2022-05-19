@@ -63,8 +63,14 @@ echo "[Unit]" | sudo tee $SYSTEMD_SERVICE_FILE > /dev/null
 echo "Description=iReceptor Turnkey" | sudo tee -a $SYSTEMD_SERVICE_FILE > /dev/null
 echo "Requires=docker.service" | sudo tee -a $SYSTEMD_SERVICE_FILE > /dev/null
 echo "After=docker.service" | sudo tee -a $SYSTEMD_SERVICE_FILE > /dev/null
+echo "" | sudo tee $SYSTEMD_SERVICE_FILE > /dev/null
 echo "[Service]" | sudo tee -a $SYSTEMD_SERVICE_FILE > /dev/null
 echo "ExecStart=${SCRIPT_DIR_FULL}/start_turnkey.sh" | sudo tee -a $SYSTEMD_SERVICE_FILE > /dev/null
+echo "TimeoutStartSec=0" | sudo tee -a $SYSTEMD_SERVICE_FILE > /dev/null
+echo "Restart=on-failure" | sudo tee -a $SYSTEMD_SERVICE_FILE > /dev/null
+echo "StartLimitIntervalSec=60" | sudo tee -a $SYSTEMD_SERVICE_FILE > /dev/null
+echo "StartLimitBurst=3" | sudo tee -a $SYSTEMD_SERVICE_FILE > /dev/null
+echo "" | sudo tee $SYSTEMD_SERVICE_FILE > /dev/null
 echo "[Install]" | sudo tee -a $SYSTEMD_SERVICE_FILE > /dev/null
 echo "WantedBy=multi-user.target" | sudo tee -a $SYSTEMD_SERVICE_FILE > /dev/null
 echo "Done"
