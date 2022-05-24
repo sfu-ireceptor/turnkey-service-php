@@ -1,6 +1,7 @@
 #!/bin/bash
 
 SCRIPT_DIR=`dirname "$0"`
+SCRIPT_DIR_FULL="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # load config file
 source ${SCRIPT_DIR}/config.sh
