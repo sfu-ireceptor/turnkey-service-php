@@ -1,5 +1,9 @@
 # Release Notes
 
+## v4.0-pre (May 19, 2022)
+- Use systemd to start turnkey on boot
+- Minor bug fixes
+
 ## v4.0-pre (Apr 4, 2022)
 - Add clone support
 - Add cell support
