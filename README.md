@@ -5,7 +5,7 @@ The iReceptor Turnkey is a quick and easy mechanism for researchers to create th
 Version | Branch | Status | Last update 
 --- | --- | --- | ---
 **3.1** | [production-v3](https://github.com/sfu-ireceptor/turnkey-service-php/tree/production-v3) | **Stable. Recommended.** | May 10, 2021 \| [Release Notes](https://github.com/sfu-ireceptor/turnkey-service-php/blob/production-v3/CHANGELOG.md) 
-4.0 | [production-v4](https://github.com/sfu-ireceptor/turnkey-service-php/tree/production-v4) | Stable. Used internally. Features stilll being added. | June 13, 2022 \| [Release Notes](CHANGELOG.md)
+4.0 | [production-v4](https://github.com/sfu-ireceptor/turnkey-service-php/tree/production-v4) | Stable. Used internally. Features still being added. | June 13, 2022 \| [Release Notes](CHANGELOG.md)
 
 ## What's in the iReceptor Turnkey?
 - a database
@@ -215,6 +215,7 @@ repository](doc/database_backup.md) before this step.
 - [Starting and stopping the Turnkey](doc/start_stop_turnkey.md)
 - [Running a production Turnkey](doc/production_db.md)
 - [Updating the turnkey](doc/updating.md)
+- [Customizing the /airr/v1/info entry point](doc/customizing_info_entry_point.md)
 - [Enabling web statistics](doc/web_stats.md)
 - [How the turnkey works](doc/how_it_works.md)
 
