@@ -1,5 +1,8 @@
 # Release Notes
 
+## v4.0-pre (June 13, 2022)
+- Enable override of contact info in airr/v1/info
+
 ## v4.0-pre (May 19, 2022)
 - Use systemd to start turnkey on boot
 - Minor bug fixes
