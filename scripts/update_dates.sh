@@ -6,14 +6,14 @@ SCRIPT_DIR=`dirname "$0"`
 if [[ $# -ne 4 ]];
 then
     echo "$0: wrong number of arguments ($#)"
-    echo "usage: $0 <collection name> <adc_created_date field name> <adc_updated_date field name>"
+    echo "usage: $0 <collection name> <adc_created_date field name> <adc_updated_date field name> <date format mask, e.g %a %b %d %Y %H:%M:%S %Z, enclosed in quotes>"
     exit 1
 fi
 
 COLLECTION_NAME="$1"
 CREATED_AT_NAME="$2"
 UPDATED_AT_NAME="$3"
-DATE_FORMAT="$4"
+DATE_MASK="$4"
 
 # create log file
 LOG_FOLDER=${SCRIPT_DIR}/../log
@@ -34,18 +34,18 @@ export FILE_FOLDER
 # $DB_HOST and $DB_DATABASE are defined in docker-compose.yml and will be
 # substituted only when the python command is executed, INSIDE the container
 sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run --rm \
-                               -e COLLECTION_NAME="$COLLECTION_NAME" \
-                               -e UPDATED_AT_NAME="$UPDATED_AT_NAME" \
-                               -e CREATED_AT_NAME="$CREATED_AT_NAME" \
-                               -e DATE_MASK="$DATE_MASK" \
+				-e COLLECTION_NAME="$COLLECTION_NAME" \
+				-e CREATED_AT_NAME="$CREATED_AT_NAME" \
+				-e UPDATED_AT_NAME="$UPDATED_AT_NAME" \
+				-e DATE_MASK="$DATE_MASK" \
 			ireceptor-dataloading  \
 				sh -c 'python /app/dataload/update_dates.py \
 					$DB_HOST \
 					$DB_DATABASE \
-					$COLLECTION_NAME
+					$COLLECTION_NAME \
 					$CREATED_AT_NAME \
 					$UPDATED_AT_NAME \
-					"$DATE_MASK"'\
+					"$DATE_MASK"' \
  	2>&1 | tee $LOG_FILE
 
 
