@@ -100,6 +100,9 @@ sudo systemctl enable ireceptor-turnkey.service
 echo "Done"
 echo
 
+# create home folder
+mkdir -p ${SCRIPT_DIR_FULL}/../.home
+
 # start Docker containers
 echo "Starting Docker containers.."
 ${SCRIPT_DIR}/start_turnkey.sh

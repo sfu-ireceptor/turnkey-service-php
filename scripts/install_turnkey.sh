@@ -33,6 +33,7 @@ echo 'Installing system service to disable Transparent Huge Pages (recommended b
 sudo cp ${SCRIPT_DIR}/disable-transparent-hugepages /etc/init.d/disable-transparent-hugepages
 sudo update-rc.d disable-transparent-hugepages defaults
 sudo service disable-transparent-hugepages start
+echo 'Created /etc/init.d/disable-transparent-hugepages'
 echo "Done"
 echo
 
@@ -86,6 +87,9 @@ mkdir -p ${SCRIPT_DIR_FULL}/../.config
 curl -# -o ${SCRIPT_DIR_FULL}/../.config/AIRR-iReceptorMapping.txt $MAPPING_URL
 echo "Done"
 echo
+
+# create home folder
+mkdir -p ${SCRIPT_DIR_FULL}/../.home
 
 # start turnkey
 ${SCRIPT_DIR}/start_turnkey.sh
