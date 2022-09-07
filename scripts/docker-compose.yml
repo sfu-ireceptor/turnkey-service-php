@@ -23,6 +23,7 @@ services:
             AIRR_INFO_CONTACT_URL: ${AIRR_INFO_CONTACT_URL:-http://ireceptor.org}
             AIRR_INFO_CONTACT_EMAIL: ${AIRR_INFO_CONTACT_EMAIL:-support@ireceptor.org}
         volumes:
+            - ../.home:/var/www/html/public/home
             - ../.config:/config
             - ../.ssl:/etc/apache2/ssl
         ports:
