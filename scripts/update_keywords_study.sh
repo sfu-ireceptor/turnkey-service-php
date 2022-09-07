@@ -38,11 +38,11 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 				-e SINGLE_CELL_FIELD_NAME="$SINGLE_CELL_FIELD_NAME" \
 				-e SEQUENCE_COUNT_FIELD_NAME="$SEQUENCE_COUNT_FIELD_NAME" \
 			ireceptor-dataloading  \
-				sh -c 'python /app/dataload/update_dates.py \
+				sh -c 'python /app/dataload/update_keywords_study.py \
 					$DB_HOST \
 					$DB_DATABASE \
 					$COLLECTION_NAME \
 					$KEYWORDS_STUDY_FIELD_NAME \
 					$SINGLE_CELL_FIELD_NAME \
-					$SEQUENCE_COUNT_FIELD_NAME \
+					$SEQUENCE_COUNT_FIELD_NAME' \
  	2>&1 | tee $LOG_FILE
