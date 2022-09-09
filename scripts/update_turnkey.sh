@@ -100,7 +100,15 @@ sudo systemctl enable ireceptor-turnkey.service
 echo "Done"
 echo
 
-# create home folder
+# if .home folder exists, but is owned by root, it needs to be deleted
+if [[ -e "${SCRIPT_DIR_FULL}/../.home" ]]; then
+	home_folder_owner="$(stat --format '%U' "${SCRIPT_DIR_FULL}/../.home")"
+	if [ "${home_folder_owner}" = 'root' ]; then
+	    sudo rmdir ${SCRIPT_DIR_FULL}/../.home
+	fi
+fi
+
+# create .home folder (owned by current user) if needed
 mkdir -p ${SCRIPT_DIR_FULL}/../.home
 
 # start Docker containers
