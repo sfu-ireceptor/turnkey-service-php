@@ -1,7 +1,10 @@
 # Release Notes
 
+## v4.0-pre (Sep 9, 2022)
+- Enable [customization of the home page](doc/customizing_home_page.md)
+
 ## v4.0-pre (June 13, 2022)
-- Enable override of contact info in airr/v1/info
+- Enable [customization of the /airr/v1/info entry point](doc/customizing_info_entry_point.md)
 
 ## v4.0-pre (May 19, 2022)
 - Use systemd to start turnkey on boot

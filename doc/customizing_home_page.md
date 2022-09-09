@@ -10,4 +10,4 @@ How to customize the web page at https://localhost/
 
 Create an ``index.html`` file in the ``.home`` folder. It will be shown instead of the default home page.
 
-Note: you can into the ``.home`` folder other files required by ``index.html``: CSS, Javascript, images, other HTML files, etc.
+Note: you can put into the ``.home`` folder other required files: CSS, Javascript, images, other HTML files, etc.
