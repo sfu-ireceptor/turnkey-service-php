@@ -19,6 +19,7 @@ services:
             DB_SAMPLES_COLLECTION: sample
             DB_SEQUENCES_COLLECTION: sequence
             DB_CELL_COLLECTION: cell
+            AIRR_INFO_TITLE: ${AIRR_INFO_TITLE:-iReceptor Service}
             AIRR_INFO_CONTACT_NAME: ${AIRR_INFO_CONTACT_NAME:-iReceptor}
             AIRR_INFO_CONTACT_URL: ${AIRR_INFO_CONTACT_URL:-http://ireceptor.org}
             AIRR_INFO_CONTACT_EMAIL: ${AIRR_INFO_CONTACT_EMAIL:-support@ireceptor.org}
