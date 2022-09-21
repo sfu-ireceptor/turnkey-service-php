@@ -6,7 +6,7 @@ Warning: this is an unstable version, you might lose your data and encounter som
 
 ```
 scripts/stop_turnkey.sh
-cp scripts/.env-dev .env
+cp scripts/.env-dev scripts/.env
 scripts/start_turnkey.sh 
 ```
 

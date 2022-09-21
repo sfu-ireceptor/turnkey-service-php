@@ -1,40 +1,40 @@
 # Ensuring the data was loaded successfully into the Turnkey
 
-Due to the dimensions of the metadata and the number of steps involved in curating and loading data, the overall process can be prone to error. We provide a script that allows to verify that the data was loaded successfuly into the Turnkey. Quality assurance is performed on the following levels:
+Due to the dimensions of the metadata and the number of steps involved in curating and loading data, the overall process can be prone to error. We provide a script that allows the user to verify that the data was loaded successfuly into the Turnkey. Quality assurance is performed on the following levels:
 
-1) Count number of samples found in metadata CSV or EXCEL file against the number of samples found in API response, given a study ID
-2) Ensure all samples are uniquely identified for a study in metadata file and API response
+1) Count number of repertoires found in metadata CSV file against the number of repertoires found in API response, given a study ID
+2) Ensure all repertoires are uniquely identified for a study in metadata file and API response
 3) Ensure field names and content match in metadata and API response
-4) Compare the total number of lines found within the annotation files against the number of sequences in the API response. It can also compare this number against what is found within the metadata file. Please ensure to name this field as ir_curator_count in the metadata CSV or EXCEL file to perform this comparison. 
+4) Compare the total number of lines found within the annotation files against the number of sequences in the API response. It can also compare this number against what is found within the metadata file. Please ensure to name this field as ir_curator_count in the metadata CSV file to perform this comparison. 
 
 
 ## How it works
 
 The verify_dataload.sh script takes as input:
 
-* the name of a CSV or EXCEL file containing sample metadata
-* the URL associated to the Turnkey
 * the study ID uniquely identifying the study
-* the full path to a directory containing annotation files for sequences processed using either MIXCR, IMGT or 
-IGBLAST
-* a field name within the metadata uniquely idenfitying each sample
+* the full path to a directory containing the study data (metadata file and annotation files) 
+* the name of a CSV file containing sample metadata
+* the type of data being processed (either MIXCR, IMGT or AIRR)
+* the directory in which to store the output report
+
 
 And as output it generates a report covering points 1-4. 
 
 ## Positional arguments:
 
 ```
-  metadata_file      The EXCEL or CSV file containing sample metadata for a
-                     study.
-  API_url_address    The URL associated to your Turnkey, or the URL associated
-                     to the API containing sample metadata.
+
   study_id           String value uniquely identifying study. Example:
                      PRJEB1234, PRJNA1234.
-  annotation_dir     Full path to directory containing annotation files for
-                     sequences processed using either IMGT, MIXCR and IGBLAST
-                     annotations.
-  unique_identifier  Choose a field name from the sample metadata spreadsheet
-                     which UNIQUELY identifies each sample.
+  study_dir          Full path to directory containing the study metadata and 
+                     annotation files for sequences processed
+  metadata_file      The CSV file containing sample metadata for a
+                     study.
+  annotation_tool    The file format used to store the annotated sequence
+                     data, either vquest, mixcr, or airr.
+  output_dir         The directory in which to store the output of the data
+                     provenance report.
 
 optional arguments:
   -h, --help         show this help message and exit
@@ -42,166 +42,116 @@ optional arguments:
 ```
 ## Sample Usage
 
-An example with positional arguments
+A working example using sample metadata from the [iReceptor Curation github repository](https://github.com/sfu-ireceptor/dataloading-curation) is given below. The example assumes you have a working iReceptor Turnkey installed, the iReceptor Turnkey has been installed in $HOME/turnkey-service-php, and that it is possible to load data into this repository (the repository is experimental and the data can later be deleted).
+
+### Checkout the curation data from Github.
+
+The example below assumes we are storing the data curation github in the users $HOME directory.
 
 ```
-verify_dataload.sh /PATH/TO/metadata_file API_url_address study_id annotation_dir unique_identifier
+cd $HOME
+git clone https://github.com/sfu-ireceptor/dataloading-curation.git
 ```
-A working example using sample metadata from the [iReceptor Curation github repository](https://github.com/sfu-ireceptor/dataloading-curation) is given below. This assumes:
-- the repertoire metadata and the rearrangments exists in the same directory as per the [iReceptor Curation process](http://www.ireceptor.org/curation). In this case the files from the dataloading_curation github test data set in dataloading-curation/test/imgt/imgt are used. This test data set is from Palanichamy et al with Study ID PRJNA248411.
-- the study above has been loaded into your iReceptor Turnkey at URL http://your.repository.org/v2/samples using the Turnkey data loading process.
-- a unique identifier field name ir_rearrangement_number was used when the study was loaded (this identifier exists in the repertoire metadata file provided with the above study).
+We now have a set of test data sets available for experimentation.
 
-You can download this example dataset from the github repository above. Once downloaded and loaded into your repository, the data loading process can be verified with the command below:
+### Load a data set into the iReceptor Turnkey
 
+We will use a IMGT VQuest based data set for our test, in particular a small "toy" data set. This is stored in $HOME/dataloading-curation/test/imgt/imgt_toy. The `verify_dataload.sh` script assumes that all data from the study are in a single directory, and this study follows that protocol. The toy data set is a subset of the data from Palanichamy et al with Study ID PRJNA248411.
+
+First load the study metadata. The "toy" IMGT study only has one repertoire.
 ```
-verify_dataload.sh dataloading-curation/test/imgt/imgt/PRJNA248411_Palanichamy_2018-12-18.csv http://your.repository.org/v2/samples PRJNA248411 dataloading-curation/test/imgt/imgt ir_rearrangement_number
+cd $HOME/turnkey-service-php
+scripts/load_metadata.sh ireceptor $HOME/dataloading-curation/test/imgt/imgt_toy/PRJNA248411_Palanichamy_SRR1298740.csv
 ```
-
-## Sample check report output
-
-Provided all arguments are in place, and all HLF options are asked for in the sanity_level option, the script will generate a report covering each level. It will first ensure that the file provided is not corrupt and that all samples are uniquely identified. In the sample below, the metadata file was healthy and all samples were identified uniquely via the field name "ir_rearrangement_number
-".
-
+Then load the associated rearrangements (in IMGT VQuest format), check to see if the repertoire was loaded, and check the count of the number of rearrangements that were loaded for the repertoire.
 ```
-########################################################################################################
----------------------------------------VERIFY FILES ARE HEALTHY-----------------------------------------
-
----------------------------------------------Metadata file----------------------------------------------
-
-HEALTHY FILE: Proceed with tests
-
-Existence and uniquenes of ir_rearrangement_number in metadata
-TRUE: All entries under  ir_rearrangement_number  in master metadata are unique
-
----------------------------------------------API RESPONSE-----------------------------------------------
-
-Existence and uniqueness of ir_rearrangement_number in API response
-TRUE: ir_rearrangement_number found in API response
-
-TRUE: ir_rearrangement_number unique in API response
+scripts/load_rearrangements.sh imgt $HOME/dataloading-curation/test/imgt/imgt_toy/SRR1298740.txz
+curl --data "{}" "http://localhost/airr/v1/repertoire"
+curl --data '{"facets":"repertoire_id"}' "http://localhost/airr/v1/rearrangement"
 ```
 
-Then the script will return information on the study title, authors and ID, and provide a count of the number of samples found in metadata and those successfully loaded into the Turnkey, as well as the number of those not found. In the example below half of the samples were successfully loaded and half were not. 
+### Perform a data provenance check
+
+Performing a data provenance check given the above is straight forward using the `verify_dataload.sh` script.
+```
+scripts/verify_dataload.sh PRJNA248411 $HOME/dataloading-curation/test/imgt/imgt_toy PRJNA248411_Palanichamy_SRR1298740.csv vquest /tmp
+```
+This will provide a report in the output directory provided (/tmp in this case). The output of the command will report on several test phases:
+- It will check the metadata file provided and warn of any errors.
+- It will report on any fields that are expected in the API and are missing
+- It will report on any curatore fields that are expected in the metadata file and are missing
+- It will report on any discrepancies between the content of data fields in the metadata file and those returned by the API
+- It will report on any discrepancies between sequences counts that are returned from the API (and therefore the repository), those that were in the original file that was loaded, and the count in the internal iReceptor metadata field (ir_curator_count) in the metadata file.
+
+A summary of potential issues will be provided, with detailed reports in the following files in the output directory (/tmp)
+- PRJNA248411_Facet_Count_curator_count_Annotation_count_DATETIME.csv
+- PRJNA248411_reported_fields_DATETIME.csv
+
+## Check the sample report output
+
+The script will generate a report covering each level above. It will first ensure that the file provided is not corrupt and that all samples are uniquely identified. In the sample below, the metadata file was healthy and all samples were identified uniquely.
 
 ```
-########################################################################################################
-------------------------------------------HIGH LEVEL SUMMARY--------------------------------------------
+DATA PROVENANCE TEST
 
-Study title
+--------------------------------------------------------------------------------------------------------
+Check Metadata file
 
-Author 1, Author 2, Author 3
-
-Study ID PRJNA12345
-
-PRJNA12345 has a total of 40 entries
-Entries found in API: 20
-Entries not found in API: 20
-
+PASS: Metadata file /study/PRJNA248411_Palanichamy_SRR1298740.csv loaded
 ```
-The report will then summarize metadata field names and content. If the number uniquely identifying a sample is not found, it will raise a flag that looks as follows. 
-
+The test then checks the AIRR Mapping file, which specifies expected fields for both API response and
+data curation fields, against fields in the API response and in the metadata file.
 ```
-########################################################################################################
------------------------------------------DETAILED SANITY CHECK------------------------------------------
+--------------------------------------------------------------------------------------------------------
+Check AIRR Mapping against API and Metadata file
 
---------------------------BEGIN METADATA AND API FIELD AND CONTENT VERIFICATION-------------------------
+INFO: Sending query to http://ireceptor-api//airr/v1/repertoire
+INFO: Total query time (in seconds): 0.2084512710571289
 
-ir_rearrangement_number: 645
-JSON file index: []
+INFO: Checking field names from AIRR mapping for API (column ir_adc_api_response) not found in API response
+PASS: No fields missing
 
-The ir_rearrangement_number associated to this study was not found in API response
-
-END OF ENTRY
-
--_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+INFO: Checking field names in AIRR mapping for curation (column ir_curator) not found in metadata fields
+PASS: No fields missing
 ```
+The test then checks that the data in the fields in the API response match the data in the metadata file. 
+This performs a field to field comparison, across all repertoires. If the test finds any field content
+differences it reports a summary and writes out the details in specified file.
 
-If on the other hand the sample is found, it will raise a TRUE flag if no content-related problems were found, otherwise information is provided on mismatches between the metadata file and the API response. This can come in handy when multiple versions of the same study are uploaded, if data has been modified since the first time it was loaded or if field names have been renamed since the first time they were loaded. The example below contains an instance of a field that was renamed with no content-related problems under all other field names. 
-
+Note: The data verification currently has problems comparing the content in fields that contains arrays
+of strings. So it is expected to have content differences flagged for two AIRR array fields, `study.keywords_study`
+and `data_processing.data_processing_files`. These fields should be checked for errors, but in general messages like
+the ones below are expected.
 ```
-ir_rearrangement_number: 663
-JSON file index: [532]
+--------------------------------------------------------------------------------------------------------
+Metadata/API content cross comparison
 
-TEST: FIELD NAMES MATCH
-RESULT --------------------------------------------------------------------------------->False
-
-Summary of non-matching field names 
-
-Field names in API response 
-
-ir_other_rearrangement_file_name
-
-
-Field names in Metadata 
-
-ir_ancillary_rearrangement_file_name
-
-
-TEST: FIELD CONTENT MATCHES
-RESULT --------------------------------------------------------------------------------->TRUE 
-
-END OF ENTRY
-
--_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+WARN: Some fields may require attention:
+WARN:     In ADC API:  ['study.keywords_study' 'data_processing.0.data_processing_files']
+WARN:     In metadata:  ['keywords_study' 'data_processing_files']
+WARN: For details refer to /output/PRJNA248411_reported_fields_2021-07-28 21:01:56.525629.csv
 ```
-
-The next entry contains a report on a field whose content does not match. 
-
+The data verification then checks to confirm the validity of the AIRR API response.
 ```
-ir_rearrangement_number: 1114
-JSON file index: [140]
+--------------------------------------------------------------------------------------------------------
+AIRR field validation
 
-TEST: FIELD NAMES MATCH
-RESULT --------------------------------------------------------------------------------->TRUE
-
-TEST: FIELD CONTENT MATCHES
-RESULT --------------------------------------------------------------------------------->FALSE 
-
-Summary of non-matching entries 
-
-ENTRY:  pub_ids
-METADATA ENTRY RETURNS : PMID: 23556777  type: <class 'str'>
-API RESPONSE RETURNS : PMCABCDS3 type: <class 'str'>
-
-END OF ENTRY
-
--_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+INFO: Sending query to http://ireceptor-api//airr/v1/repertoire
+INFO: Total query time (in seconds): 0.20888471603393555
+PASS: AIRR Repertoire is valid
 ```
-
-The last part of the report compares the number of sequences found in metadata, API response against the number of lines in the annotation files, for a given sample. It first ensures that files reported in metadata are found under the path provided. 
-
+The last step is the most processing intensive. In this step, the data verification request the ADC API
+to count the rearrangements for a repertoire and confirms that that number matches both the number of
+rearrangements in the file that was loaded for the repertoire as well as the curator count field (ir_curator_count)
+in the metadata file.
 ```
-ir_rearrangement_number: 655
-Metadata file names: ['SRR12345_a.txz', 'SRR12345_b.txz']
-Files found in server: ['SRR12345_a.txz', 'SRR12345_b.txz']
-Files not found in server: []
+--------------------------------------------------------------------------------------------------------
+Annotation count validation (API, file size, curator count)
 
- . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-ir_sequence_count 			#Lines Annotation F 	Test Result
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-API Resp 	 Metadata Resp
- . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-540235 		 540235				540235			True
-
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+INFO: Processing annotations for Repertoire 393 using:
+INFO:   annotation_file_format: vquest
+INFO:   ir_rearrangement_tool: IMGT high-Vquest
+INFO: Sending query to http://ireceptor-api//airr/v1/rearrangement
+INFO: Total query time (in seconds): 0.22046279907226562
+PASS: Repertoire 393 returned TRUE (test passed), see CSV for details
 ```
-
-Note that this check can work if one or more of the three components is missing. For example, if the sample is not loaded into the API, the script will report this as "NINAPI" and compare what is in the metadata against the number of lines in annotation file. If a filename is not found, it will be reported and a 0 will be marked under #Lines Annotation F. 
-
-```
-ir_rearrangement_number: 646
-Metadata file names: ['SRR1964798.fmt19']
-Files found in server: []
-Files not found in server: ['SRR1964798.fmt19']
-
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-ir_sequence_count 			#Lines Annotation F 	Test Result
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-API Resp 	 Metadata Resp
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-NINAPI 		 56075				0			False
-
-
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
- ```

@@ -18,15 +18,26 @@ services:
             DB_DATABASE: ireceptor
             DB_SAMPLES_COLLECTION: sample
             DB_SEQUENCES_COLLECTION: sequence
+            DB_CELL_COLLECTION: cell
+            AIRR_INFO_TITLE: ${AIRR_INFO_TITLE:-iReceptor Service}
+            AIRR_INFO_CONTACT_NAME: ${AIRR_INFO_CONTACT_NAME:-iReceptor}
+            AIRR_INFO_CONTACT_URL: ${AIRR_INFO_CONTACT_URL:-http://ireceptor.org}
+            AIRR_INFO_CONTACT_EMAIL: ${AIRR_INFO_CONTACT_EMAIL:-support@ireceptor.org}
+        volumes:
+            - ../.home:/var/www/html/public/home
+            - ../.config:/config
+            - ../.ssl:/etc/apache2/ssl
         ports:
             - ${API_PORT:-80}:80
+            - ${API_PORT_HTTPS:-443}:443
 
     ireceptor-dataloading:
         depends_on:
             - ireceptor-database
-        image: ireceptor/dataloading-mongo:${DATALOADING_TAG:-turnkey-v4-dataloading}
+        image: ireceptor/dataloading-mongo:${DATALOADING_TAG:-turnkey-v4}
         environment:
             DB_HOST: ireceptor-database
             DB_DATABASE: ireceptor
         volumes:
+            - ../.config:/config
             - ${FILE_FOLDER:-/tmp}:/scratch

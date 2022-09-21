@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Corrie
+    given-names: Brian
+    orcid: https://orcid.org/0000-0003-3888-6495
+title: "iReceptor: A platform for querying and analyzing antibody/B-cell and T-cell receptor repertoire data across federated repositories"
+version: v4.0
+doi: 10.1111/imr.12666
