@@ -14,11 +14,12 @@ COLLECTION_NAME="$1"
 CREATED_AT_NAME="$2"
 UPDATED_AT_NAME="$3"
 DATE_MASK="$4"
-NO_UPDATE = ""
-if [[$# eq 5]];
+NO_UPDATE=""
+
+if [ $# -eq 5 ];
 then
-	NO_UPDATE = "$5"
-	ECHO "Note: Using $NO_UPDATE, no database changes will be made."
+	NO_UPDATE="$5"
+	echo "Note: Using $NO_UPDATE, no database changes will be made."
 fi
 
 # create log file
