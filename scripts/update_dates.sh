@@ -3,10 +3,10 @@
 SCRIPT_DIR=`dirname "$0"`
 
 # check number of arguments
-if [[ $# -ne 4 ]];
+if [[ $# -ne 4 && $# -ne 5 ]];
 then
     echo "$0: wrong number of arguments ($#)"
-    echo "usage: $0 <collection name> <adc_created_date field name> <adc_updated_date field name> <date format mask, e.g %a %b %d %Y %H:%M:%S %Z, enclosed in quotes>"
+    echo "usage: $0 <collection name> <adc_created_date field name> <adc_updated_date field name> <date format mask, e.g %a %b %d %Y %H:%M:%S %Z, enclosed in quotes> <noupdate if you wish to test the script without updating the database>"
     exit 1
 fi
 
@@ -14,6 +14,12 @@ COLLECTION_NAME="$1"
 CREATED_AT_NAME="$2"
 UPDATED_AT_NAME="$3"
 DATE_MASK="$4"
+NO_UPDATE = ""
+if [[$# eq 5]];
+then
+	NO_UPDATE = "$5"
+	ECHO "Note: Using $NO_UPDATE, no database changes will be made."
+fi
 
 # create log file
 LOG_FOLDER=${SCRIPT_DIR}/../log
@@ -38,6 +44,7 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 				-e CREATED_AT_NAME="$CREATED_AT_NAME" \
 				-e UPDATED_AT_NAME="$UPDATED_AT_NAME" \
 				-e DATE_MASK="$DATE_MASK" \
+				-e NO_UPDATE="$NO_UPDATE" \
 			ireceptor-dataloading  \
 				sh -c 'python /app/dataload/update_dates.py \
 					$DB_HOST \
@@ -45,7 +52,8 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 					$COLLECTION_NAME \
 					$CREATED_AT_NAME \
 					$UPDATED_AT_NAME \
-					"$DATE_MASK"' \
+					"$DATE_MASK" \
+					$NO_UPDATE ' \
  	2>&1 | tee $LOG_FILE
 
 
