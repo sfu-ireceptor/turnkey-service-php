@@ -17,7 +17,7 @@ date
 CLONE_TYPE="$1"
 shift
 
-${SCRIPT_DIR}/drop_clone_database_indexes_for_dataloading.sh
+${SCRIPT_DIR}/drop_clone_database_indexes_dataloading.sh
 
 while [ "$1" != "" ]; do
 	FILE="$1"
