@@ -217,7 +217,6 @@ repository](doc/database_backup.md) before this step.
 - [Running a production Turnkey](doc/production_db.md)
 - [Updating the turnkey](doc/updating.md)
 - [Upgrading the turnkey from v3 to v4](doc/upgrading_from_v3_to_v4.md)
-- [Customizing the /airr/v1/info entry point](doc/customizing_info_entry_point.md)
 - [Customizing the home page](doc/customizing_home_page.md)
 - [Enabling web statistics](doc/web_stats.md)
 - [How the turnkey works](doc/how_it_works.md)
