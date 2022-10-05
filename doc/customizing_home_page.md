@@ -35,10 +35,10 @@ scripts/start_turnkey.sh
 
 Go to your turnkey root URL https://&lt;your server IP&gt;:
 
-![Saturn University repository screenshot](saturn_university.png)
+<kbd>![Saturn University repository screenshot](saturn_university.png)</kbd>
 
 
-You can also check ``/airr/v1/info``:
+You can also check the API entry point ``/airr/v1/info``:
 ```
 curl -k https://localhost/airr/v1/info
 ```
