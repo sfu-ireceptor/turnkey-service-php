@@ -18,7 +18,7 @@ AIRR_INFO_CONTACT_EMAIL=support@test-repository.com
 AIRR_INFO_CONTACT_URL=https://test-repository.com
 ```
 
-Change the values as you see fit. For example:
+Change the values. For example:
 ```
 AIRR_INFO_TITLE=Saturn University
 AIRR_INFO_CONTACT_EMAIL=contact@saturn.uni
@@ -49,7 +49,7 @@ scripts/stop_turnkey.sh
 scripts/start_turnkey.sh
 ```
 
-Note: this will also change the JSON response returned by the API at `/airr/v1/info`:
+Note: this will also change the default values in the JSON response returned by the API at `/airr/v1/info`:
 
 
 
