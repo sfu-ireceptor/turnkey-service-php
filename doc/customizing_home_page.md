@@ -1,6 +1,6 @@
 # Customizing the home page
 
-How to customize the web page at https://<your server IP> (also visible at https://localhost).
+How to customize the web page at https://&lt;your server IP&gt; (also visible at https://localhost).
 
 
 ## Solution 1 (recommended) - Changing the defaults
@@ -33,7 +33,7 @@ scripts/start_turnkey.sh
 
 ### Check it worked
 
-Go to your turnkey root URL https://<your server IP>. You can also 
+Go to your turnkey root URL https://&lt;your server IP&gt; . You can also 
 
 ```
 curl -k https://localhost/airr/v1/info
