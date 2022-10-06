@@ -56,9 +56,9 @@ $ curl -k https://localhost/airr/v1/info
 ```
 
 
-### Resetting to the default values
+### Reverting to the default values
 
-Delete the .env file and restart the turnkey:
+To remove your changes, delete the .env file and restart the turnkey:
 ```
 rm scripts/.env
 scripts/stop_turnkey.sh
