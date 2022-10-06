@@ -5,12 +5,12 @@ How to customize the web page at https://&lt;your server IP&gt; (also visible at
 
 ## Solution 1 (recommended) - Changing the defaults
 
-### Create a .env file
+### Create a ``.env`` file
 ```
 cp scripts/.env-custom scripts/.env
 ```
 
-### Customize .env
+### Customize ``.env``
 The defaults are:
 ```
 AIRR_INFO_TITLE=iReceptor Service
@@ -58,7 +58,7 @@ $ curl -k https://localhost/airr/v1/info
 
 ### Reverting to the default values
 
-To remove your changes, delete the .env file and restart the turnkey:
+To remove your changes, delete the ``.env`` file and restart the turnkey:
 ```
 rm scripts/.env
 scripts/stop_turnkey.sh
