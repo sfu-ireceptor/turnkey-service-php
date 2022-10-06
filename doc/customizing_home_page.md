@@ -38,9 +38,21 @@ Go to your turnkey root URL https://&lt;your server IP&gt;:
 <kbd>![Saturn University repository screenshot](saturn_university.png)</kbd>
 
 
-You can also check the API entry point ``/airr/v1/info``:
+Note: the JSON response returned by the API at `/airr/v1/info` has also been updated:
 ```
-curl -k https://localhost/airr/v1/info
+$ curl -k https://localhost/airr/v1/info
+{
+    "title": "Saturn University",
+    "description": "AIRR Data Commons API for iReceptor",
+    "version": "3.0",
+    "contact": {
+        "url": "https://saturn-university.com",
+        "email": "contact@saturn.uni"
+    },
+    "license": {
+        "name": "GNU LGPL V3"
+    },
+    ...
 ```
 
 
@@ -52,9 +64,6 @@ rm scripts/.env
 scripts/stop_turnkey.sh
 scripts/start_turnkey.sh
 ```
-
-Note: this will also change the default values in the JSON response returned by the API at `/airr/v1/info`:
-
 
 
 ## Solution 2 - Building a custom home page
