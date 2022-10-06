@@ -1,6 +1,11 @@
-# Moving the database to another folder
+# Moving the database to another location
 
-The database data is in the `.mongodb_data` folder. To move it somewhere else (for example on an external disk):
+Because the MongoDB database can be quite large, it is often necessary to move it to an external volume rather
+than using the root disk of your server/VM.
+
+Although any file system can be used, [Mongo recommends using the XFS file system](https://docs.mongodb.com/manual/administration/production-checklist-operations/).
+
+The database data is in the `.mongodb_data` folder. To move it somewhere else (for example to an external volume):
 
 1. Stop the turnkey
 ```
