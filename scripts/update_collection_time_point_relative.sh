@@ -46,8 +46,8 @@ export FILE_FOLDER
 sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run --rm \
 				-e TIMEPOINT_RELATIVE_NAME="$TIMEPOINT_RELATIVE_NAME" \
 				-e COLLECTION_NAME="sample"\
-				-e UPDATED_AT_NAME = "$UPDATED_AT_NAME" \
-				-e NO_UPDATE = "$NO_UPDATE"
+				-e UPDATED_AT_NAME="$UPDATED_AT_NAME" \
+				-e NO_UPDATE="$NO_UPDATE"
 			ireceptor-dataloading  \
 				sh -c 'python /app/dataload/update_collection_timepoint_relative.py \
 					$DB_HOST \

@@ -50,7 +50,7 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 				-e COLLECTION_NAME="sample"\
 				-e SINGLE_CELL_FIELD_NAME="$SINGLE_CELL_FIELD_NAME" \
 				-e SEQUENCE_COUNT_FIELD_NAME="$SEQUENCE_COUNT_FIELD_NAME" \
-				-e UPDATED_AT_NAME = "$UPDATED_AT_NAME" \
+				-e UPDATED_AT_NAME="$UPDATED_AT_NAME" \
 			ireceptor-dataloading  \
 				sh -c 'python /app/dataload/update_keywords_study.py \
 					$DB_HOST \
