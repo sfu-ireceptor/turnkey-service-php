@@ -24,7 +24,7 @@ NO_UPDATE=""
 if [ $# -eq 5 ];
 then
 	NO_UPDATE="$5"
-	echo "Note: Using $NO_UPDATE, no database changes will be made."
+	echo "Note: Using $NO_UPDATE parameter."
 fi
 
 # create log file

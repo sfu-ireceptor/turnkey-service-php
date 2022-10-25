@@ -18,13 +18,13 @@ fi
 KEYWORDS_STUDY_FIELD_NAME="$1"
 SINGLE_CELL_FIELD_NAME="$2"
 SEQUENCE_COUNT_FIELD_NAME="$3"
-UPDATED_AT_NAME = $4
+UPDATED_AT_NAME = "$4"
 NO_UPDATE=""
 
 if [ $# -eq 5 ];
 then
 	NO_UPDATE="$5"
-	echo "Note: Using $NO_UPDATE, no database changes will be made."
+	echo "Note: Using $NO_UPDATE parameter."
 fi
 
 # create log file

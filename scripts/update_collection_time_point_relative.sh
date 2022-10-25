@@ -15,14 +15,14 @@ then
     exit 1
 fi
 
-TIMEPOINT_RELATIVE_NAME=$1
-UPDATED_AT_NAME = $2
+TIMEPOINT_RELATIVE_NAME= "$1"
+UPDATED_AT_NAME = "$2"
 NO_UPDATE=""
 
 if [ $# -eq 3 ];
 then
 	NO_UPDATE="$3"
-	echo "Note: Using $NO_UPDATE, no database changes will be made."
+	echo "Note: Using $NO_UPDATE parameter."
 fi
 
 # create log file

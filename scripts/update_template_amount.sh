@@ -14,14 +14,14 @@ then
     exit 1
 fi
 
-TEMPLATE_AMOUNT_FIELD_NAME=$1
-UPDATED_AT_NAME = $2
+TEMPLATE_AMOUNT_FIELD_NAME= "$1"
+UPDATED_AT_NAME = "$2"
 NO_UPDATE=""
 
 if [ $# -eq 3 ];
 then
 	NO_UPDATE="$3"
-	echo "Note: Using $NO_UPDATE, no database changes will be made."
+	echo "Note: Using $NO_UPDATE parameter."
 fi
 
 # create log file
