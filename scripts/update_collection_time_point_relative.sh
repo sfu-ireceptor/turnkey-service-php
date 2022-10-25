@@ -3,11 +3,11 @@
 SCRIPT_DIR=`dirname "$0"`
 
 # check number of arguments
-if [[ $# -ne 4 && $# -ne 5 ]];
+if [[ $# -ne 2 && $# -ne 3 ]];
 then
     echo "$0: wrong number of arguments ($#)"
-    echo "usage: $0 <collection name> <adc_created_date field name> <adc_updated_date field name> \
-    <date format mask, e.g %a %b %d %Y %H:%M:%S %Z, enclosed in quotes> <optional check|verbose|check-verbose parameter>"
+    echo "usage: $0 <collection_time_point_relative_field_name>  \
+    <updated_at_field_name> <optional check|verbose|check-verbose parameter>"
     echo "check: don't do a database update, return 0 if no updates are needed, 1 otherwise, minimal output"
     echo "verbose: do a database update, return 0 if no issues, 1 otherwise, provide detailed output"
     echo "check-verbose: as check, but with detailed output"
@@ -15,15 +15,13 @@ then
     exit 1
 fi
 
-COLLECTION_NAME="$1"
-CREATED_AT_NAME="$2"
-UPDATED_AT_NAME="$3"
-DATE_MASK="$4"
+TIMEPOINT_RELATIVE_NAME=$1
+UPDATED_AT_NAME = $2
 NO_UPDATE=""
 
-if [ $# -eq 5 ];
+if [ $# -eq 3 ];
 then
-	NO_UPDATE="$5"
+	NO_UPDATE="$3"
 	echo "Note: Using $NO_UPDATE, no database changes will be made."
 fi
 
@@ -46,20 +44,16 @@ export FILE_FOLDER
 # $DB_HOST and $DB_DATABASE are defined in docker-compose.yml and will be
 # substituted only when the python command is executed, INSIDE the container
 sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run --rm \
-				-e COLLECTION_NAME="$COLLECTION_NAME" \
-				-e CREATED_AT_NAME="$CREATED_AT_NAME" \
-				-e UPDATED_AT_NAME="$UPDATED_AT_NAME" \
-				-e DATE_MASK="$DATE_MASK" \
-				-e NO_UPDATE="$NO_UPDATE" \
+				-e TIMEPOINT_RELATIVE_NAME="$TIMEPOINT_RELATIVE_NAME" \
+				-e COLLECTION_NAME="sample"\
+				-e UPDATED_AT_NAME = "$UPDATED_AT_NAME" \
+				-e NO_UPDATE = "$NO_UPDATE"
 			ireceptor-dataloading  \
-				sh -c 'python /app/dataload/update_dates.py \
+				sh -c 'python /app/dataload/update_collection_timepoint_relative.py \
 					$DB_HOST \
 					$DB_DATABASE \
 					$COLLECTION_NAME \
-					$CREATED_AT_NAME \
+					$TIMEPOINT_RELATIVE_NAME \
 					$UPDATED_AT_NAME \
-					"$DATE_MASK" \
-					$NO_UPDATE ' \
+					$NO_UPDATE '\
  	2>&1 | tee $LOG_FILE
-
-

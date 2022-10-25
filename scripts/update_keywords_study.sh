@@ -3,16 +3,29 @@
 SCRIPT_DIR=`dirname "$0"`
 
 # check number of arguments
-if [[ $# -ne 3 ]];
+if [[ $# -ne 4 && $# -ne 5 ]];
 then
     echo "$0: wrong number of arguments ($#)"
-    echo "usage: $0 <keywords_study_field_name> <single_cell_field_name> <sequence_count_field_name>"
+    echo "usage: $0 <keywords_study_field_name> <single_cell_field_name> <sequence_count_field_name> \
+      <updated_at_field_name> <optional check|verbose|check-verbose parameter>"
+    echo "check: don't do a database update, return 0 if no updates are needed, 1 otherwise, minimal output"
+    echo "verbose: do a database update, return 0 if no issues, 1 otherwise, provide detailed output"
+    echo "check-verbose: as check, but with detailed output"
+    echo "if no parameter, database will be updated with minimal output"
     exit 1
 fi
 
 KEYWORDS_STUDY_FIELD_NAME="$1"
 SINGLE_CELL_FIELD_NAME="$2"
 SEQUENCE_COUNT_FIELD_NAME="$3"
+UPDATED_AT_NAME = $4
+NO_UPDATE=""
+
+if [ $# -eq 5 ];
+then
+	NO_UPDATE="$5"
+	echo "Note: Using $NO_UPDATE, no database changes will be made."
+fi
 
 # create log file
 LOG_FOLDER=${SCRIPT_DIR}/../log
@@ -37,6 +50,7 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 				-e COLLECTION_NAME="sample"\
 				-e SINGLE_CELL_FIELD_NAME="$SINGLE_CELL_FIELD_NAME" \
 				-e SEQUENCE_COUNT_FIELD_NAME="$SEQUENCE_COUNT_FIELD_NAME" \
+				-e UPDATED_AT_NAME = "$UPDATED_AT_NAME" \
 			ireceptor-dataloading  \
 				sh -c 'python /app/dataload/update_keywords_study.py \
 					$DB_HOST \
@@ -44,5 +58,7 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 					$COLLECTION_NAME \
 					$KEYWORDS_STUDY_FIELD_NAME \
 					$SINGLE_CELL_FIELD_NAME \
-					$SEQUENCE_COUNT_FIELD_NAME' \
+					$SEQUENCE_COUNT_FIELD_NAME \
+					$UPDATED_AT_NAME \
+					$NO_UPDATE '\
  	2>&1 | tee $LOG_FILE
