@@ -14,8 +14,8 @@ then
     exit 1
 fi
 
-TEMPLATE_AMOUNT_FIELD_NAME= "$1"
-UPDATED_AT_NAME = "$2"
+TEMPLATE_AMOUNT_FIELD_NAME="$1"
+UPDATED_AT_NAME="$2"
 NO_UPDATE=""
 
 if [ $# -eq 3 ];

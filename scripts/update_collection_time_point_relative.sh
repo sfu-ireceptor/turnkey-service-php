@@ -15,8 +15,8 @@ then
     exit 1
 fi
 
-TIMEPOINT_RELATIVE_NAME= "$1"
-UPDATED_AT_NAME = "$2"
+TIMEPOINT_RELATIVE_NAME="$1"
+UPDATED_AT_NAME="$2"
 NO_UPDATE=""
 
 if [ $# -eq 3 ];
