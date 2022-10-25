@@ -46,7 +46,7 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 				-e TEMPLATE_AMOUNT_FIELD_NAME="$TEMPLATE_AMOUNT_FIELD_NAME" \
 				-e COLLECTION_NAME="sample"\
 				-e UPDATED_AT_NAME="$UPDATED_AT_NAME" \
-				-e NO_UPDATE="$NO_UPDATE"
+				-e NO_UPDATE="$NO_UPDATE" \
 			ireceptor-dataloading  \
 				sh -c 'python /app/dataload/update_template_amount.py \
 					$DB_HOST \

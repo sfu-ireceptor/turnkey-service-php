@@ -47,7 +47,7 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 				-e TIMEPOINT_RELATIVE_NAME="$TIMEPOINT_RELATIVE_NAME" \
 				-e COLLECTION_NAME="sample"\
 				-e UPDATED_AT_NAME="$UPDATED_AT_NAME" \
-				-e NO_UPDATE="$NO_UPDATE"
+				-e NO_UPDATE="$NO_UPDATE" \
 			ireceptor-dataloading  \
 				sh -c 'python /app/dataload/update_collection_timepoint_relative.py \
 					$DB_HOST \
