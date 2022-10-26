@@ -123,6 +123,17 @@ sudo docker system prune --force
 echo "Done"
 echo
 
+# check for database updates
+echo "Checking if the database needs to be updated.."
+DATABASE_NEEDS_TO_BE_UPDATED=`${SCRIPT_DIR}/check_for_database_updates.sh`
+if [ $DATABASE_NEEDS_TO_BE_UPDATED == '1' ]; then
+	echo "Warning: the version 1.3 of the AIRR standards requires some database updates."
+	echo "Please run scripts/update_database.sh as soon as possible. It will take about two hours."
+	exit 0
+fi
+echo "Done"
+echo
+
 # confirm successful installation
 echo "Congratulations, your iReceptor Service Turnkey has been updated successfully."
 echo "For more information, go to https://github.com/sfu-ireceptor/turnkey-service-php"
