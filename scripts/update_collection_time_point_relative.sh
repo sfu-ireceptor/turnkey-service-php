@@ -22,7 +22,6 @@ NO_UPDATE=""
 if [ $# -eq 3 ];
 then
 	NO_UPDATE="$3"
-	echo "Note: Using $NO_UPDATE parameter."
 fi
 
 # create log file
