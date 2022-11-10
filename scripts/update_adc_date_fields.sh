@@ -43,7 +43,7 @@ export FILE_FOLDER
 sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run --rm \
 				-e COLLECTION_NAME="sample"\
 			ireceptor-dataloading  \
-				sh -c 'python /app/dataload/update_template_amount.py \
+				sh -c 'python /app/dataload/update_adc_date_fields.py \
 					$DB_HOST \
 					$DB_DATABASE \
 					$COLLECTION_NAME \
