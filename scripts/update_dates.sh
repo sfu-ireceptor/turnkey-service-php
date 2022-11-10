@@ -1,6 +1,7 @@
 #!/bin/bash
 
 SCRIPT_DIR=`dirname "$0"`
+SCRIPT_FILE_NAME=`basename "$0"`
 
 # check number of arguments
 if [[ $# -ne 2 && $# -ne 3 ]];
@@ -34,7 +35,7 @@ fi
 LOG_FOLDER=${SCRIPT_DIR}/../log
 mkdir -p $LOG_FOLDER
 TIME1=`date +%Y-%m-%d_%H-%M-%S`
-LOG_FILE=${LOG_FOLDER}/${TIME1}_${FILE_NAME}.log
+LOG_FILE=${LOG_FOLDER}/${TIME1}_${SCRIPT_FILE_NAME}.log
 
 # make available to docker-compose.yml
 export FILE_FOLDER
