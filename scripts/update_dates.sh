@@ -1,32 +1,41 @@
 #!/bin/bash
 
 SCRIPT_DIR=`dirname "$0"`
+SCRIPT_FILE_NAME=`basename "$0"`
 
 # check number of arguments
-if [[ $# -ne 4 && $# -ne 5 ]];
+if [[ $# -ne 2 && $# -ne 3 ]];
 then
     echo "$0: wrong number of arguments ($#)"
-    echo "usage: $0 <collection name> <adc_created_date field name> <adc_updated_date field name> <date format mask, e.g %a %b %d %Y %H:%M:%S %Z, enclosed in quotes> <noupdate if you wish to test the script without updating the database>"
+    echo "usage: $0 <collection name><date format mask, e.g %a %b %d %Y %H:%M:%S %Z, enclosed in quotes> \ 
+    <optional check|verbose|check-verbose parameter>"
+    echo "check: don't do a database update, return 0 if no updates are needed, 1 otherwise, minimal output"
+    echo "verbose: do a database update, return 0 if no issues, 1 otherwise, provide detailed output"
+    echo "check-verbose: as check, but with detailed output"
+    echo "if no parameter, database will be updated with minimal output"
     exit 1
 fi
 
 COLLECTION_NAME="$1"
-CREATED_AT_NAME="$2"
-UPDATED_AT_NAME="$3"
-DATE_MASK="$4"
+CREATED_AT_NAME="ir_created_at"
+UPDATED_AT_NAME="ir_updated_at"
+DATE_MASK="$2"
 NO_UPDATE=""
+ERROR_OUTPUT=/dev/stdout
 
-if [ $# -eq 5 ];
+if [ $# -eq 3 ];
 then
-	NO_UPDATE="$5"
-	echo "Note: Using $NO_UPDATE, no database changes will be made."
+	NO_UPDATE="$3"
+	if [ $NO_UPDATE = "check" ]; then
+		ERROR_OUTPUT=/dev/null
+	fi
 fi
 
 # create log file
 LOG_FOLDER=${SCRIPT_DIR}/../log
 mkdir -p $LOG_FOLDER
 TIME1=`date +%Y-%m-%d_%H-%M-%S`
-LOG_FILE=${LOG_FOLDER}/${TIME1}_${FILE_NAME}.log
+LOG_FILE=${LOG_FOLDER}/${TIME1}_${SCRIPT_FILE_NAME}.log
 
 # make available to docker-compose.yml
 export FILE_FOLDER
@@ -55,6 +64,6 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 					$UPDATED_AT_NAME \
 					"$DATE_MASK" \
 					$NO_UPDATE ' \
- 	2>&1 | tee $LOG_FILE
+ 	2> $ERROR_OUTPUT | tee $LOG_FILE
 
 

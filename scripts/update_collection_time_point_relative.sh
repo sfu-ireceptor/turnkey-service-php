@@ -3,11 +3,11 @@
 SCRIPT_DIR=`dirname "$0"`
 
 # check number of arguments
-if [[ $# -ne 3 && $# -ne 4 ]];
+if [[ $# -ne 1 && $# -ne 2 ]];
 then
     echo "$0: wrong number of arguments ($#)"
-    echo "usage: $0 <keywords_study_field_name> <single_cell_field_name> <sequence_count_field_name> \
-       <optional check|verbose|check-verbose parameter>"
+    echo "usage: $0 <collection_time_point_relative_field_name>  \
+     <optional check|verbose|check-verbose parameter>"
     echo "check: don't do a database update, return 0 if no updates are needed, 1 otherwise, minimal output"
     echo "verbose: do a database update, return 0 if no issues, 1 otherwise, provide detailed output"
     echo "check-verbose: as check, but with detailed output"
@@ -15,15 +15,13 @@ then
     exit 1
 fi
 
-KEYWORDS_STUDY_FIELD_NAME="$1"
-SINGLE_CELL_FIELD_NAME="$2"
-SEQUENCE_COUNT_FIELD_NAME="$3"
+TIMEPOINT_RELATIVE_NAME="$1"
 UPDATED_AT_NAME="ir_updated_at"
 NO_UPDATE=""
 
-if [ $# -eq 4 ];
+if [ $# -eq 2 ];
 then
-	NO_UPDATE="$4"
+	NO_UPDATE="$2"
 fi
 
 # create log file
@@ -45,20 +43,16 @@ export FILE_FOLDER
 # $DB_HOST and $DB_DATABASE are defined in docker-compose.yml and will be
 # substituted only when the python command is executed, INSIDE the container
 sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run --rm \
-				-e KEYWORDS_STUDY_FIELD_NAME="$KEYWORDS_STUDY_FIELD_NAME" \
+				-e TIMEPOINT_RELATIVE_NAME="$TIMEPOINT_RELATIVE_NAME" \
 				-e COLLECTION_NAME="sample"\
-				-e SINGLE_CELL_FIELD_NAME="$SINGLE_CELL_FIELD_NAME" \
-				-e SEQUENCE_COUNT_FIELD_NAME="$SEQUENCE_COUNT_FIELD_NAME" \
 				-e UPDATED_AT_NAME="$UPDATED_AT_NAME" \
 				-e NO_UPDATE="$NO_UPDATE" \
 			ireceptor-dataloading  \
-				sh -c 'python /app/dataload/update_keywords_study.py \
+				sh -c 'python /app/dataload/update_collection_timepoint_relative.py \
 					$DB_HOST \
 					$DB_DATABASE \
 					$COLLECTION_NAME \
-					$KEYWORDS_STUDY_FIELD_NAME \
-					$SINGLE_CELL_FIELD_NAME \
-					$SEQUENCE_COUNT_FIELD_NAME \
+					$TIMEPOINT_RELATIVE_NAME \
 					$UPDATED_AT_NAME \
 					$NO_UPDATE '\
  	2>&1 | tee $LOG_FILE
