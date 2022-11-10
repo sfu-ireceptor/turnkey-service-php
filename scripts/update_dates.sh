@@ -20,10 +20,14 @@ CREATED_AT_NAME="ir_created_at"
 UPDATED_AT_NAME="ir_updated_at"
 DATE_MASK="$2"
 NO_UPDATE=""
+ERROR_OUTPUT=/dev/stdout
 
 if [ $# -eq 3 ];
 then
 	NO_UPDATE="$3"
+	if [ NO_UPDATE = "check" ]; then
+		ERROR_OUTPUT=/dev/null
+	fi
 fi
 
 # create log file
@@ -59,6 +63,6 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 					$UPDATED_AT_NAME \
 					"$DATE_MASK" \
 					$NO_UPDATE ' \
- 	2>&1 | tee $LOG_FILE
+ 	2> $ERROR_OUTPUT | tee $LOG_FILE
 
 
