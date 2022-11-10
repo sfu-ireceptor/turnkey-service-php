@@ -25,7 +25,7 @@ ERROR_OUTPUT=/dev/stdout
 if [ $# -eq 3 ];
 then
 	NO_UPDATE="$3"
-	if [ NO_UPDATE = "check" ]; then
+	if [ $NO_UPDATE = "check" ]; then
 		ERROR_OUTPUT=/dev/null
 	fi
 fi
