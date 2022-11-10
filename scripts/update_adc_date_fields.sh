@@ -42,6 +42,7 @@ export FILE_FOLDER
 # substituted only when the python command is executed, INSIDE the container
 sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run --rm \
 				-e COLLECTION_NAME="sample"\
+				-e NO_UPDATE="$NO_UPDATE" \		
 			ireceptor-dataloading  \
 				sh -c 'python /app/dataload/update_adc_date_fields.py \
 					$DB_HOST \
