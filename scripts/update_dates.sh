@@ -3,11 +3,11 @@
 SCRIPT_DIR=`dirname "$0"`
 
 # check number of arguments
-if [[ $# -ne 4 && $# -ne 5 ]];
+if [[ $# -ne 2 && $# -ne 3 ]];
 then
     echo "$0: wrong number of arguments ($#)"
-    echo "usage: $0 <collection name> <adc_created_date field name> <adc_updated_date field name> \
-    <date format mask, e.g %a %b %d %Y %H:%M:%S %Z, enclosed in quotes> <optional check|verbose|check-verbose parameter>"
+    echo "usage: $0 <collection name><date format mask, e.g %a %b %d %Y %H:%M:%S %Z, enclosed in quotes> \ 
+    <optional check|verbose|check-verbose parameter>"
     echo "check: don't do a database update, return 0 if no updates are needed, 1 otherwise, minimal output"
     echo "verbose: do a database update, return 0 if no issues, 1 otherwise, provide detailed output"
     echo "check-verbose: as check, but with detailed output"
@@ -16,14 +16,14 @@ then
 fi
 
 COLLECTION_NAME="$1"
-CREATED_AT_NAME="$2"
-UPDATED_AT_NAME="$3"
-DATE_MASK="$4"
+CREATED_AT_NAME="ir_created_at"
+UPDATED_AT_NAME="ir_updated_at"
+DATE_MASK="$2"
 NO_UPDATE=""
 
 if [ $# -eq 5 ];
 then
-	NO_UPDATE="$5"
+	NO_UPDATE="$3"
 fi
 
 # create log file

@@ -3,10 +3,10 @@
 SCRIPT_DIR=`dirname "$0"`
 
 # check number of arguments
-if [[ $# -ne 2 && $# -ne 3 ]];
+if [[ $# -ne 1 && $# -ne 2 ]];
 then
     echo "$0: wrong number of arguments ($#)"
-    echo "usage: $0 <template_amount_field_name> <updated_at_field_name> <optional check|verbose|check-verbose parameter>"
+    echo "usage: $0 <template_amount_field_name> <optional check|verbose|check-verbose parameter>"
     echo "check: don't do a database update, return 0 if no updates are needed, 1 otherwise, minimal output"
     echo "verbose: do a database update, return 0 if no issues, 1 otherwise, provide detailed output"
     echo "check-verbose: as check, but with detailed output"
@@ -15,12 +15,12 @@ then
 fi
 
 TEMPLATE_AMOUNT_FIELD_NAME="$1"
-UPDATED_AT_NAME="$2"
+UPDATED_AT_NAME="ir_updated_at"
 NO_UPDATE=""
 
-if [ $# -eq 3 ];
+if [ $# -eq 2 ];
 then
-	NO_UPDATE="$3"
+	NO_UPDATE="$2"
 fi
 
 # create log file
