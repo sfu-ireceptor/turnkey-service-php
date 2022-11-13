@@ -5,14 +5,14 @@ SCRIPT_DIR=`dirname "$0"`
 SCRIPT_FILE_NAME=`basename "$0"`
 
 # check number of arguments
-if [[$# -ne 1 ]];
+if [ $# -ne 1 ];
 then
     echo "$0: wrong number of arguments ($#)"
     echo "usage: $0 <update|check|verbose|check-verbose parameter>"
+    echo "update: database will be updated with minimal output"
     echo "check: don't do a database update, return 0 if no updates are needed, 1 otherwise, minimal output"
     echo "verbose: do a database update, return 0 if no issues, 1 otherwise, provide detailed output"
     echo "check-verbose: as check, but with detailed output"
-    echo "if no parameter, database will be updated with minimal output"
     exit 1
 fi
 
