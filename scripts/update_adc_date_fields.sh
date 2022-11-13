@@ -25,7 +25,7 @@ then
 	if [ $NO_UPDATE = "check" ]; then
 		ERROR_OUTPUT=/dev/null
 	fi
-	if [ $NO_UPDATE = "update"]; then
+	if [ $NO_UPDATE = "update" ]; then
 		NO_UPDATE=""
 	fi
 fi
