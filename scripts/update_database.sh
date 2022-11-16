@@ -17,6 +17,12 @@ fi
 
 # run any updates
 echo "Updating the database.."
-# TODO run update scripts
+
+${SCRIPT_DIR}/update_adc_date_fields.sh
+${SCRIPT_DIR}/update_collection_time_point_relative.sh collection_time_point_relative
+${SCRIPT_DIR}/update_dates.sh sample '%a %b %d %Y %H:%M:%S %Z'
+${SCRIPT_DIR}/update_keywords_study.sh keywords_study single_cell ir_sequence_count
+${SCRIPT_DIR}/update_template_amount.sh template_amount
+
 echo "Done"
 echo
