@@ -15,7 +15,7 @@ if [ $DATABASE_NEEDS_TO_BE_UPDATED -eq 0 ]; then
 fi
 
 if [ $DATABASE_NEEDS_TO_BE_UPDATED -eq 0 ]; then
-	${SCRIPT_DIR}/update_collection_time_point_relative.sh check > ${temp_file}
+	${SCRIPT_DIR}/update_collection_time_point_relative.sh collection_time_point_relative check > ${temp_file}
 	NEEDS_UPDATE=`cat ${temp_file}`
 	if [ $NEEDS_UPDATE = "1" ]; then
 		DATABASE_NEEDS_TO_BE_UPDATED=1
@@ -31,7 +31,7 @@ if [ $DATABASE_NEEDS_TO_BE_UPDATED -eq 0 ]; then
 fi
 
 if [ $DATABASE_NEEDS_TO_BE_UPDATED -eq 0 ]; then
-	${SCRIPT_DIR}/update_keywords_study.sh keywords_study single_cell ir_sequence_count ir_updated_at check > ${temp_file}
+	${SCRIPT_DIR}/update_keywords_study.sh keywords_study single_cell ir_sequence_count check > ${temp_file}
 	NEEDS_UPDATE=`cat ${temp_file}`
 	if [ $NEEDS_UPDATE = "1" ]; then
 		DATABASE_NEEDS_TO_BE_UPDATED=1
@@ -39,7 +39,7 @@ if [ $DATABASE_NEEDS_TO_BE_UPDATED -eq 0 ]; then
 fi
 
 if [ $DATABASE_NEEDS_TO_BE_UPDATED -eq 0 ]; then
-	${SCRIPT_DIR}/update_template_amount.sh check > ${temp_file}
+	${SCRIPT_DIR}/update_template_amount.sh template_amount check > ${temp_file}
 	NEEDS_UPDATE=`cat ${temp_file}`
 	if [ $NEEDS_UPDATE = "1" ]; then
 		DATABASE_NEEDS_TO_BE_UPDATED=1
