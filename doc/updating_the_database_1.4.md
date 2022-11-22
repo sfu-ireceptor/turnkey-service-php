@@ -1,6 +1,6 @@
 ## Upgrading your repository data for the AIRR v1.4 specification
 
-As of September 2022 the AIRR Community released the [AIRR v1.4 specification](https://www.antibodysociety.org/airr-community/airr-community-standards-v1-4-now-available/) (see the [release notes](https://docs.airr-community.org/en/stable/news.html)). iReceptor v4.0 supports this new specification, but to be compliant, some data updates in your repository are required. These updates are primarily around being more precise in the specification, with the key change being the conversion of `string` fields to combined `numerical` and unit `ontology` fields.
+As of September 2022 the AIRR Community released the [AIRR v1.4 specification](https://www.antibodysociety.org/airr-community/airr-community-standards-v1-4-now-available/) (see the [release notes](https://docs.airr-community.org/en/stable/news.html)). iReceptor v4.0 supports this new specification, but some data updates in your repository are required. These updates are about being more precise with the data, with the key change being the conversion of `string` fields to combined `numerical` and unit `ontology` fields.
 
 
 The main fields impacted by these changes are:
