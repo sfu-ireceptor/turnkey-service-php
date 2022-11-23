@@ -14,3 +14,17 @@ The main fields impacted by these changes are:
 
 :warning: Your repository data will change. Before running the scripts below, we recommend making 
 a [backup of the database](database_backup.md).
+
+Run these scripts:
+
+```
+scripts/update_adc_date_fields.sh update
+scripts/update_collection_time_point_relative.sh collection_time_point_relative
+scripts/update_dates.sh sample '%a %b %d %Y %H:%M:%S %Z'
+scripts/update_keywords_study.sh keywords_study single_cell ir_sequence_count
+scripts/update_template_amount.sh template_amount
+```
+
+# Checking it worked
+
+Make sure no more update is required by running `scripts/update_turnkey.sh` and checking the warning message does not appear anymore.
