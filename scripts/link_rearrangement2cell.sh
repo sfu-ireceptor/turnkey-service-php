@@ -44,6 +44,7 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 					/scratch/${FILE_MAP}' \
  	2>&1 | tee $LOG_FILE
 
+					#--skipload \
 			#-e REARRANGEMENT_FILE_NAME="$REARRANGEMENT_FILE_NAME" \
 			#-e CELL_FILE_NAME="$CELL_FILE_NAME" \
 					#--rearrangement_file $REARRANGEMENT_FILE_NAME \
