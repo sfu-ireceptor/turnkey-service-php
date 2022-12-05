@@ -35,7 +35,7 @@ echo "Starting at: $TIME1"
 sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run --rm \
 			-e FILE_MAP="$FILE_MAP" \
 			ireceptor-dataloading \
-				sh -c 'python /app/dataload/link_rearrangement2cell.py -v \
+				sh -c 'python /app/dataload/link_rearrangement2clone.py -v \
 					--mapfile=/app/config/AIRR-iReceptorMapping.txt \
 					--host=$DB_HOST \
 					--database=$DB_DATABASE \
@@ -44,7 +44,6 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 					/scratch/${FILE_MAP}' \
  	2>&1 | tee $LOG_FILE
 
-					#--skipload \
 			#-e REARRANGEMENT_FILE_NAME="$REARRANGEMENT_FILE_NAME" \
 			#-e CELL_FILE_NAME="$CELL_FILE_NAME" \
 					#--rearrangement_file $REARRANGEMENT_FILE_NAME \
