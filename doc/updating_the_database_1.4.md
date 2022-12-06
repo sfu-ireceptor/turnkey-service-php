@@ -15,15 +15,36 @@ The main fields impacted by these changes are:
 :warning: Your repository data will change. Before running the scripts below, we recommend making 
 a [backup of the database](database_backup.md).
 
-Run these scripts:
+To update the data in your repository, you can use the following scripts:
+
+```
+scripts/update_keywords_study.sh keywords_study single_cell ir_sequence_count
+```
+- This will update the `keywords_study` field to ensure that it has correct values. It usese the `single_cell` field and the internal `ir_sequence_count` field to help populate the correct keywords.
+- Errors: If the script can not convert a field in a repertoire, a message will be printed such as: `For sample id 6079e75720652127e63515ab could not identify keyword has_paired_chain`. In this case, the script expects a keyword `contains_paired_chain` and the repository has an unknown keyword `has_paired_chain`. This implies that data was originally loaded with an invalid keyword `has_paired_chain`.
+
+```
+scripts/update_collection_time_point_relative.sh collection_time_point_relative
+```
+- This updates the `collection_time_point_relative` field, converting the string field to a numerical value and an ontology base unit field.
+- Errors: If the script can not convert a field in a repertoire, a message will be printed such as: `For sample id 635af0c93891ed552fe4dd21 could not find the collection time point relative I could process 0.0`. In this case, the value is already a numerical value and therefore no conversion can take place.  
+
+```
+scripts/update_template_amount.sh template_amount
+```
+- This updates the `template_amount` field, converting the string field to a numerical value and an ontology base unit field.
+- Errors: If the script can not convert a field in a repertoire, a message will be printed such as `For sample _id 609c04b40eb3bf2735751a1d could not find the template amount I could process 250–500 ng`. In this case the conversion could not be done because the amount is a range.
+
+```
+scripts/update_dates.sh sample '%a %b %d %Y %H:%M:%S %Z'
+```
+- This updates the internal iReceptor `ir_created_at` and `ir_updated_at` fields of the `sample` (repertoire) collection in the database, changing the string dates from a human readable format to the AIRR Standard compliant ISO date format. The format string above describes the data format that the iReceptor v3.0 data loader initially used in the repository when data was loaded. You can also run this script on the `rearrangement` collection, but these dates are internal dates only so although recommended for consistency this is not absolutely necessary. Running this on the `rearrangement` collection will take a long time (it is updating millions of records).
+- Errors: If the script can not update the date (e.g. the original date is not in the format specified) then a notification for each record will be output (for sample data only).
 
 ```
 scripts/update_adc_date_fields.sh update
-scripts/update_collection_time_point_relative.sh collection_time_point_relative
-scripts/update_dates.sh sample '%a %b %d %Y %H:%M:%S %Z'
-scripts/update_keywords_study.sh keywords_study single_cell ir_sequence_count
-scripts/update_template_amount.sh template_amount
 ```
+- This will update the AIRR Data Commons date fields `adc_update_date` and `adc_publish_date` to take on the current internal date/time fields as stored in the database. 
 
 # Checking it worked
 
