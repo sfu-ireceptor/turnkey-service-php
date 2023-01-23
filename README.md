@@ -213,7 +213,23 @@ a backup of the database.
 ```
 scripts/update_metadata.sh ireceptor test_data/PRJNA330606_Wang_1_sample_metadata.csv
 ```
+### Adding Immune Receptor and MHC Genotype
 
+MHC and Immune Receptor Genotype data describe which IG/TR alleles (Genotype) and MHC alleles (MHCGenotype) are found in a subject.
+Because the Genotype object is fairly complex, it is not possible to load this type of data using the iReceptor Metadata TSV format. If
+you want to add IG/TR/MHC Genotype to a subject/sample it is necessary to specify the Genotype in an AIRR Repertoire JSON file and use
+the iReceptor `update_metadata.sh` script to add this to an existing Repertoire. Assuming the Repertoire metadata for a subject was loaded
+using the iReceptor CSV file `metadata-sample1.csv` and an AIRR Repertoire file with additonal genotype data exists in a file
+`genotype-sample1.json`, the data can be added to a repository with the commands:
+```
+scripts/load_metadata.sh ireceptor metadata-sample1.csv
+scripts/update_metadata.sh repertoire genotype-sample1.json
+```
+An example of an iReceptor Repertoire CSV file and an accompanying AIRR Repertoire JSON Genotype file can be found in the [iReceptor
+Genotype data curation github repository](https://github.com/sfu-ireceptor/dataloading-curation/tree/production-v4/test/genotype). The main requirement
+to add the genotype correctly is to ensure that the AIRR Repertoire JSON file with the genotype data in it also contains the correct
+`repertoire_id`, `sample_processing_id`, `data_processing_id`, and `data_processing_files` fields for the relevant repertoire. This is required
+so that the data loader can correctly associate the genotype data with correct Repetoire in the repository.
 
 ## Backing up the database
 When you've loaded your data, we recommend [backing up the database](doc/database_backup.md) to avoid having to load your data again in case a problem happens.
