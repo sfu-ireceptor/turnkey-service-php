@@ -137,7 +137,7 @@ The following command will load all AIRR Clone JSON files ending with `.json` fr
 ```
 scripts/load_clones.sh airr-clone <your study data folder>/*.json
 ```
-Again, compressed files are allowed, but the full compressed file name must be listed for the repertoire in the metadata file.
+Again, compressed files are allowed, but the full compressed file name must be listed for the repertoire in the metadata file. Currently only AIRR Clone JSON files are supported, but the iReceptor team provides a convenience utility to convert data that is generated from the 10X cellranger VDJ pipeline into the AIRR Clone JSON file format. Please refer to the iReceptor [10x2AIRR github repository](https://github.com/sfu-ireceptor/sandbox/tree/production-v4/10x2AIRR) if you would like to convert 10X data to AIRR compliant data.
 
 ### Load your cell files
 
@@ -145,7 +145,7 @@ The following command will load all AIRR Cell JSON files ending with `.json` fro
 ```
 scripts/load_cells.sh airr-cell <your study data folder>/*.json
 ```
-Again, compressed files are allowed, but the full compressed file name must be listed for the repertoire in the metadata file.
+Again, compressed files are allowed, but the full compressed file name must be listed for the repertoire in the metadata file. Currently only AIRR Cell and GEX JSON files are supported, but the iReceptor team provides a convenience utility to convert data that is generated from the 10X cellranger VDJ pipeline into the AIRR Cell and GEX JSON file formats. Please refer to the iReceptor [10x2AIRR github repository](https://github.com/sfu-ireceptor/sandbox/tree/production-v4/10x2AIRR) if you would like to convert 10X data to AIRR compliant data.
   
 ### Load your gene expression files
 
@@ -153,7 +153,7 @@ The following command will load all AIRR Expression JSON files ending with `.jso
 ```
 scripts/load_expression.sh airr-expression <your study data folder>/*.json
 ```
-Again, compressed files are allowed, but the full compressed file name must be listed for the repertoire in the metadata file.
+Again, compressed files are allowed, but the full compressed file name must be listed for the repertoire in the metadata file. Currently only AIRR Cell and GEX JSON files are supported, but the iReceptor team provides a convenience utility to convert data that is generated from the 10X cellranger VDJ pipeline into the AIRR Cell and GEX JSON file formats. Please refer to the iReceptor [10x2AIRR github repository](https://github.com/sfu-ireceptor/sandbox/tree/production-v4/10x2AIRR) if you would like to convert 10X data to AIRR compliant data.
  
 ### Loading large rearrangement/clone/cell/expression data files.
 :warning: Loading many rearrangements, clones, cells, or expression data can take hours. We recommend using the Unix command `nohup` to run the script in the background, and to redirect the script output to a log file. So you can log out and come back later to check on the data loading progress by looking at that file. Example:
