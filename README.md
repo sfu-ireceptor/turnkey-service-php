@@ -137,7 +137,7 @@ The following command will load all AIRR Clone JSON files ending with `.json` fr
 ```
 scripts/load_clones.sh airr-clone <your study data folder>/*.json
 ```
-Again, compressed files are allowed, but the full compressed file name must be listed for the repertoire in the metadata file.
+Again, compressed files are allowed, but the full compressed file name must be listed for the repertoire in the metadata file. Currently only AIRR Clone JSON files are supported, but the iReceptor team provides a convenience utility to convert data that is generated from the 10X cellranger VDJ pipeline into the AIRR Clone JSON file format. Please refer to the iReceptor [10x2AIRR github repository](https://github.com/sfu-ireceptor/sandbox/tree/production-v4/10x2AIRR) if you would like to convert 10X data to AIRR compliant data.
 
 ### Load your cell files
 
@@ -145,7 +145,7 @@ The following command will load all AIRR Cell JSON files ending with `.json` fro
 ```
 scripts/load_cells.sh airr-cell <your study data folder>/*.json
 ```
-Again, compressed files are allowed, but the full compressed file name must be listed for the repertoire in the metadata file.
+Again, compressed files are allowed, but the full compressed file name must be listed for the repertoire in the metadata file. Currently only AIRR Cell and GEX JSON files are supported, but the iReceptor team provides a convenience utility to convert data that is generated from the 10X cellranger VDJ pipeline into the AIRR Cell and GEX JSON file formats. Please refer to the iReceptor [10x2AIRR github repository](https://github.com/sfu-ireceptor/sandbox/tree/production-v4/10x2AIRR) if you would like to convert 10X data to AIRR compliant data.
   
 ### Load your gene expression files
 
@@ -153,8 +153,58 @@ The following command will load all AIRR Expression JSON files ending with `.jso
 ```
 scripts/load_expression.sh airr-expression <your study data folder>/*.json
 ```
-Again, compressed files are allowed, but the full compressed file name must be listed for the repertoire in the metadata file.
- 
+Again, compressed files are allowed, but the full compressed file name must be listed for the repertoire in the metadata file. Currently only AIRR Cell and GEX JSON files are supported, but the iReceptor team provides a convenience utility to convert data that is generated from the 10X cellranger VDJ pipeline into the AIRR Cell and GEX JSON file formats. Please refer to the iReceptor [10x2AIRR github repository](https://github.com/sfu-ireceptor/sandbox/tree/production-v4/10x2AIRR) if you would like to convert 10X data to AIRR compliant data.
+
+  
+### Resolving internal data linkages
+
+When loaded into the iReceptor Turnkey repository, some objects (e.g. Rearrangements) refer to other objects in the repository (e.g. Cells). For example, Rearrangements often are associated with a barcode Cell ID when processed with a tool like 10X's cellranger. The same barcode is used to identify the Cell. These identifiers are not globally unique, and can have ID clashes when searched between samples within the repository. In order to uniquely identify such data linkages in the repository, it is necessary to generate unique IDs for some objects (e.g. Cells) and ensure that the other object (e.g. Rearrangement) refers to the unique identifier so that correct repository wide queries can be made. These linkages are necessary to link Rearrangements to Clones, Rearrangements to Cells, and Gene Expression data to Cells. There are a set of utilities to perform this linking as part of the iReceptor Turnkey, and these steps should be taken after the Rearrangement/Clone/Cell/GEX data is loaded. The link steps take as input a TSV file that contains pairs of file names that identify the source of the data that is to be linked.
+  
+For example if you load Rearrangement and Clone files as below:
+```
+scripts/load_rearrangements.sh airr <your study data folder>/sample1-rearrangements.tsv.gz
+scripts/load_cells.sh airr-cell <your study data folder>/sample1-cells.json
+```
+Then the following mapping file from Rearrangements to Cells, stored in rearrangement-to-cell.tsv, would be used to prepare for the Rearrangement to Clone mapping step:
+```
+Rearrangement   Cell
+sample1-rearrangemetns.tsv.gz  sample1-cells.json
+```
+In order to map the rearrangement Cell IDs you would then run the following script.
+```
+scripts/link_rearrangement2cell.sh <your study data folder>/rearrangement-to-cell.tsv
+```
+Before the link script is run, a given rearrangement might have a barcode `cell_id` field of `AAACCTGAGCTTCGCG-1`. In the repository, this data is stored as:
+```
+Rearrangement fields:
+cell_id = AAACCTGAGCTTCGCG-1
+adc_annotation_cell_id = AAACCTGAGCTTCGCG-1
+
+Cell fields:
+cell_id = AAACCTGAGCTTCGCG-1
+adc_annotation_cell_id = AAACCTGAGCTTCGCG-1
+```
+After the linking is performed, the repository will overwrite the `cell_id` field to have a repository wide unique id while maintainging the originally curated annotation tools cell barcode in the `adc_annotation_cell_id` field as follows:
+```
+Rearrangement fields:
+cell_id = 6363d266984ff503b0a95b4e
+adc_annotation_cell_id = AAACCTGAGCTTCGCG-1
+
+Cell fields:
+cell_id = 6363d266984ff503b0a95b4e
+adc_annotation_cell_id = AAACCTGAGCTTCGCG-1
+```
+After linking it is therefore possible to use a single unique identifier to look up related information for a single Cell in any of the objects in the repository.
+  
+The link mapping file can have as many lines as you want, and would typically contain a line for every sample that has both Rearrangements and Cells. It is essential that the file names used are those used to load the original Rearrangement, Clone, Cell, and Expression data, as the linking process uses those file names as a key to find the correct data to link within the repository.
+  
+There are similar scripts for linking Rearrangements to Clones and Expression data to Cells. They are used as follows:
+  
+```
+scripts/link_rearrangement2clone.sh <your study data folder>/rearrangement-to-clone.tsv
+scripts/link_expression2cell.sh <your study data folder>/expression-to-cell.tsv
+```
+
 ### Loading large rearrangement/clone/cell/expression data files.
 :warning: Loading many rearrangements, clones, cells, or expression data can take hours. We recommend using the Unix command `nohup` to run the script in the background, and to redirect the script output to a log file. So you can log out and come back later to check on the data loading progress by looking at that file. Example:
 
@@ -184,7 +234,23 @@ a backup of the database.
 ```
 scripts/update_metadata.sh ireceptor test_data/PRJNA330606_Wang_1_sample_metadata.csv
 ```
+### Adding Immune Receptor and MHC Genotype
 
+MHC and Immune Receptor Genotype data describe which IG/TR alleles (Genotype) and MHC alleles (MHCGenotype) are found in a subject.
+Because the Genotype object is fairly complex, it is not possible to load this type of data using the iReceptor Metadata TSV format. If
+you want to add IG/TR/MHC Genotype to a subject/sample it is necessary to specify the Genotype in an AIRR Repertoire JSON file and use
+the iReceptor `update_metadata.sh` script to add this to an existing Repertoire. Assuming the Repertoire metadata for a subject was loaded
+using the iReceptor CSV file `metadata-sample1.csv` and an AIRR Repertoire file with additonal genotype data exists in a file
+`genotype-sample1.json`, the data can be added to a repository with the commands:
+```
+scripts/load_metadata.sh ireceptor metadata-sample1.csv
+scripts/update_metadata.sh repertoire genotype-sample1.json
+```
+An example of an iReceptor Repertoire CSV file and an accompanying AIRR Repertoire JSON Genotype file can be found in the [iReceptor
+Genotype data curation github repository](https://github.com/sfu-ireceptor/dataloading-curation/tree/production-v4/test/genotype). The main requirement
+to add the genotype correctly is to ensure that the AIRR Repertoire JSON file with the genotype data in it also contains the correct
+`repertoire_id`, `sample_processing_id`, `data_processing_id`, and `data_processing_files` fields for the relevant repertoire. This is required
+so that the data loader can correctly associate the genotype data with correct Repetoire in the repository.
 
 ## Backing up the database
 When you've loaded your data, we recommend [backing up the database](doc/database_backup.md) to avoid having to load your data again in case a problem happens.
