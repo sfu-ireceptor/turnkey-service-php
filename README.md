@@ -174,7 +174,26 @@ In order to map the rearrangement Cell IDs you would then run the following scri
 ```
 scripts/link_rearrangement2cell.sh <your study data folder>/rearrangement-to-cell.tsv
 ```
+Before the link script is run, a given rearrangement might have a barcode `cell_id` field of `AAACCTGAGCTTCGCG-1`. In the repository, this data is stored as:
+```
+Rearrangement fields:
+cell_id = AAACCTGAGCTTCGCG-1
+adc_annotation_cell_id = AAACCTGAGCTTCGCG-1
 
+Cell fields:
+cell_id = AAACCTGAGCTTCGCG-1
+```
+After the linking is performed, the repository will overwrite the `cell_id` field to have a repository wide unique id while maintainging the originally curated annotation tools cell barcode in the `adc_annotation_cell_id` field as follows:
+```
+Rearrangement fields:
+cell_id = 6363d266984ff503b0a95b4e
+adc_annotation_cell_id = AAACCTGAGCTTCGCG-1
+
+Cell fields:
+cell_id = 6363d266984ff503b0a95b4e
+```
+After linking it is therefore possible to use a single unique identifier to look up related information for a single Cell in any of the objects in the repository.
+  
 The link mapping file can have as many lines as you want, and would typically contain a line for every sample that has both Rearrangements and Cells. It is essential that the file names used are those used to load the original Rearrangement, Clone, Cell, and Expression data, as the linking process uses those file names as a key to find the correct data to link within the repository.
   
 There are similar scripts for linking Rearrangements to Clones and Expression data to Cells. They are used as follows:
