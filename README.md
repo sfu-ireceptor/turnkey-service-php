@@ -182,6 +182,7 @@ adc_annotation_cell_id = AAACCTGAGCTTCGCG-1
 
 Cell fields:
 cell_id = AAACCTGAGCTTCGCG-1
+adc_annotation_cell_id = AAACCTGAGCTTCGCG-1
 ```
 After the linking is performed, the repository will overwrite the `cell_id` field to have a repository wide unique id while maintainging the originally curated annotation tools cell barcode in the `adc_annotation_cell_id` field as follows:
 ```
@@ -191,6 +192,7 @@ adc_annotation_cell_id = AAACCTGAGCTTCGCG-1
 
 Cell fields:
 cell_id = 6363d266984ff503b0a95b4e
+adc_annotation_cell_id = AAACCTGAGCTTCGCG-1
 ```
 After linking it is therefore possible to use a single unique identifier to look up related information for a single Cell in any of the objects in the repository.
   
