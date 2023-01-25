@@ -1,5 +1,14 @@
 # Release Notes
 
+## v4.0 (Dec 7, 2022)
+Official 4.0 release. [More details about iReceptor 4.0](https://ireceptor.org/ireceptor-4).
+
+- Add [turnkey upgrade instructions from v3 to v4](doc/upgrading_from_v3_to_v4.md)
+- Add [scripts to upgrade an existing turnkey database for v4.0](doc/updating_the_database_1.4.md)
+- Rename some util scripts
+- Add [Code of Conduct](CODE_OF_CONDUCT.md) and [Contributing Guidelines](CONTRIBUTING.md)
+- Minor bug fixes
+
 ## v4.0-pre (Sep 9, 2022)
 - Enable [customization of the home page](doc/customizing_home_page.md)
 
