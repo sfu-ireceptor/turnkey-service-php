@@ -3,6 +3,11 @@
 ## v4.0 (Dec 7, 2022)
 Official 4.0 release. [More details about iReceptor 4.0](https://ireceptor.org/ireceptor-4).
 
+- Key new features in production:
+	- Implementation of storing Clone data and querying on /clone API endpoint
+	- Implementation of storing Cell data and querying on /cell API endpoint
+	- Implementation of storing Expression data and querying on /expression API endppoint
+	- Add scripts to load Clone/Cell/Expression data
 - Add [turnkey upgrade instructions from v3 to v4](doc/upgrading_from_v3_to_v4.md)
 - Add [scripts to upgrade an existing turnkey database for v4.0](doc/updating_the_database_1.4.md)
 - Rename some util scripts
