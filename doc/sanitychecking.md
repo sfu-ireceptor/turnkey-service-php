@@ -56,25 +56,25 @@ We now have a set of test data sets available for experimentation.
 
 ### Load a data set into the iReceptor Turnkey
 
-We will use a IMGT VQuest based data set for our test, in particular a small "toy" data set. This is stored in $HOME/dataloading-curation/test/imgt/imgt_toy. The `verify_dataload.sh` script assumes that all data from the study are in a single directory, and this study follows that protocol. The toy data set is a subset of the data from Palanichamy et al with Study ID PRJNA248411.
+We will use a IMGT VQuest based data set for our test. This is stored in $HOME/dataloading-curation/test/imgt. The `verify_dataload.sh` script assumes that all data from the study are in a single directory, and this study follows that protocol. The  data set is a subset of the data from Palanichamy et al with Study ID PRJNA248411.
 
-First load the study metadata. The "toy" IMGT study only has one repertoire.
+First load the study metadata.
 ```
 cd $HOME/turnkey-service-php
-scripts/load_metadata.sh ireceptor $HOME/dataloading-curation/test/imgt/imgt_toy/PRJNA248411_Palanichamy_SRR1298740.csv
+scripts/load_metadata.sh ireceptor $HOME/dataloading-curation/test/imgt/PRJNA248411_Palanichamy_2018-12-18.csv
 ```
 Then load the associated rearrangements (in IMGT VQuest format), check to see if the repertoire was loaded, and check the count of the number of rearrangements that were loaded for the repertoire.
 ```
-scripts/load_rearrangements.sh imgt $HOME/dataloading-curation/test/imgt/imgt_toy/SRR1298740.txz
-curl --data "{}" "http://localhost/airr/v1/repertoire"
-curl --data '{"facets":"repertoire_id"}' "http://localhost/airr/v1/rearrangement"
+scripts/load_rearrangements.sh imgt $HOME/dataloading-curation/test/imgt/SRR*.txz
+curl --data "{}" "https://localhost/airr/v1/repertoire"
+curl --data '{"facets":"repertoire_id"}' "https://localhost/airr/v1/rearrangement"
 ```
 
 ### Perform a data provenance check
 
 Performing a data provenance check given the above is straight forward using the `verify_dataload.sh` script.
 ```
-scripts/verify_dataload.sh PRJNA248411 $HOME/dataloading-curation/test/imgt/imgt_toy PRJNA248411_Palanichamy_SRR1298740.csv vquest /tmp
+scripts/verify_dataload.sh PRJNA248411 $HOME/dataloading-curation/test/imgt PRJNA248411_Palanichamy_2018-12-18.csv vquest /tmp https://localhost/
 ```
 This will provide a report in the output directory provided (/tmp in this case). The output of the command will report on several test phases:
 - It will check the metadata file provided and warn of any errors.
@@ -105,7 +105,7 @@ data curation fields, against fields in the API response and in the metadata fil
 --------------------------------------------------------------------------------------------------------
 Check AIRR Mapping against API and Metadata file
 
-INFO: Sending query to http://ireceptor-api//airr/v1/repertoire
+INFO: Sending query to https://ireceptor-api//airr/v1/repertoire
 INFO: Total query time (in seconds): 0.2084512710571289
 
 INFO: Checking field names from AIRR mapping for API (column ir_adc_api_response) not found in API response
@@ -136,7 +136,7 @@ The data verification then checks to confirm the validity of the AIRR API respon
 --------------------------------------------------------------------------------------------------------
 AIRR field validation
 
-INFO: Sending query to http://ireceptor-api//airr/v1/repertoire
+INFO: Sending query to https://ireceptor-api//airr/v1/repertoire
 INFO: Total query time (in seconds): 0.20888471603393555
 PASS: AIRR Repertoire is valid
 ```
@@ -151,7 +151,7 @@ Annotation count validation (API, file size, curator count)
 INFO: Processing annotations for Repertoire 393 using:
 INFO:   annotation_file_format: vquest
 INFO:   ir_rearrangement_tool: IMGT high-Vquest
-INFO: Sending query to http://ireceptor-api//airr/v1/rearrangement
+INFO: Sending query to https://ireceptor-api//airr/v1/rearrangement
 INFO: Total query time (in seconds): 0.22046279907226562
 PASS: Repertoire 393 returned TRUE (test passed), see CSV for details
 ```
