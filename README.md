@@ -204,7 +204,13 @@ There are similar scripts for linking Rearrangements to Clones and Expression da
 scripts/link_rearrangement2clone.sh <your study data folder>/rearrangement-to-clone.tsv
 scripts/link_expression2cell.sh <your study data folder>/expression-to-cell.tsv
 ```
-
+The Rearrangement/Clone mapping files would have two columns similar to the following, with more than one Rearrangement file possible for a single clone file:
+```
+Clone   Rearrangement
+su001_post-vdj_trb-clones.json  su001_post_TCR-TRA.tsv
+su001_post-vdj_trb-clones.json  su001_post_TCR-TRB.tsv
+```
+If a Rearrangement can not find the clone_id in the Clone file, it will report the relevant information. It should be checked to ensure that this is correct given the data provided.
 ### Loading large rearrangement/clone/cell/expression data files.
 :warning: Loading many rearrangements, clones, cells, or expression data can take hours. We recommend using the Unix command `nohup` to run the script in the background, and to redirect the script output to a log file. So you can log out and come back later to check on the data loading progress by looking at that file. Example:
 
