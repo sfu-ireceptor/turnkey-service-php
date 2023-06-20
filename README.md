@@ -240,6 +240,14 @@ a backup of the database.
 ```
 scripts/update_metadata.sh ireceptor test_data/PRJNA330606_Wang_1_sample_metadata.csv
 ```
+:warning: Updating the metadata requires that `repertoire_id`, `sample_processing_id`, and `data_processing_id` in the
+metadata CSV file match those in the repository. If, when the data is loaded there fields are not provided the data loading
+will set these values to unique IDs. It is therefore necessary to extract these IDs for any record that is being updated and 
+add them to the metadata file. These IDs can be extracted using the following ADC API query:
+
+```
+curl -k -d '{"filters":{ "op":"contains","content": {"field":"study.studyid","value":"PRJNA330606"}},"fields":["repertoire_id","sample.sample_processing_id","data_processing.data_processing_id"]}' https://localhost/airr/v1/repertoire
+```
 ### Adding Immune Receptor and MHC Genotype
 
 MHC and Immune Receptor Genotype data describe which IG/TR alleles (Genotype) and MHC alleles (MHCGenotype) are found in a subject.
