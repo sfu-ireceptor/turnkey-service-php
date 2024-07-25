@@ -92,7 +92,7 @@ echo "    Repository URL = $url"
 # "ireceptor-dataloading" is the service name defined in docker-compose.yml 
 # sh -c '...' is the command executed inside the container
 				
-sudo -E docker compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run -v $study_dir:/study -v $output_dir:/output --rm \
+sudo -E docker compose -f ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run -v $study_dir:/study -v $output_dir:/output --rm \
 			-e study_id="$study_id" \
 			-e metadata_file="$metadata_file" \
 			-e annotation_tool="$annotation_tool" \

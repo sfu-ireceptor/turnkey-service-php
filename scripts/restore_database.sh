@@ -2,7 +2,7 @@
 
 SCRIPT_DIR=`dirname "$0"`
 
-sudo docker compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service exec -T ireceptor-database \
+sudo docker compose -f ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service exec -T ireceptor-database \
 	sh -c 'mongo --quiet /app/scripts/drop_rearrangement_indexes.js && \
 			mongo --quiet /app/scripts/drop_rearrangement_indexes.js && \
 			mongo --quiet /app/scripts/drop_clone_indexes.js && \

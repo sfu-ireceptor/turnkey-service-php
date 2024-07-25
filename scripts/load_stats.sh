@@ -48,7 +48,7 @@ echo "    Temporary directory = $stats_dir"
 # "ireceptor-dataloading" is the service name defined in docker-compose.yml 
 # sh -c '...' is the command executed inside the container
 
-sudo -E docker compose --file ${SCRIPT_DIR}/docker-compose.yml \
+sudo -E docker compose -f ${SCRIPT_DIR}/docker-compose.yml \
 	               --project-name turnkey-service run \
 		       -v $stats_dir:/outdir --rm \
 		       -e study_id="$study_id" \

@@ -48,7 +48,7 @@ export FILE_FOLDER
 # sh -c '...' is the command executed inside the container
 # $DB_HOST and $DB_DATABASE are defined in docker-compose.yml and will be
 # substituted only when the python command is executed, INSIDE the container
-sudo -E docker compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run --rm \
+sudo -E docker compose -f ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run --rm \
 				-e COLLECTION_NAME="sample"\
 				-e NO_UPDATE="$NO_UPDATE" \
 			ireceptor-dataloading  \

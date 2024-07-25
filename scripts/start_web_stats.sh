@@ -17,7 +17,7 @@ echo "Done"
 echo
 
 echo "Dumping iReceptor Turnkey API container log into ${APACHE_LOG_FOLDER} ..."
-sudo docker compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service logs ireceptor-api | cut -f2 -d'|' > "${APACHE_LOG_FOLDER}/access.log"
+sudo docker compose -f ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service logs ireceptor-api | cut -f2 -d'|' > "${APACHE_LOG_FOLDER}/access.log"
 echo "Done"
 echo
 
