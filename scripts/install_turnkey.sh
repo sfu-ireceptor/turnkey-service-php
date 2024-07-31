@@ -18,11 +18,11 @@ echo
 
 # install Docker Compose
 echo "Installing Docker Compose.."
-if [ -x "$(command -v docker-compose)" ]; then
+if [ -x "$(command -v docker compose)" ]; then
 	echo "Already installed."
   else
-	sudo curl -L https://github.com/docker/compose/releases/download/1.23.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker compose > /dev/null 2>&1
-	sudo chmod +x /usr/local/bin/docker-compose
+	sudo curl -L https://github.com/docker/compose/releases/download/2.29.1/docker-compose-`uname -s`-`uname -m` -o /usr/libexec/docker/cli-plugins/docker-compose > /dev/null 2>&1
+	sudo chmod +x /usr/libexec/docker/cli-plugins/docker-compose
 	echo "Done"
 fi
 echo
