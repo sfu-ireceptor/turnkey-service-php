@@ -3,7 +3,7 @@
 SCRIPT_DIR=`dirname "$0"`
 
 echo "Starting iReceptor Service Turnkey.."
-sudo docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service up -d
+sudo docker compose -f ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service up -d
 echo "Done"
 echo
 

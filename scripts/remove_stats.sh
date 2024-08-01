@@ -21,7 +21,7 @@ export study_id
 echo "Removing stats for study $study_id"
 
 # Remove stats
-sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service exec -T -e study_id="$study_id" ireceptor-database  \
+sudo -E docker compose -f ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service exec -T -e study_id="$study_id" ireceptor-database  \
 	sh -c 'cd /app && bash /app/scripts/remove_stats.sh ${study_id}'
 
 echo -n "Done $0: "

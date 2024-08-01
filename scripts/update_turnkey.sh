@@ -20,7 +20,7 @@ echo
 
 # download latest Docker images from Docker Hub
 echo "Downloading Docker images from Docker Hub.."
-sudo docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service pull
+sudo docker compose -f ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service pull
 echo "Done"
 echo
 
