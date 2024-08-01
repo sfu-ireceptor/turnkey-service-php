@@ -21,8 +21,32 @@ echo "Installing Docker Compose.."
 if [ -x "$(command -v docker compose)" ]; then
 	echo "Already installed."
   else
-	sudo curl -L https://github.com/docker/compose/releases/download/2.29.1/docker-compose-`uname -s`-`uname -m` -o /usr/libexec/docker/cli-plugins/docker-compose > /dev/null 2>&1
-	sudo chmod +x /usr/libexec/docker/cli-plugins/docker-compose
+
+	compose_dir=""
+
+	# Check where Docker Compose could be installed
+	for dir in \
+			"/usr/lib/docker/cli-plugins"\
+			"/usr/local/lib/docker/cli-plugins" \
+			"/usr/local/libexec/docker/cli-plugins" \
+			"/usr/libexec/docker/cli-plugins"
+	do
+		echo "Checking if Docker Compose can be installed on $dir"
+		if [ -d "$dir" ]; then
+			echo "Docker compose can be installed on $dir"
+			compose_dir=$dir
+			break
+		fi
+	done
+
+	# Fallback to user's home directory
+	if [ -z "$compose_dir" ]; then
+		compose_dir=$HOME/.docker/cli-plugins
+		echo "System-wide directory for Docker CLI plugins was not found. Defaulting to home directory at $compose_dir"
+	fi
+
+	sudo curl -L https://github.com/docker/compose/releases/download/2.29.1/docker-compose-`uname -s`-`uname -m` -o $compose_dir/docker-compose > /dev/null 2>&1
+	sudo chmod +x $compose_dir/docker-compose
 	echo "Done"
 fi
 echo
