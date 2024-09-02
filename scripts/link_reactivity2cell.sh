@@ -2,15 +2,20 @@
 
 SCRIPT_DIR=`dirname "$0"`
 
+# Check arguments
+if [ $# -ne 1 ];
+then
+    echo "$0: wrong number of arguments"
+    echo "usage: $0 link_file.tsv"
+    exit 1
+fi
+
 # FILE_FOLDER is mapped to /scratch inside the container (see docker compose).
 # We need the file by itself (FILE_MAP) because it is read in the conatiner
 # relative to /scratch.
 FILE_ABSOLUTE_PATH=`realpath "$1"`
 FILE_FOLDER=`dirname "$FILE_ABSOLUTE_PATH"`
 FILE_MAP=`basename "$FILE_ABSOLUTE_PATH"`
-
-#REARRANGEMENT_FILE_NAME=$1
-#CELL_FILE_NAME=$2
 
 # make available to docker-compose.yml
 export FILE_FOLDER
