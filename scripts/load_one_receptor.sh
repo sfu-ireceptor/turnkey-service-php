@@ -2,20 +2,11 @@
 
 SCRIPT_DIR=`dirname "$0"`
 
-# Check arguments
-if [ $# -ne 1 ];
-then
-    echo "$0: wrong number of arguments"
-    echo "usage: $0 link_file.tsv"
-    exit 1
-fi
+RECEPTOR_TYPE="$1"
 
-# FILE_FOLDER is mapped to /scratch inside the container (see docker compose).
-# We need the file by itself (FILE_MAP) because it is read in the conatiner
-# relative to /scratch.
-FILE_ABSOLUTE_PATH=`realpath "$1"`
+FILE_ABSOLUTE_PATH=`realpath "$2"`
 FILE_FOLDER=`dirname "$FILE_ABSOLUTE_PATH"`
-FILE_MAP=`basename "$FILE_ABSOLUTE_PATH"`
+FILE_NAME=`basename "$FILE_ABSOLUTE_PATH"`
 
 # make available to docker-compose.yml
 export FILE_FOLDER
@@ -24,10 +15,9 @@ export FILE_FOLDER
 LOG_FOLDER=${SCRIPT_DIR}/../log
 mkdir -p $LOG_FOLDER
 TIME1=`date +%Y-%m-%d_%H-%M-%S`
-LOG_FILE=${LOG_FOLDER}/${TIME1}_${FILE_MAP}.log
+LOG_FILE=${LOG_FOLDER}/${TIME1}_${FILE_NAME}.log
 
-#echo "Linking data from ${REARRANGEMENT_FILE_NAME} to ${CELL_FILE_NAME}" 
-echo "Linking data from files in ${FILE_MAP}" 
+echo "Loading file $2"
 echo "Starting at: $TIME1"
 
 # Notes:
@@ -38,21 +28,22 @@ echo "Starting at: $TIME1"
 # sh -c '...' is the command executed inside the container
 # $DB_HOST and $DB_DATABASE are defined in docker-compose.yml and will be substituted only when the python command is executed, INSIDE the container
 sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run --rm \
-			-e FILE_MAP="$FILE_MAP" \
+			-e FILE_NAME="$FILE_NAME" \
+			-e FILE_FOLDER="$FILE_FOLDER" \
+			-e RECEPTOR_TYPE="$RECEPTOR_TYPE" \
 			ireceptor-dataloading \
-				sh -c 'python /app/dataload/link_expression2cell.py -v \
+				sh -c 'python /app/dataload/dataloader.py -v \
 					--mapfile=/app/config/AIRR-iReceptorMapping.txt \
 					--host=$DB_HOST \
 					--database=$DB_DATABASE \
 					--repertoire_collection sample \
 					--rearrangement_collection sequence \
-					/scratch/${FILE_MAP}' \
+					--cell_collection cell \
+					--expression_collection expression \
+					--receptor_collection receptor \
+					--$RECEPTOR_TYPE \
+					-f /scratch/$FILE_NAME' \
  	2>&1 | tee $LOG_FILE
-
-			#-e REARRANGEMENT_FILE_NAME="$REARRANGEMENT_FILE_NAME" \
-			#-e CELL_FILE_NAME="$CELL_FILE_NAME" \
-					#--rearrangement_file $REARRANGEMENT_FILE_NAME \
-					#--cell_file $CELL_FILE_NAME' \
 
 TIME2=`date +%Y-%m-%d_%H-%M-%S`
 echo "Finished at: $TIME2"

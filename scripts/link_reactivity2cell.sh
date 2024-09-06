@@ -40,7 +40,7 @@ echo "Starting at: $TIME1"
 sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run --rm \
 			-e FILE_MAP="$FILE_MAP" \
 			ireceptor-dataloading \
-				sh -c 'python /app/dataload/link_expression2cell.py -v \
+				sh -c 'python /app/dataload/link_reactivity2cell.py -v \
 					--mapfile=/app/config/AIRR-iReceptorMapping.txt \
 					--host=$DB_HOST \
 					--database=$DB_DATABASE \
