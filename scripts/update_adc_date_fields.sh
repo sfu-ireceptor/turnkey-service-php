@@ -16,6 +16,7 @@ then
 fi
 
 NO_UPDATE=""
+ERROR_OUTPUT=/dev/stdout
 
 if [ $# -eq 1 ];
 then
@@ -49,4 +50,4 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 					$DB_DATABASE \
 					$COLLECTION_NAME \
 					$NO_UPDATE '\
- 	2>&1 | tee $LOG_FILE
+ 	2> $ERROR_OUTPUT | tee $LOG_FILE
