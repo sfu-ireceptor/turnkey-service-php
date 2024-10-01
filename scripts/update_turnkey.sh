@@ -6,6 +6,8 @@ SCRIPT_DIR_FULL="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd
 # load config file
 source ${SCRIPT_DIR}/config.sh
 
+MONGO_VERSION=`sudo docker-compose --file  ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service exec -T ireceptor-database sh -c 'mongo --quiet --eval "db.version()" $MONGO_INITDB_DATABASE'`
+
 # stop Docker containers
 echo "Stopping Docker containers.."
 ${SCRIPT_DIR}/stop_turnkey.sh
