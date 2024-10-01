@@ -1,6 +1,7 @@
 #!/bin/bash
 
 SCRIPT_DIR=`dirname "$0"`
+SCRIPT_FILE_NAME=`basename "$0"`
 
 # check number of arguments
 if [[ $# -ne 3 && $# -ne 4 ]];
@@ -20,17 +21,21 @@ SINGLE_CELL_FIELD_NAME="$2"
 SEQUENCE_COUNT_FIELD_NAME="$3"
 UPDATED_AT_NAME="ir_updated_at"
 NO_UPDATE=""
+ERROR_OUTPUT=/dev/stdout
 
 if [ $# -eq 4 ];
 then
 	NO_UPDATE="$4"
+	if [ $NO_UPDATE = "check" ]; then
+		ERROR_OUTPUT=/dev/null
+	fi
 fi
 
 # create log file
 LOG_FOLDER=${SCRIPT_DIR}/../log
 mkdir -p $LOG_FOLDER
 TIME1=`date +%Y-%m-%d_%H-%M-%S`
-LOG_FILE=${LOG_FOLDER}/${TIME1}_${FILE_NAME}.log
+LOG_FILE=${LOG_FOLDER}/${TIME1}_${SCRIPT_FILE_NAME}.log
 
 # make available to docker-compose.yml
 export FILE_FOLDER
@@ -61,4 +66,4 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 					$SEQUENCE_COUNT_FIELD_NAME \
 					$UPDATED_AT_NAME \
 					$NO_UPDATE '\
- 	2>&1 | tee $LOG_FILE
+ 	2> $ERROR_OUTPUT | tee $LOG_FILE

@@ -8,5 +8,8 @@ echo "Done"
 echo
 
 # The Mongo query plans are forgotten each time mongo is stopped.
-# They need to be recreated at startup.
+# They need to be recreated at startup. We sleep for a few seconds
+# to make sure the database is up and running and accepting
+# connections.
+sleep 2
 ${SCRIPT_DIR}/create_database_queryplans.sh

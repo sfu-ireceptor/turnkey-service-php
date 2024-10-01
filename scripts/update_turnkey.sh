@@ -129,8 +129,8 @@ echo
 echo "Checking if the database needs to be updated.."
 DATABASE_NEEDS_TO_BE_UPDATED=`${SCRIPT_DIR}/check_for_database_updates.sh`
 if [ $DATABASE_NEEDS_TO_BE_UPDATED == '1' ]; then
-	echo "Warning: the version 1.3 of the AIRR standards requires some database updates."
-	echo "Please run scripts/update_database.sh as soon as possible. It will take about two hours."
+	echo "Warning: the version 1.4 of the AIRR standards requires some database updates."
+	echo "Please read https://github.com/sfu-ireceptor/turnkey-service-php/blob/production-v4/doc/updating_the_database_1.4.md for more information"
 	exit 0
 fi
 echo "Done"
