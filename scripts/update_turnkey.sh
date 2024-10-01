@@ -20,9 +20,6 @@ git -C ${SCRIPT_DIR} pull
 echo "Done"
 echo
 
-# update database to Mongo 4.4 if necessary
-${SCRIPT_DIR}/upgrade_mongo.sh $MONGO_VERSION
-
 # download latest Docker images from Docker Hub
 echo "Downloading Docker images from Docker Hub.."
 sudo docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service pull
