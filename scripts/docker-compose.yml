@@ -3,7 +3,7 @@ version: '3'
 services:
 
     ireceptor-database:
-        image: ireceptor/repository-mongodb:${DATABASE_TAG:-turnkey-v4}
+        image: ireceptor/repository-mongodb:${DATABASE_TAG:-mongo4.0}
         volumes:
             - ../.mongodb_data:/data/db
         environment:
@@ -16,7 +16,7 @@ services:
         environment:
             DB_HOST: ireceptor-database
             DB_DATABASE: ireceptor
-            DB_SAMPLES_COLLECTION: sample
+            DB_SAMPLES_COLLECTION: repertoire
             DB_SEQUENCES_COLLECTION: sequence
             DB_CELL_COLLECTION: cell
             AIRR_INFO_TITLE: ${AIRR_INFO_TITLE:-iReceptor Service}
