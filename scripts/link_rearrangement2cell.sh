@@ -46,6 +46,7 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 					--database=$DB_DATABASE \
 					--repertoire_collection sample \
 					--rearrangement_collection sequence \
+					--reactivity_collection reactivity \
 					/scratch/${FILE_MAP}' \
  	2>&1 | tee $LOG_FILE
 
