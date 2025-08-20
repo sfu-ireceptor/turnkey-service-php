@@ -53,7 +53,7 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 				-e APPEND="$APPEND" \
 				-e SEQUENCE_FILE="$SEQUENCE_FILE" \
 			ireceptor-dataloading  \
-				sh -c 'python /data/src/dataloading-mongo/dataload/add_reactivity.py \
+				sh -c 'python /app/dataload/add_reactivity.py \
 				        --mapfile=/app/config/AIRR-iReceptorMapping.txt \
                                         --host=$DB_HOST \
                                         --database=$DB_DATABASE \
