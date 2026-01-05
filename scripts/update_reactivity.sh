@@ -66,7 +66,7 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 					'\
  	2>&1  | tee $LOG_FILE
 
-if [ $# -eq 2 ];
+if [[ "$SKIPLOAD" == "--skipload" ]];
 then
     echo "Note: Upload used $SKIPLOAD, no database changes were made."
 fi
