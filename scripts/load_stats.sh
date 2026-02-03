@@ -42,13 +42,13 @@ echo "    Temporary directory = $stats_dir"
 # -----------------------------------------------------------------------------------#
 # Notes:
 # sudo -E: make current environment variables available to the command run as root
-# docker-compose --rm: delete container afterwards 
-# docker-compose -e: these variables will be available inside the container (but not accessible in docker-compose.yml)
-# docker-compose -v: mount VM volumes in the container. 
+# docker compose --rm: delete container afterwards 
+# docker compose -e: these variables will be available inside the container (but not accessible in docker-compose.yml)
+# docker compose -v: mount VM volumes in the container. 
 # "ireceptor-dataloading" is the service name defined in docker-compose.yml 
 # sh -c '...' is the command executed inside the container
 
-sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml \
+sudo -E docker compose --file ${SCRIPT_DIR}/docker-compose.yml \
 	               --project-name turnkey-service run \
 		       -v $stats_dir:/outdir --rm \
 		       -e study_id="$study_id" \
