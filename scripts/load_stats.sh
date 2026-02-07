@@ -30,7 +30,7 @@ fi
 mkdir ${stats_dir}
 
 if [ ! -d "$stats_dir" ]; then
-    echo "ERROR: Could nor create temporary directory $stats_dir."
+    echo "ERROR: Could not create temporary directory $stats_dir."
     exit 1
 fi
 
