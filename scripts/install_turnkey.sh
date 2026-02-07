@@ -18,13 +18,8 @@ echo
 
 # install Docker Compose
 echo "Installing Docker Compose.."
-if [ -x "$(command -v docker-compose)" ]; then
-	echo "Already installed."
-  else
-	sudo curl -L https://github.com/docker/compose/releases/download/1.23.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose > /dev/null 2>&1
-	sudo chmod +x /usr/local/bin/docker-compose
-	echo "Done"
-fi
+sudo apt install docker-compose-plugin
+echo "Done"
 echo
 
 # MongoDB optimization
@@ -39,7 +34,7 @@ echo
 
 # download Docker images from Docker Hub
 echo "Downloading Docker images from Docker Hub.."
-sudo docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service pull
+sudo docker compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service pull
 echo "Done"
 echo
 

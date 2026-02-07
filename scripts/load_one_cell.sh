@@ -22,12 +22,12 @@ echo "Starting at: $TIME1"
 
 # Notes:
 # sudo -E: make current environment variables available to the command run as root
-# docker-compose --rm: delete container afterwards 
-# docker-compose -e: these variables will be available inside the container (but not accessible in docker-compose.yml)
+# docker compose --rm: delete container afterwards 
+# docker compose -e: these variables will be available inside the container (but not accessible in docker-compose.yml)
 # "ireceptor-dataloading" is the service name defined in docker-compose.yml 
 # sh -c '...' is the command executed inside the container
 # $DB_HOST and $DB_DATABASE are defined in docker-compose.yml and will be substituted only when the python command is executed, INSIDE the container
-sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run --rm \
+sudo -E docker compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run --rm \
 			-e FILE_NAME="$FILE_NAME" \
 			-e FILE_FOLDER="$FILE_FOLDER" \
 			-e CELL_TYPE="$CELL_TYPE" \
