@@ -2,7 +2,7 @@
 services:
 
     ireceptor-database:
-        image: ireceptor/repository-mongodb:${DATABASE_TAG:-master}
+        image: ireceptor/repository-mongodb:${DATABASE_TAG:-turnkey-v4}
         ulimits:
           memlock:
             soft: -1
