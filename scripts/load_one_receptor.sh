@@ -2,7 +2,7 @@
 
 SCRIPT_DIR=`dirname "$0"`
 
-GEX_TYPE="$1"
+RECEPTOR_TYPE="$1"
 
 FILE_ABSOLUTE_PATH=`realpath "$2"`
 FILE_FOLDER=`dirname "$FILE_ABSOLUTE_PATH"`
@@ -30,7 +30,7 @@ echo "Starting at: $TIME1"
 sudo -E docker compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run --rm \
 			-e FILE_NAME="$FILE_NAME" \
 			-e FILE_FOLDER="$FILE_FOLDER" \
-			-e GEX_TYPE="$GEX_TYPE" \
+			-e RECEPTOR_TYPE="$RECEPTOR_TYPE" \
 			ireceptor-dataloading \
 				sh -c 'python /app/dataload/dataloader.py -v \
 					--mapfile=/app/config/AIRR-iReceptorMapping.txt \
@@ -40,7 +40,8 @@ sudo -E docker compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 					--rearrangement_collection sequence \
 					--cell_collection cell \
 					--expression_collection expression \
-					--$GEX_TYPE \
+					--receptor_collection receptor \
+					--$RECEPTOR_TYPE \
 					-f /scratch/$FILE_NAME' \
  	2>&1 | tee $LOG_FILE
 

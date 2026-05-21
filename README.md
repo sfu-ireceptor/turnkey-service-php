@@ -1,6 +1,6 @@
 # iReceptor Turnkey
 
-The iReceptor Turnkey is a quick and easy mechanism for researchers to create their own [AIRR Data Commons](https://docs.airr-community.org/en/latest/api/adc.html#datacommons) repository.
+The iReceptor Turnkey is a quick and easy mechanism for researchers to create their own [AIRR Data Commons](https://docs.airr-community.org/en/v1.4.1/api/adc.html#datacommons) repository.
 
 Version | Branch | Status | Last update 
 --- | --- | --- | ---
@@ -11,7 +11,7 @@ Version | Branch | Status | Last update
 ## What's in the iReceptor Turnkey?
 - a database
 - scripts to add data to the database
-- a web service exposing the database via the [ADC API](https://docs.airr-community.org/en/latest/api/adc_api.html)
+- a web service exposing the database via the [ADC API](https://docs.airr-community.org/en/v1.4.1/api/adc_api.html)
 
 These components are packaged as Docker images. The installation script will:
 - install Docker
@@ -45,7 +45,7 @@ scripts/install_turnkey.sh
 curl -k --data "{}" "https://localhost/airr/v1/repertoire"
 ```
 
-This returns the list of repertoires in your database, by querying the web service at `/airr/v1/repertoire`, an [ADC API](https://docs.airr-community.org/en/latest/api/adc_api.html) entry point.
+This returns the list of repertoires in your database, by querying the web service at `/airr/v1/repertoire`, an [ADC API](https://docs.airr-community.org/en/v1.4.1/api/adc_api.html) entry point.
 
 
 You can also visit <https://localhost> in your browser (replace "localhost" with your server URL if necessary). You'll see the home page for your repository, with information about the ADC API and iReceptor. Note: a self-signed SSL certificate is used by default, so you might see a security warning. But you can [install your own SSL certificate](doc/installing_a_custom_ssl_certificate.md). If you don't want to the turnkey to use HTTPS, you can easily [disable HTTPS](doc/disabling_https.md).
@@ -53,7 +53,7 @@ You can also visit <https://localhost> in your browser (replace "localhost" with
 
 ## Loading data
 The general data loading procedure, for a study which has generated sequence data is to:
-1. load the associated repertoire metadata using the [iReceptor Metadata CSV format](https://github.com/sfu-ireceptor/dataloading-curation/tree/master/metadata). Note: it's also possible to use the [AIRR Repertoire Schema JSON format](https://docs.airr-community.org/en/latest/datarep/metadata.html).
+1. load the associated repertoire metadata using the [iReceptor Metadata CSV format](https://github.com/sfu-ireceptor/dataloading-curation/tree/master/metadata). Note: it's also possible to use the [AIRR Repertoire Schema JSON format](https://docs.airr-community.org/en/v1.4.1/datarep/metadata.html).
 
 2. load the sequence annotations (rearrangements) from IMGT, MiXCR, etc.
 

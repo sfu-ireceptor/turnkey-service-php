@@ -1,34 +1,23 @@
 #!/bin/bash
-#script that populates adc_publish_date and adc_update_date database fields using 
-#  values in ir_created_at and ir_updated_at
+
 SCRIPT_DIR=`dirname "$0"`
 SCRIPT_FILE_NAME=`basename "$0"`
 
 # check number of arguments
-if [ $# -ne 1 ];
+if [[ $# -ne 3 ]];
 then
     echo "$0: wrong number of arguments ($#)"
-    echo "usage: $0 <update|check|verbose|check-verbose parameter>"
-    echo "update: database will be updated with minimal output"
-    echo "check: don't do a database update, return 0 if no updates are needed, 1 otherwise, minimal output"
-    echo "verbose: do a database update, return 0 if no issues, 1 otherwise, provide detailed output"
-    echo "check-verbose: as check, but with detailed output"
+    echo "usage: $0 gene_field allele_field field_map"
     exit 1
 fi
 
-NO_UPDATE=""
-ERROR_OUTPUT=/dev/stdout
+GENE_FIELD=$1
+ALLELE_FIELD=$2
+FIELD_MAP=$3
 
-if [ $# -eq 1 ];
-then
-	NO_UPDATE="$1"
-	if [ $NO_UPDATE = "check" ]; then
-		ERROR_OUTPUT=/dev/null
-	fi
-	if [ $NO_UPDATE = "update" ]; then
-		NO_UPDATE=""
-	fi
-fi
+FILE_ABSOLUTE_PATH=`realpath "$3"`
+FILE_FOLDER=`dirname "$FILE_ABSOLUTE_PATH"`
+FILE_NAME=`basename "$FILE_ABSOLUTE_PATH"`
 
 # create log file
 LOG_FOLDER=${SCRIPT_DIR}/../log
@@ -49,12 +38,25 @@ export FILE_FOLDER
 # $DB_HOST and $DB_DATABASE are defined in docker-compose.yml and will be
 # substituted only when the python command is executed, INSIDE the container
 sudo -E docker compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run --rm \
-				-e COLLECTION_NAME="sample"\
-				-e NO_UPDATE="$NO_UPDATE" \
+	                        -e FILE_NAME="$FILE_NAME" \
+	                        -e FILE_FOLDER="$FILE_FOLDER" \
+				-e GENE_FIELD="${GENE_FIELD}" \
+				-e ALLELE_FIELD="${ALLELE_FIELD}"\
+				-e FIELD_MAP="$FIELD_MAP" \
 			ireceptor-dataloading  \
-				sh -c 'python /app/dataload/update_adc_date_fields.py \
-					$DB_HOST \
-					$DB_DATABASE \
-					$COLLECTION_NAME \
-					$NO_UPDATE '\
- 	2> $ERROR_OUTPUT | tee $LOG_FILE
+				sh -c 'python /app/dataload/update_adaptive_genes.py \
+				        --mapfile=/app/config/AIRR-iReceptorMapping.txt \
+                                        --host=$DB_HOST \
+                                        --database=$DB_DATABASE \
+                                        --repertoire_collection sample \
+                                        --rearrangement_collection sequence \
+					--verbose \
+					$GENE_FIELD \
+					$ALLELE_FIELD \
+					/scratch/$FILE_NAME \
+					'\
+ 	2>&1  | tee $LOG_FILE
+
+TIME2=`date +%Y-%m-%d_%H-%M-%S`
+echo "Finished at: $TIME2"
+

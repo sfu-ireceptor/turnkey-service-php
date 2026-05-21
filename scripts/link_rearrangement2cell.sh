@@ -2,15 +2,20 @@
 
 SCRIPT_DIR=`dirname "$0"`
 
+# Check arguments
+if [ $# -ne 1 ];
+then
+    echo "$0: wrong number of arguments"
+    echo "usage: $0 link_file.tsv"
+    exit 1
+fi
+
 # FILE_FOLDER is mapped to /scratch inside the container (see docker compose).
 # We need the file by itself (FILE_MAP) because it is read in the conatiner
 # relative to /scratch.
 FILE_ABSOLUTE_PATH=`realpath "$1"`
 FILE_FOLDER=`dirname "$FILE_ABSOLUTE_PATH"`
 FILE_MAP=`basename "$FILE_ABSOLUTE_PATH"`
-
-#REARRANGEMENT_FILE_NAME=$1
-#CELL_FILE_NAME=$2
 
 # make available to docker-compose.yml
 export FILE_FOLDER
@@ -27,12 +32,12 @@ echo "Starting at: $TIME1"
 
 # Notes:
 # sudo -E: make current environment variables available to the command run as root
-# docker-compose --rm: delete container afterwards 
-# docker-compose -e: these variables will be available inside the container (but not accessible in docker-compose.yml)
+# docker compose --rm: delete container afterwards 
+# docker compose -e: these variables will be available inside the container (but not accessible in docker-compose.yml)
 # "ireceptor-dataloading" is the service name defined in docker-compose.yml 
 # sh -c '...' is the command executed inside the container
 # $DB_HOST and $DB_DATABASE are defined in docker-compose.yml and will be substituted only when the python command is executed, INSIDE the container
-sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run --rm \
+sudo -E docker compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run --rm \
 			-e FILE_MAP="$FILE_MAP" \
 			ireceptor-dataloading \
 				sh -c 'python /app/dataload/link_rearrangement2cell.py -v \
@@ -41,6 +46,7 @@ sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name tu
 					--database=$DB_DATABASE \
 					--repertoire_collection sample \
 					--rearrangement_collection sequence \
+					--reactivity_collection reactivity \
 					/scratch/${FILE_MAP}' \
  	2>&1 | tee $LOG_FILE
 

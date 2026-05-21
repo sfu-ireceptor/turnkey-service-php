@@ -86,13 +86,13 @@ echo "    Repository URL = $url"
 # -----------------------------------------------------------------------------------#
 # Notes:
 # sudo -E: make current environment variables available to the command run as root
-# docker-compose --rm: delete container afterwards 
-# docker-compose -e: these variables will be available inside the container (but not accessible in docker-compose.yml)
-# docker-compose -v: mount VM volumes in the container. We mount $study_dir where all the input is and $output_dir where the output is written
+# docker compose --rm: delete container afterwards 
+# docker compose -e: these variables will be available inside the container (but not accessible in docker-compose.yml)
+# docker compose -v: mount VM volumes in the container. We mount $study_dir where all the input is and $output_dir where the output is written
 # "ireceptor-dataloading" is the service name defined in docker-compose.yml 
 # sh -c '...' is the command executed inside the container
 				
-sudo -E docker-compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run -v $study_dir:/study -v $output_dir:/output --rm \
+sudo -E docker compose --file ${SCRIPT_DIR}/docker-compose.yml --project-name turnkey-service run -v $study_dir:/study -v $output_dir:/output --rm \
 			-e study_id="$study_id" \
 			-e metadata_file="$metadata_file" \
 			-e annotation_tool="$annotation_tool" \
