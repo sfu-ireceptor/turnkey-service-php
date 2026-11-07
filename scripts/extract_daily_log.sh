@@ -63,10 +63,9 @@ fi
 # --no-log-prefix strips the "service  | " prefix.
 # grep -F matches the literal "[DD/Mon/YYYY:" so only that day's entries are kept.
 # "|| true" stops grep's exit code 1 (no matches) from aborting under set -e.
-echo "${COMPOSE[@]}" --project-name "$PROJECT" logs --no-log-prefix "$SERVICE"
 sudo "${COMPOSE[@]}" --project-name "$PROJECT" logs --no-log-prefix "$SERVICE" 2>/dev/null \
   | grep -F "[${LOGDATE}:" > "$OUTFILE" || true
 
 COUNT=$(wc -l < "$OUTFILE" | tr -d ' ')
-echo "Wrote $COUNT entries for $LOGDATE to $OUTFILE"
+echo "Wrote $COUNT entries for $LOGDATE to $OUTFILE on $(date)"
 
